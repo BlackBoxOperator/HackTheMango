@@ -21,7 +21,7 @@ end = model.index('.')
 loc = 'data/'
 subdirs = ['C1-P1_Dev', 'C1-P1_Train']
 
-with open('{}_summary.txt'.format(mn[beg:end]), "w") as sumfile:
+with open('{}_summary.txt'.format(model[beg:end]), "w") as sumfile:
     for dset in subdirs:
         summary = {}
         for k in "ABC":
