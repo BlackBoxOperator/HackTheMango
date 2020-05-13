@@ -8,4 +8,16 @@ I have already do the naive object detection on the data set. You can download i
 
 ## execute the code
 
-first 
+If you want to train the model, go into the models directory and choose a model file such as `code/NaiveCNN/models/naive_cnn.py`.
+
+```
+cd code/NaiveCNN/models
+python naive_cnn.py
+```
+
+Then you will get the `.h5` file, you can use the predict script to do summary.
+
+```
+cd code/NaiveCNN
+python naive_cnn_predict.py models/naive_cnn.h5
+```
