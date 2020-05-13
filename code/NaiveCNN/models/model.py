@@ -8,7 +8,7 @@ Created on Fri Feb  7 21:56:37 2020
 """
 
 # Part 1 - Building the CNN
-import sys
+import sys, os
 # Importing the Keras libraries and packages
 from keras.models import Sequential
 from keras.layers import Convolution2D
