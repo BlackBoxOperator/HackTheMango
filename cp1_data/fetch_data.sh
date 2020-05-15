@@ -6,8 +6,7 @@ download_from_gdrive() {
     if grep "Virus scan warning" $file_name > /dev/null;then
         # second stage to extract the download link from html above
         download_link=$(cat $file_name | \
-        grep -Po 'uc-download-link" [^>]* href="\K[^"]*' | \
-        sed 's/\&amp;/\&/g')
+        grep -Eo 'uc-download-link" [^>]* href="[^\"]*' | sed 's/\&amp;/\&/g' | sed  's/.*href="\(.*\)/\1/')
         if [ ! -z "$download_link" ];then
             curl -L -b /tmp/cookies \
             "https://drive.google.com$download_link" > $file_name
