@@ -22,7 +22,7 @@ batch_size = 32
 from tensorflow.keras.preprocessing.image import ImageDataGenerator
 
 model_name = 'naive_cnn'
-train_path = os.path.join('data', 'C1-P1_Train')
+train_path = os.path.join('..', 'data', 'C1-P1_Train')
 
 # All images will be rescaled by 1./255
 train_datagen = ImageDataGenerator(rescale=1/255)
