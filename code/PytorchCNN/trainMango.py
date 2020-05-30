@@ -75,6 +75,9 @@ class train():
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
     def run(self, ind):
+
+        global global_a
+
         ind = [x % 1 for x in ind]
         result = 0.0
 
@@ -160,6 +163,9 @@ class train():
 
 
 def main():
+
+    global global_a
+
     random.seed(64)
 
     global_a = train()
