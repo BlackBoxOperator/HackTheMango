@@ -198,5 +198,12 @@ def main():
 if __name__ == "__main__":
     pop, log, hof = main()
 
+    logbook = open('logbook.txt', 'w')
+
     for h in hof:
         print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
+        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values, file = logbook)
+
+    print(log)
+    print(log, file = logbook)
+    logbook.close()
