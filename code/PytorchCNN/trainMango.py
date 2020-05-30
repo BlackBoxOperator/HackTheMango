@@ -55,12 +55,12 @@ def checkStrategy(minstrategy):
 global_a = 0
 
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
-                    image_size= 256, validation_frequency = 5, weight_path = "weight", data_path="data"):
+    def __init__(self,classes = ["A","B","C"], max_epoch = 20, lr = 1e-4, batch_size = 32,
+                    image_size= 128, validation_frequency = 20, weight_path = "weight", data_path="data"):
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
         self.data_path = data_path
-        self.device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.classes = classes
         self.image_size = image_size
         self.validation_frequency = validation_frequency
@@ -75,6 +75,9 @@ class train():
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
     def run(self, ind):
+
+        global global_a
+
         ind = [x % 1 for x in ind]
         result = 0.0
 
@@ -160,6 +163,8 @@ class train():
 
 
 def main():
+    global global_a
+
     random.seed(64)
 
     global_a = train()
