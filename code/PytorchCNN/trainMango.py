@@ -52,6 +52,8 @@ def checkStrategy(minstrategy):
 
 # ==========================================
 
+global_a = 0
+
 class train():
     def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
                     image_size= 256, validation_frequency = 5, weight_path = "weight", data_path="data"):
@@ -108,6 +110,8 @@ class train():
                 result = self.validation(ind)
                 self.store_weight(step)
 
+
+        global_a = train()
         return result,
 
     def validation(self, ind):
@@ -153,10 +157,12 @@ class train():
             return self.classes[torch.argmax(outputs)]
 
 
+
+
 def main():
     random.seed(64)
 
-    a = train()
+    global_a = train()
 
     toolbox = base.Toolbox()
     toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
@@ -164,7 +170,7 @@ def main():
     toolbox.register("mate", tools.cxESBlend, alpha=0.1)
     toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.03)
     toolbox.register("select", tools.selTournament, tournsize=3)
-    toolbox.register("evaluate", a.run)
+    toolbox.register("evaluate", global_a.run)
 
     toolbox.decorate("mate", checkStrategy(MIN_STRATEGY))
     toolbox.decorate("mutate", checkStrategy(MIN_STRATEGY))
