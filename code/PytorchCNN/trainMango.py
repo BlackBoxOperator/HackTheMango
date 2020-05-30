@@ -1,6 +1,11 @@
 import os
 import numpy as np
 
+# Deap
+import random
+import array
+from deap import algorithms, base, creator, tools, benchmarks
+
 import torch
 import torch.nn as nn
 import torch.optim as optim
@@ -9,6 +14,43 @@ import torchvision.transforms as transforms
 
 from mlp import VGG16_model, ResNet, ResidualBlock
 from data import Mango_dataset
+
+# ======== Evolutionray Strategy ============
+# for reproducibility
+random.seed(64)
+
+MU, LAMBDA = 4, 8
+NGEN = 30  # number of generations
+
+IND_SIZE = 6
+MIN_VALUE = 0
+MAX_VALUE = 1
+MIN_STRATEGY = 0.05
+MAX_STRATEGY = 1
+
+creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
+creator.create("Strategy", array.array, typecode="d")
+
+# Individual generator
+def generateES(icls, scls, size, imin, imax, smin, smax):
+    ind = icls(random.uniform(imin, imax) for _ in range(size))
+    ind.strategy = scls(random.uniform(smin, smax) for _ in range(size))
+    return ind
+
+def checkStrategy(minstrategy):
+    def decorator(func):
+        def wrappper(*args, **kargs):
+            children = func(*args, **kargs)
+            for child in children:
+                for i, s in enumerate(child.strategy):
+                    if s < minstrategy:
+                        child.strategy[i] = minstrategy
+            return children
+        return wrappper
+    return decorator
+
+# ==========================================
 
 class train():
     def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
@@ -30,12 +72,15 @@ class train():
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer,step_size=100,gamma=0.98)
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
-    def run(self):
+    def run(self, ind):
+        ind = [x % 1 for x in ind]
+        result = 0.0
+
         dataTransformsTrain = transforms.Compose([
             transforms.RandomResizedCrop(self.image_size, interpolation=2),
             transforms.RandomRotation(degrees=(-180,180)),
             transforms.ToTensor(),
-            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+            transforms.Normalize([ind[0], ind[1], ind[2]], [ind[3], ind[4], ind[5]])
             ])
         trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
         dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
@@ -60,16 +105,18 @@ class train():
             print("Training loss = {}".format(totalLoss/count))
             print("step = {}, Training Accuracy: {}".format(step,accuracy / count))
             if step % self.validation_frequency == 0 or step == self.max_epoch-1:
-                self.validation()
+                result = self.validation(ind)
                 self.store_weight(step)
 
-    def validation(self):
+        return result,
+
+    def validation(self, ind):
         with torch.no_grad():
             dataTransformsValid = transforms.Compose([
             transforms.Resize(self.image_size),
             transforms.CenterCrop(self.image_size),
             transforms.ToTensor(),
-            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
+            transforms.Normalize([ind[0], ind[1], ind[2]], [ind[3], ind[4], ind[5]])
             ])
             validDatasets = Mango_dataset(os.path.join(self.data_path,"dev.csv"), os.path.join(self.data_path,"C1-P1_Dev"), dataTransformsValid)
             dataloadersValid = torch.utils.data.DataLoader(validDatasets, batch_size=self.batch_size, shuffle=False)
@@ -83,7 +130,14 @@ class train():
                 _, predicted = torch.max(outputs.data, 1)
                 count += len(x)
                 accuracy += (predicted == label).sum().item()
+
+            # ===============================================
+            # export the accurancy for evolutionary algorithm
+            exportAccurancy = accuracy / count
+            # ===============================================
+
             print("Validation Accuracy: {}".format(accuracy / count))
+            return exportAccurancy
 
     def store_weight(self,step):
         with open("weight/weight_{}".format(step), "wb") as f:
@@ -98,7 +152,39 @@ class train():
             outputs = self.classifier_net(x)
             return self.classes[torch.argmax(outputs)]
 
-if __name__ == "__main__":
+
+def main():
+    random.seed(64)
+
     a = train()
-    a.run()
-    
+
+    toolbox = base.Toolbox()
+    toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    toolbox.register("mate", tools.cxESBlend, alpha=0.1)
+    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.03)
+    toolbox.register("select", tools.selTournament, tournsize=3)
+    toolbox.register("evaluate", a.run)
+
+    toolbox.decorate("mate", checkStrategy(MIN_STRATEGY))
+    toolbox.decorate("mutate", checkStrategy(MIN_STRATEGY))
+
+    pop = toolbox.population(n=MU)
+    hof = tools.HallOfFame(1)
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("avg", np.mean)
+    stats.register("std", np.std)
+    stats.register("min", np.min)
+    stats.register("max", np.max)
+
+    pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
+        cxpb=0.6, mutpb=0.3, ngen=NGEN, stats=stats, halloffame=hof)
+
+    return pop, logbook, hof
+
+
+if __name__ == "__main__":
+    pop, log, hof = main()
+
+    for h in hof:
+        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
