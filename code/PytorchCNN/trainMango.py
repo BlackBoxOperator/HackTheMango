@@ -25,8 +25,8 @@ NGEN = 30  # number of generations
 IND_SIZE = 6
 MIN_VALUE = 0
 MAX_VALUE = 1
-MIN_STRATEGY = 0.05
-MAX_STRATEGY = 1
+MIN_STRATEGY = 0.3
+MAX_STRATEGY = 0.8
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
@@ -34,7 +34,8 @@ creator.create("Strategy", array.array, typecode="d")
 
 # Individual generator
 def generateES(icls, scls, size, imin, imax, smin, smax):
-    ind = icls(random.uniform(imin, imax) for _ in range(size))
+    ind = icls([0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010])
+    # ind = icls(random.uniform(imin, imax) for _ in range(size))
     ind.strategy = scls(random.uniform(smin, smax) for _ in range(size))
     return ind
 
@@ -55,7 +56,7 @@ def checkStrategy(minstrategy):
 global_a = 0
 
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
+    def __init__(self,classes = ["A","B","C"], max_epoch = 10, lr = 1e-4, batch_size = 32,
                     image_size= 256, validation_frequency = 5, weight_path = "weight", data_path="data"):
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
@@ -68,14 +69,13 @@ class train():
         self.lr = lr
         self.batch_size = batch_size
 
-        # self.classifier_net = VGG16_model(numClasses=len(self.classes)).to(self.device)
+        self.classifier_net = VGG16_model(numClasses=len(self.classes)).to(self.device)
         self.classifier_net = ResNet(ResidualBlock=ResidualBlock,numClasses=len(self.classes)).to(self.device)
         self.optimizer = optim.Adam(self.classifier_net.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer,step_size=100,gamma=0.98)
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
     def run(self, ind):
-
         global global_a
 
         ind = [x % 1 for x in ind]
