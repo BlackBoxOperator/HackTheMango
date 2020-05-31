@@ -34,8 +34,8 @@ creator.create("Strategy", array.array, typecode="d")
 
 # Individual generator
 def generateES(icls, scls, size, imin, imax, smin, smax):
-    ind = icls([0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010])
-    # ind = icls(random.uniform(imin, imax) for _ in range(size))
+    #  ind = icls([0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010])
+    ind = icls(random.uniform(imin, imax) for _ in range(size))
     ind.strategy = scls(random.uniform(smin, smax) for _ in range(size))
     return ind
 
@@ -56,8 +56,8 @@ def checkStrategy(minstrategy):
 global_a = 0
 
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 10, lr = 1e-4, batch_size = 32,
-                    image_size= 128, validation_frequency = 10, weight_path = "weight", data_path="data"):
+    def __init__(self,classes = ["A","B","C"], max_epoch = 20, lr = 1e-4, batch_size = 32,
+                    image_size= 128, validation_frequency = 20, weight_path = "weight", data_path="data"):
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
         self.data_path = data_path
