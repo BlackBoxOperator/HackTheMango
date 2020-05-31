@@ -9,4 +9,4 @@ dev.csv
 train.csv
 
 __pycache__
-weight
+*weight
