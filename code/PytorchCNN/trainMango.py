@@ -24,7 +24,7 @@ NGEN = 30  # number of generations
 
 IND_SIZE = 6
 MIN_VALUE = 4
-MAX_VALUE = 8192
+MAX_VALUE = 2048
 MIN_STRATEGY = 2
 MAX_STRATEGY = 1024
 
@@ -56,7 +56,7 @@ def checkStrategy(minstrategy):
 
 class train():
     def __init__(self,classifier_hp_dict = {},classes = ["A","B","C"], max_epoch = 10, lr = 1e-4, batch_size = 16,
-                    image_size= 256, validation_frequency = 5, weight_path = "weight", data_path="data"):
+                    image_size= 128, validation_frequency = 10, weight_path = "weight", data_path="data"):
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
         self.data_path = data_path
@@ -106,7 +106,7 @@ class train():
                 totalLoss += loss.item()
             print("Training loss = {}".format(totalLoss/count))
             print("step = {}, Training Accuracy: {}".format(step,accuracy / count))
-            if step % self.validation_frequency == 0 or step == self.max_epoch-1:
+            if step+1 % self.validation_frequency == 0 or step == self.max_epoch-1:
                 result = self.validation()
                 self.store_weight(step)
 
@@ -157,6 +157,13 @@ class train():
 
 
 def es_hidden(ind):
+    for i in range(6):
+        if i < 4:
+            ind[i] = ind[i] % 513
+        else:
+            ind[i] = ind[i] % 2049
+    
+    print("individual: ",ind)
     hp_dic = {
         "layer1" : int(ind[0]),
         "layer2" : int(ind[1]),
@@ -167,14 +174,13 @@ def es_hidden(ind):
     }
     a = train(classifier_hp_dict=hp_dic)
     result = a.run()
-    return result, 
+    return result
 
 def main():
 
     random.seed(64)
 
     toolbox = base.Toolbox()
-    toolbox.register("attr_int", random.randint,1, 65535)
     toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     toolbox.register("mate", tools.cxESBlend, alpha=0.1)

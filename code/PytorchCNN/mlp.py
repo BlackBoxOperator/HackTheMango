@@ -92,7 +92,7 @@ class ResNet(nn.Module):
         self.inchannel = hp_dic["layer1"]
         self.conv1 = nn.Sequential(
             nn.Conv2d(3, hp_dic["layer1"], kernel_size=3, stride=1, padding=1, bias=False),
-            nn.BatchNorm2d(64),
+            nn.BatchNorm2d(hp_dic["layer1"]),
             nn.ReLU(),
         )
         self.layer1 = self.make_layer(ResidualBlock, hp_dic["layer1"],  2, stride=1)
