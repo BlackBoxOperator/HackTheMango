@@ -53,9 +53,11 @@ def checkStrategy(minstrategy):
 
 # ==========================================
 
+global_a = 0
+
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
-                    image_size= 128, validation_frequency = 5, weight_path = "weight", data_path="data"):
+    def __init__(self,classes = ["A","B","C"], max_epoch = 20, lr = 1e-4, batch_size = 25,
+                    image_size= 256, validation_frequency = 20, weight_path = "weight", data_path="data"):
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
         self.data_path = data_path
@@ -75,7 +77,10 @@ class train():
 
     def run(self, ind):
 
+        global global_a
+
         ind = [x % 1 for x in ind]
+        result = 0.0
 
         print("parameter = {}".format(ind))
 
@@ -111,6 +116,8 @@ class train():
                 result = self.validation(ind)
                 self.store_weight(step)
 
+
+        global_a = train()
         return result,
 
     def validation(self, ind):
@@ -155,7 +162,50 @@ class train():
             outputs = self.classifier_net(x)
             return self.classes[torch.argmax(outputs)]
 
+
+
+
+def main():
+    global global_a
+
+    random.seed(64)
+
+    global_a = train()
+
+    toolbox = base.Toolbox()
+    toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    toolbox.register("mate", tools.cxESBlend, alpha=0.1)
+    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.03)
+    toolbox.register("select", tools.selTournament, tournsize=3)
+    toolbox.register("evaluate", global_a.run)
+
+    toolbox.decorate("mate", checkStrategy(MIN_STRATEGY))
+    toolbox.decorate("mutate", checkStrategy(MIN_STRATEGY))
+
+    pop = toolbox.population(n=MU)
+    hof = tools.HallOfFame(1)
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("avg", np.mean)
+    stats.register("std", np.std)
+    stats.register("min", np.min)
+    stats.register("max", np.max)
+
+    pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
+        cxpb=0.6, mutpb=0.3, ngen=NGEN, stats=stats, halloffame=hof)
+
+    return pop, logbook, hof
+
+
 if __name__ == "__main__":
-    _78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
-            0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
-    train().run(78625)
+    pop, log, hof = main()
+
+    logbook = open('logbook.txt', 'w')
+
+    for h in hof:
+        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
+        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values, file = logbook)
+
+    print(log)
+    print(log, file = logbook)
+    logbook.close()
