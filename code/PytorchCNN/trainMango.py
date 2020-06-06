@@ -19,14 +19,14 @@ from data import Mango_dataset
 # for reproducibility
 random.seed(64)
 
-MU, LAMBDA = 4, 8
+MU, LAMBDA = 2, 2
 NGEN = 30  # number of generations
 
 IND_SIZE = 6
 MIN_VALUE = 4
 MAX_VALUE = 2048
-MIN_STRATEGY = 2
-MAX_STRATEGY = 1024
+MIN_STRATEGY = 32
+MAX_STRATEGY = 512
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
@@ -159,9 +159,9 @@ class train():
 def es_hidden(ind):
     for i in range(6):
         if i < 4:
-            ind[i] = ind[i] % 513
+            ind[i] = np.abs(ind[i] % 513)
         else:
-            ind[i] = ind[i] % 2049
+            ind[i] = np.abs(ind[i] % 2049)
     
     print("individual: ",ind)
     hp_dic = {
@@ -184,7 +184,7 @@ def main():
     toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     toolbox.register("mate", tools.cxESBlend, alpha=0.1)
-    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.03)
+    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.8)
     toolbox.register("select", tools.selTournament, tournsize=3)
     toolbox.register("evaluate", es_hidden)
 
@@ -200,7 +200,7 @@ def main():
     stats.register("max", np.max)
 
     pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
-        cxpb=0.6, mutpb=0.3, ngen=NGEN, stats=stats, halloffame=hof)
+        cxpb=0.1, mutpb=0.9, ngen=NGEN, stats=stats, halloffame=hof)
 
     return pop, logbook, hof
 
