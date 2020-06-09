@@ -71,21 +71,27 @@ class train():
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer,step_size=100,gamma=0.98)
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
-    def run(self, ind):
+        """
+        image transformation / augmentation
+        """
 
-        ind = [x % 1 for x in ind]
-
-        print("parameter = {}".format(ind))
-
-        # Define the augmentation pipeline
-
-        orig_trans = [
+        train_trans = [
             A.RandomResizedCrop(self.image_size, interpolation=2),
             A.RandomRotation(degrees=(-180,180)),
             ToTensor(), # convert the image to PyTorch tensor
             A.Normalize(
-                mean=[0.485, 0.456, 0.406],
-                std=[0.229, 0.224, 0.225],
+                mean = [ind[0], ind[1], ind[2]],
+                std = [ind[3], ind[4], ind[5]],
+            ),
+        ]
+
+        valid_trans = [
+            A.Resize(self.image_size),
+            A.CenterCrop(self.image_size),
+            ToTensor(),
+            A.Normalize(
+                mean = [ind[0], ind[1], ind[2]],
+                std = [ind[3], ind[4], ind[5]],
             ),
         ]
 
@@ -141,8 +147,27 @@ class train():
 
             ]
         """
+        self.augmentation_pipeline = A.Compose(train_trans, p = 1)
+        self.validation_pipeline = A.Compose(valid_trans, p = 1)
 
-        dataTransformsTrain = A.Compose(orig_trans, p = 1)
+    def run(self, ind):
+
+        ind = [x % 1 for x in ind]
+
+        print("parameter = {}".format(ind))
+
+        # Define the augmentation pipeline
+
+        """
+        Image data augmentation is typically only applied to the training dataset,
+        and not to the validation or test dataset.
+        This is different from data preparation such as image resizing and pixel scaling;
+        they must be performed consistently across all datasets that interact with the model.
+
+        https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
+        """
+
+        dataTransformsTrain = self.validation_pipeline
 
         trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
         dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
@@ -174,12 +199,18 @@ class train():
 
     def validation(self, ind):
         with torch.no_grad():
+
+            """
             dataTransformsValid = transforms.Compose([
-            transforms.Resize(self.image_size),
-            transforms.CenterCrop(self.image_size),
-            transforms.ToTensor(),
-            transforms.Normalize([ind[0], ind[1], ind[2]], [ind[3], ind[4], ind[5]])
+                transforms.Resize(self.image_size),
+                transforms.CenterCrop(self.image_size),
+                transforms.ToTensor(),
+                transforms.Normalize([ind[0], ind[1], ind[2]], [ind[3], ind[4], ind[5]])
             ])
+            """
+
+            dataTransformsValid = self.augmentation_pipeline
+
             validDatasets = Mango_dataset(os.path.join(self.data_path,"dev.csv"), os.path.join(self.data_path,"C1-P1_Dev"), dataTransformsValid)
             dataloadersValid = torch.utils.data.DataLoader(validDatasets, batch_size=self.batch_size, shuffle=False)
             accuracy = 0
@@ -215,6 +246,7 @@ class train():
             return self.classes[torch.argmax(outputs)]
 
 if __name__ == "__main__":
-    _78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
-            0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
+    #_78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
+    #        0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
+    bench = [0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010]
     train().run(_78625)
