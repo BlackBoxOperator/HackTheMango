@@ -76,6 +76,7 @@ class train():
         """
 
         train_trans = lambda ind: [
+            A.Flip(p = 0.5),
             A.RandomResizedCrop(self.image_size, self.image_size, interpolation=2),
             A.Rotate(limit=(-180,180)),
             A.Normalize(
