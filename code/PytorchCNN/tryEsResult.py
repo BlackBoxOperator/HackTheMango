@@ -75,24 +75,24 @@ class train():
         image transformation / augmentation
         """
 
-        train_trans = [
-            A.RandomResizedCrop(self.image_size, interpolation=2),
-            A.RandomRotation(degrees=(-180,180)),
-            ToTensor(), # convert the image to PyTorch tensor
+        train_trans = lambda ind: [
+            A.RandomResizedCrop(self.image_size, self.image_size, interpolation=2),
+            A.Rotate(limit=(-180,180)),
             A.Normalize(
                 mean = [ind[0], ind[1], ind[2]],
                 std = [ind[3], ind[4], ind[5]],
             ),
+            ToTensor(), # convert the image to PyTorch tensor
         ]
 
-        valid_trans = [
-            A.Resize(self.image_size),
-            A.CenterCrop(self.image_size),
-            ToTensor(),
+        valid_trans = lambda ind: [
+            A.Resize(self.image_size, self.image_size),
+            A.CenterCrop(self.image_size, self.image_size),
             A.Normalize(
                 mean = [ind[0], ind[1], ind[2]],
                 std = [ind[3], ind[4], ind[5]],
             ),
+            ToTensor(),
         ]
 
         """
@@ -147,8 +147,8 @@ class train():
 
             ]
         """
-        self.augmentation_pipeline = A.Compose(train_trans, p = 1)
-        self.validation_pipeline = A.Compose(valid_trans, p = 1)
+        self.augmentation_pipeline = lambda ind: A.Compose(train_trans(ind), p = 1)
+        self.validation_pipeline = lambda ind: A.Compose(valid_trans(ind), p = 1)
 
     def run(self, ind):
 
@@ -167,7 +167,7 @@ class train():
         https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
         """
 
-        dataTransformsTrain = self.validation_pipeline
+        dataTransformsTrain = self.augmentation_pipeline(ind)
 
         trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
         dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
@@ -209,7 +209,7 @@ class train():
             ])
             """
 
-            dataTransformsValid = self.augmentation_pipeline
+            dataTransformsValid = self.validation_pipeline(ind)
 
             validDatasets = Mango_dataset(os.path.join(self.data_path,"dev.csv"), os.path.join(self.data_path,"C1-P1_Dev"), dataTransformsValid)
             dataloadersValid = torch.utils.data.DataLoader(validDatasets, batch_size=self.batch_size, shuffle=False)
@@ -249,4 +249,4 @@ if __name__ == "__main__":
     #_78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
     #        0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
     bench = [0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010]
-    train().run(_78625)
+    train().run(bench)
