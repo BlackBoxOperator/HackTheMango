@@ -72,16 +72,6 @@ class train():
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
         """
-        fix the seed
-        """
-        np.random.seed(self.seed)
-        random.seed(self.seed)
-        torch.manual_seed(self.seed)
-        torch.cuda.manual_seed_all(self.seed)
-
-
-
-        """
         image transformation / augmentation
         """
 # Blur
@@ -110,38 +100,14 @@ class train():
 
         train_trans = lambda ind: [
             A.Flip(p=0.5),
-            #A.Blur(p=0.5),
             A.RandomBrightnessContrast(
                 brightness_limit=(-0.2, 0.2),
                 contrast_limit=(-0.2, 0.2),
                 brightness_by_max=False,
                 p=0.5
             ),
-            A.RandomResizedCrop(
-                height=self.image_size,
-                width=self.image_size,
-                scale=(0.08, 1.0), # 0.08 to 0.8 become worse
-                ratio=(0.75, 1.3333333333333333),
-                interpolation=2, # non default
-                p=1,
-            ), 
-            A.ShiftScaleRotate(
-                #shift_limit=0.0625,
-                #scale_limit=0.1,
-                shift_limit=0,
-                scale_limit=0,
-                rotate_limit=180,
-                interpolation=1,
-                p=0.5
-            ), 
-            #A.Rotate(limit=(-180,180)), # better than SSR
-            #A.ElasticTransform(  # ET is slow, must later than crop
-            #    alpha=1,
-            #    sigma=50,
-            #    alpha_affine=50,
-            #    interpolation=1,
-            #    p=0.5
-            #),
+            A.RandomResizedCrop(self.image_size, self.image_size, interpolation=2),
+            A.Rotate(limit=(-180,180)),
             A.Normalize(
                 mean=[ind[0], ind[1], ind[2]],
                 std=[ind[3], ind[4], ind[5]],
@@ -158,6 +124,7 @@ class train():
                 p = 1
             ),
             A.Resize(self.image_size, self.image_size),
+            #A.CenterCrop(self.image_size, self.image_size),
             A.Normalize(
                 mean = [ind[0], ind[1], ind[2]],
                 std = [ind[3], ind[4], ind[5]],

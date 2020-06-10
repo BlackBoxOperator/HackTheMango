@@ -72,16 +72,6 @@ class train():
         self.cross = nn.CrossEntropyLoss().to(self.device)
 
         """
-        fix the seed
-        """
-        np.random.seed(self.seed)
-        random.seed(self.seed)
-        torch.manual_seed(self.seed)
-        torch.cuda.manual_seed_all(self.seed)
-
-
-
-        """
         image transformation / augmentation
         """
 # Blur
