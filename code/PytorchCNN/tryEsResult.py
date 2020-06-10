@@ -79,8 +79,6 @@ class train():
         torch.manual_seed(self.seed)
         torch.cuda.manual_seed_all(self.seed)
 
-
-
         """
         image transformation / augmentation
         """
@@ -120,7 +118,7 @@ class train():
             A.RandomResizedCrop(
                 height=self.image_size,
                 width=self.image_size,
-                scale=(0.08, 1.0), # 0.08 to 0.8 become worse
+                scale=(0.8, 1.0), # 0.08 to 0.8 become worse
                 ratio=(0.75, 1.3333333333333333),
                 interpolation=2, # non default
                 p=1,
