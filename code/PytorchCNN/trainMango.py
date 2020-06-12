@@ -19,7 +19,7 @@ from data import Mango_dataset
 # for reproducibility
 random.seed(64)
 
-MU, LAMBDA = 2, 2
+MU, LAMBDA = 4, 8
 NGEN = 30  # number of generations
 
 IND_SIZE = 6
@@ -60,7 +60,7 @@ class train():
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
         self.data_path = data_path
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:3" if torch.cuda.is_available() else "cpu")
         self.classes = classes
         self.image_size = image_size
         self.validation_frequency = validation_frequency
@@ -74,6 +74,11 @@ class train():
         self.optimizer = optim.Adam(self.classifier_net.parameters(), lr=self.lr)
         self.scheduler = torch.optim.lr_scheduler.StepLR(self.optimizer,step_size=100,gamma=0.98)
         self.cross = nn.CrossEntropyLoss().to(self.device)
+        self.seed = 0
+        np.random.seed(self.seed)
+        random.seed(self.seed)
+        torch.manual_seed(self.seed)
+        torch.cuda.manual_seed(self.seed)
 
     def run(self):
         result = 0.0
@@ -140,6 +145,7 @@ class train():
             # ===============================================
 
             print("Validation Accuracy: {}".format(accuracy / count))
+            print("Validation Accuracy: {}".format(accuracy / count), file=logfile)
             return exportAccurancy
 
     def store_weight(self,step):
@@ -159,11 +165,14 @@ class train():
 def es_hidden(ind):
     for i in range(6):
         if i < 4:
-            ind[i] = np.abs(ind[i] % 513)
+            ind[i] = int(np.abs(ind[i] % 513))
         else:
-            ind[i] = np.abs(ind[i] % 2049)
+            ind[i] = int(np.abs(ind[i] % 2049))
+        if ind[i] < 16:
+            ind[i] = 16
     
     print("individual: ",ind)
+    print("individual: ",ind, file=logfile)
     hp_dic = {
         "layer1" : int(ind[0]),
         "layer2" : int(ind[1]),
@@ -200,20 +209,21 @@ def main():
     stats.register("max", np.max)
 
     pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
-        cxpb=0.1, mutpb=0.9, ngen=NGEN, stats=stats, halloffame=hof)
+        cxpb=0.2, mutpb=0.8, ngen=NGEN, stats=stats, halloffame=hof)
 
     return pop, logbook, hof
 
-
+logfile = open('logfile.txt', 'w')
 if __name__ == "__main__":
     pop, log, hof = main()
 
     logbook = open('logbook.txt', 'w')
 
     for h in hof:
-        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
-        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values, file = logbook)
+        print("individual: ", [int(x)  for x in h], " value: ", h.fitness.values)
+        print("individual: ", [int(x)  for x in h], " value: ", h.fitness.values, file = logbook)
 
     print(log)
     print(log, file = logbook)
     logbook.close()
+    logfile.close()
