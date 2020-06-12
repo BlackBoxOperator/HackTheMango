@@ -10,6 +10,7 @@ import torchvision.transforms as transforms
 
 from mlp import VGG16_model, ResNet, ResidualBlock
 from data import Eval_dataset
+from trainMango import train
 
 def eval(model, imgsize, data_path, device, classes=["A","B","C"]):
     df = pd.read_csv(os.path.join(data_path,"test.csv"))
@@ -27,6 +28,12 @@ def eval(model, imgsize, data_path, device, classes=["A","B","C"]):
                 x = x.to(device)
                 outputs = model(x)
                 _, predicted = torch.max(outputs.data, 1)
-                print(classes[np.argmax(predicted)])
-                df["label"][idx] = classes[np.argmax(predicted)]
+                predicted = predicted.cpu()
+                df["label"][idx] = classes[predicted[0]]
+    df.to_csv("result.csv", header=True, index=False)
+
+if __name__ == "__main__":
+    model = train()
+    model.load_weight(99)
+    eval(model.classifier_net, imgsize=128,data_path="data/",device=model.device)
 
