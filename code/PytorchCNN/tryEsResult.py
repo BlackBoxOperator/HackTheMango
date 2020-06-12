@@ -23,7 +23,6 @@ from albumentations.pytorch import ToTensor
 # ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
-
 MU, LAMBDA = 4, 8
 NGEN = 30  # number of generations
 
@@ -122,7 +121,7 @@ class train():
                 ratio=(0.75, 1.3333333333333333),
                 interpolation=2, # non default
                 p=1,
-            ), 
+            ),
             A.ShiftScaleRotate(
                 #shift_limit=0.0625,
                 #scale_limit=0.1,
@@ -131,7 +130,7 @@ class train():
                 rotate_limit=180,
                 interpolation=1,
                 p=0.5
-            ), 
+            ),
             #A.Rotate(limit=(-180,180)), # better than SSR
             #A.ElasticTransform(  # ET is slow, must later than crop
             #    alpha=1,
@@ -219,12 +218,14 @@ class train():
         self.validation_pipeline = lambda ind: A.Compose(valid_trans(ind), p = 1)
 
     def run(self, ind):
+        global bench
 
-        ind = [x % 1 for x in ind]
-
-        print("parameter = {}".format(ind))
+        # ind is a permuation list
+        print("parameter = {}".format(bench))
 
         # Define the augmentation pipeline
+        # TODO here
+
 
         """
         Image data augmentation is typically only applied to the training dataset,
@@ -235,7 +236,7 @@ class train():
         https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
         """
 
-        dataTransformsTrain = self.augmentation_pipeline(ind)
+        dataTransformsTrain = self.augmentation_pipeline(bench)
 
         trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
         dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
@@ -260,7 +261,7 @@ class train():
             print("Training loss = {}".format(totalLoss/count))
             print("step = {}, Training Accuracy: {}".format(step,accuracy / count))
             if step % self.validation_frequency == 0 or step == self.max_epoch-1:
-                result = self.validation(ind)
+                result = self.validation(bench)
                 self.store_weight(step)
 
         return result,
@@ -313,8 +314,61 @@ class train():
             outputs = self.classifier_net(x)
             return self.classes[torch.argmax(outputs)]
 
-if __name__ == "__main__":
+# ea
+NUM_PIPE = 123
+
+creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMax)
+
+bench = [0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010]
+
+global_a = 0
+
+def main():
+    global global_a
+    global bench
     #_78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
     #        0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
-    bench = [0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010]
-    train().run(bench)
+    random.seed(64)
+
+    global_a = train()
+
+    #Since there is only one queen per line,
+    #individual are represented by a permutation
+    toolbox = base.Toolbox()
+    toolbox.register("permutation", random.sample, range(NUM_PIPE), NUM_PIPE)
+
+    #Structure initializers
+    #An individual is a list that represents the position of each queen.
+    #Only the line is stored, the column is the index of the number in the list.
+    toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.permutation)
+    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+
+    toolbox.register("evaluate", global_a.run)
+    toolbox.register("mate", tools.cxPartialyMatched)
+    toolbox.register("mutate", tools.mutShuffleIndexes, indpb=2.0/NUM_PIPE)
+    toolbox.register("select", tools.selTournament, tournsize=3)
+
+    pop = toolbox.population(n=NUM_PIPE)
+    hof = tools.HallOfFame(1)
+    stats = tools.Statistics(lambda ind: ind.fitness.values)
+    stats.register("Avg", np.mean)
+    stats.register("Std", np.std)
+    stats.register("Min", np.min)
+    stats.register("Max", np.max)
+
+    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.7, mutpb=0.2, ngen=100, stats=stats,
+                        halloffame=hof, verbose=True)
+
+    return pop, logbook, hof
+
+if __name__ == "__main__":
+    pop, log, hof = main()
+
+    logbook = open('logbook.txt', 'w')
+
+    print(log)
+    print(log, file = logbook)
+    logbook.close()
+
+    print(hof[0])
