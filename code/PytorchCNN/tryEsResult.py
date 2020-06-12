@@ -56,6 +56,8 @@ class train():
                     image_size= 128, validation_frequency = 5, weight_path = "weight", data_path="data"):
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
+
+        self.seed = 42
         self.data_path = data_path
         self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
         self.classes = classes
@@ -84,12 +86,7 @@ class train():
         """
 # Blur
 # Transpose
-# OpticalDistortion
-# gamma?
-# ShiftScaleRotate?
-# GridDistortion
 # RandomGridShuffle
-# HueSaturationValue
 # RGBShift
 # MotionBlur
 # MedianBlur
@@ -98,31 +95,82 @@ class train():
 # CLAHE
 # ChannelShuffle
 # InvertImg
-# CoarseDropout
 # ISONoise
-# Equalize
 # FancyPCA (class)
-# GridDropout
 # HueSaturationValue
+# ShiftScaleRotate?
+
+# Equalize
+# OpticalDistortion
+# GridDistortion
+# CoarseDropout
 # RandomGamma
 
         train_trans = lambda ind: [
-            A.Flip(p=0.5),
-            #A.Blur(p=0.5),
+
+            A.RandomResizedCrop(
+                height=self.image_size,
+                width=self.image_size,
+                scale=(0.9, 1.0), # 0.08 to 0.8 become worse
+                ratio=(0.75, 1.3333333333333333),
+                interpolation=2, # non default
+                p=1,
+            ),
+
+            A.Flip(p=.5),
+
+            #A.Transpose(p=.5),
+
+            #A.ISONoise(
+            #    color_shift=(0.01, 0.05),
+            #    intensity=(0.1, 0.5),
+            #    p=0.5),
+
+            A.RandomGamma(p=.5),
+            A.GridDistortion(p=.3),
+            A.OpticalDistortion(p=.3),
+            A.CoarseDropout(
+                max_holes=8,
+                max_height=8,
+                max_width=8,
+                min_holes=None,
+                min_height=None,
+                min_width=None,
+                fill_value=0,
+                p=0.5
+            ),
+            #A.RandomGridShuffle(grid=(32, 32), p=0.5),
+            #A.Transpose(),
+            #A.OneOf([
+            #    A.IAAAdditiveGaussianNoise(),
+            #    A.GaussNoise(),
+            #], p=0.2),
+            #A.OneOf([
+            #    A.MotionBlur(p=.2),
+            #    A.MedianBlur(blur_limit=3, p=.1),
+            #    A.Blur(blur_limit=3, p=.1),
+            #], p=0.2),
+            #A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0.2, rotate_limit=45, p=.2),
+            #A.OneOf([
+            #    A.OpticalDistortion(p=0.3),
+            #    A.GridDistortion(p=.1),
+            #    A.IAAPiecewiseAffine(p=0.3),
+            #], p=0.2),
+            #A.OneOf([
+            #    A.CLAHE(clip_limit=2),
+            #    A.IAASharpen(),
+            #    A.IAAEmboss(),
+            #    A.RandomContrast(),
+            #    A.RandomBrightness(),
+            #], p=0.3),
+
             A.RandomBrightnessContrast(
                 brightness_limit=(-0.2, 0.2),
                 contrast_limit=(-0.2, 0.2),
                 brightness_by_max=False,
                 p=0.5
             ),
-            A.RandomResizedCrop(
-                height=self.image_size,
-                width=self.image_size,
-                scale=(0.8, 1.0), # 0.08 to 0.8 become worse
-                ratio=(0.75, 1.3333333333333333),
-                interpolation=2, # non default
-                p=1,
-            ), 
+            
             A.ShiftScaleRotate(
                 #shift_limit=0.0625,
                 #scale_limit=0.1,
@@ -132,14 +180,9 @@ class train():
                 interpolation=1,
                 p=0.5
             ), 
-            #A.Rotate(limit=(-180,180)), # better than SSR
-            #A.ElasticTransform(  # ET is slow, must later than crop
-            #    alpha=1,
-            #    sigma=50,
-            #    alpha_affine=50,
-            #    interpolation=1,
-            #    p=0.5
-            #),
+
+            #A.Equalize(p=0.2),
+
             A.Normalize(
                 mean=[ind[0], ind[1], ind[2]],
                 std=[ind[3], ind[4], ind[5]],

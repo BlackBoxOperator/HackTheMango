@@ -1,0 +1,222 @@
+parameter = [0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.201]
+Training loss = 0.03453091295702117
+step = 0, Training Accuracy: 0.4233928571428571
+Validation Accuracy: 0.505
+Training loss = 0.031336482880370956
+step = 1, Training Accuracy: 0.4764285714285714
+Training loss = 0.030711541367428645
+step = 2, Training Accuracy: 0.4825
+Training loss = 0.030380726318274227
+step = 3, Training Accuracy: 0.5141071428571429
+Training loss = 0.029810938366821835
+step = 4, Training Accuracy: 0.5260714285714285
+Training loss = 0.029765967769282205
+step = 5, Training Accuracy: 0.5316071428571428
+Validation Accuracy: 0.55375
+Training loss = 0.02947813756763935
+step = 6, Training Accuracy: 0.5407142857142857
+Training loss = 0.02935595613505159
+step = 7, Training Accuracy: 0.5417857142857143
+Training loss = 0.029451008694512504
+step = 8, Training Accuracy: 0.5407142857142857
+Training loss = 0.02877521347786699
+step = 9, Training Accuracy: 0.55
+Training loss = 0.02852110765874386
+step = 10, Training Accuracy: 0.5623214285714285
+Validation Accuracy: 0.56625
+Training loss = 0.028725526747959
+step = 11, Training Accuracy: 0.5542857142857143
+Training loss = 0.028511755455817495
+step = 12, Training Accuracy: 0.5592857142857143
+Training loss = 0.02813854127057961
+step = 13, Training Accuracy: 0.5714285714285714
+Training loss = 0.02805905018533979
+step = 14, Training Accuracy: 0.5783928571428572
+Training loss = 0.02754271524293082
+step = 15, Training Accuracy: 0.5764285714285714
+Validation Accuracy: 0.61125
+Training loss = 0.027726574540138244
+step = 16, Training Accuracy: 0.5805357142857143
+Training loss = 0.027461462361471994
+step = 17, Training Accuracy: 0.58875
+Training loss = 0.02693062638597829
+step = 18, Training Accuracy: 0.6016071428571429
+Training loss = 0.02644614617739405
+step = 19, Training Accuracy: 0.6092857142857143
+Training loss = 0.02561298444867134
+step = 20, Training Accuracy: 0.6307142857142857
+Validation Accuracy: 0.6875
+Training loss = 0.0250385505599635
+step = 21, Training Accuracy: 0.6375
+Training loss = 0.024163240598780767
+step = 22, Training Accuracy: 0.6489285714285714
+Training loss = 0.023529047912784984
+step = 23, Training Accuracy: 0.6592857142857143
+Training loss = 0.023833810687065124
+step = 24, Training Accuracy: 0.6542857142857142
+Training loss = 0.02295187759612288
+step = 25, Training Accuracy: 0.6683928571428571
+Validation Accuracy: 0.755
+Training loss = 0.022683200729744776
+step = 26, Training Accuracy: 0.6707142857142857
+Training loss = 0.022777382832552706
+step = 27, Training Accuracy: 0.6735714285714286
+Training loss = 0.022513994074293546
+step = 28, Training Accuracy: 0.6689285714285714
+Training loss = 0.022331218224550996
+step = 29, Training Accuracy: 0.6814285714285714
+Training loss = 0.021726662841226374
+step = 30, Training Accuracy: 0.6898214285714286
+Validation Accuracy: 0.77625
+Training loss = 0.021366886368819647
+step = 31, Training Accuracy: 0.6942857142857143
+Training loss = 0.021506823072476047
+step = 32, Training Accuracy: 0.69125
+Training loss = 0.021251975106341497
+step = 33, Training Accuracy: 0.69375
+Training loss = 0.021370485254696436
+step = 34, Training Accuracy: 0.6896428571428571
+Training loss = 0.021299261280468534
+step = 35, Training Accuracy: 0.6932142857142857
+Validation Accuracy: 0.79375
+Training loss = 0.021367754664804253
+step = 36, Training Accuracy: 0.6978571428571428
+Training loss = 0.020826728237526758
+step = 37, Training Accuracy: 0.7060714285714286
+Training loss = 0.020878160569284644
+step = 38, Training Accuracy: 0.7076785714285714
+Training loss = 0.020507539005151818
+step = 39, Training Accuracy: 0.7103571428571429
+Training loss = 0.020554934138698237
+step = 40, Training Accuracy: 0.7083928571428572
+Validation Accuracy: 0.795
+Training loss = 0.020477896412568433
+step = 41, Training Accuracy: 0.7076785714285714
+Training loss = 0.020079623434160438
+step = 42, Training Accuracy: 0.7098214285714286
+Training loss = 0.020079486769224917
+step = 43, Training Accuracy: 0.7098214285714286
+Training loss = 0.020552589717720237
+step = 44, Training Accuracy: 0.7119642857142857
+Training loss = 0.020233014646385397
+step = 45, Training Accuracy: 0.7123214285714285
+Validation Accuracy: 0.7825
+Training loss = 0.019641214210007873
+step = 46, Training Accuracy: 0.7207142857142858
+Training loss = 0.019557784354048115
+step = 47, Training Accuracy: 0.7167857142857142
+Training loss = 0.019921591776822293
+step = 48, Training Accuracy: 0.7175
+Training loss = 0.019617019737405435
+step = 49, Training Accuracy: 0.7239285714285715
+Training loss = 0.019746975797627655
+step = 50, Training Accuracy: 0.7205357142857143
+Validation Accuracy: 0.78625
+Training loss = 0.019917907251843385
+step = 51, Training Accuracy: 0.7244642857142857
+Training loss = 0.019852226051901067
+step = 52, Training Accuracy: 0.7158928571428571
+Training loss = 0.019396491912858825
+step = 53, Training Accuracy: 0.7267857142857143
+Training loss = 0.01925739665648767
+step = 54, Training Accuracy: 0.7271428571428571
+Training loss = 0.019569754137524535
+step = 55, Training Accuracy: 0.7242857142857143
+Validation Accuracy: 0.7875
+Training loss = 0.019064941496721336
+step = 56, Training Accuracy: 0.7323214285714286
+Training loss = 0.01921669785465513
+step = 57, Training Accuracy: 0.7260714285714286
+Training loss = 0.019087688220398767
+step = 58, Training Accuracy: 0.7273214285714286
+Training loss = 0.018958160068307604
+step = 59, Training Accuracy: 0.735
+Training loss = 0.018742906296891827
+step = 60, Training Accuracy: 0.7344642857142857
+Validation Accuracy: 0.7875
+Training loss = 0.01883345409695591
+step = 61, Training Accuracy: 0.7348214285714286
+Training loss = 0.018900950072067123
+step = 62, Training Accuracy: 0.7291071428571428
+Training loss = 0.018907038691852774
+step = 63, Training Accuracy: 0.7335714285714285
+Training loss = 0.018961041410054478
+step = 64, Training Accuracy: 0.7325
+Training loss = 0.01888095932347434
+step = 65, Training Accuracy: 0.7260714285714286
+Validation Accuracy: 0.79875
+Training loss = 0.01857658370797123
+step = 66, Training Accuracy: 0.74125
+Training loss = 0.018746616563626698
+step = 67, Training Accuracy: 0.7316071428571429
+Training loss = 0.01895197724125215
+step = 68, Training Accuracy: 0.7323214285714286
+Training loss = 0.018609103022941522
+step = 69, Training Accuracy: 0.7314285714285714
+Training loss = 0.018344728371926716
+step = 70, Training Accuracy: 0.7394642857142857
+Validation Accuracy: 0.8025
+Training loss = 0.01869239900793348
+step = 71, Training Accuracy: 0.7342857142857143
+Training loss = 0.018444267266563008
+step = 72, Training Accuracy: 0.7342857142857143
+Training loss = 0.0185697917001588
+step = 73, Training Accuracy: 0.7360714285714286
+Training loss = 0.018524218324039665
+step = 74, Training Accuracy: 0.7358928571428571
+Training loss = 0.018427330260830266
+step = 75, Training Accuracy: 0.7426785714285714
+Validation Accuracy: 0.8075
+Training loss = 0.018412688757692065
+step = 76, Training Accuracy: 0.7475
+Training loss = 0.018271480995629516
+step = 77, Training Accuracy: 0.7410714285714286
+Training loss = 0.018298845110195024
+step = 78, Training Accuracy: 0.7428571428571429
+Training loss = 0.01842443235218525
+step = 79, Training Accuracy: 0.7391071428571429
+Training loss = 0.01830880224172558
+step = 80, Training Accuracy: 0.7310714285714286
+Validation Accuracy: 0.80375
+Training loss = 0.017976705341466837
+step = 81, Training Accuracy: 0.7473214285714286
+Training loss = 0.017880100639803068
+step = 82, Training Accuracy: 0.7503571428571428
+Training loss = 0.018253349140286444
+step = 83, Training Accuracy: 0.7426785714285714
+Training loss = 0.018025939150580338
+step = 84, Training Accuracy: 0.7485714285714286
+Training loss = 0.018195172074650014
+step = 85, Training Accuracy: 0.7425
+Validation Accuracy: 0.80625
+Training loss = 0.018061214994106973
+step = 86, Training Accuracy: 0.7473214285714286
+Training loss = 0.018057556668562548
+step = 87, Training Accuracy: 0.7478571428571429
+Training loss = 0.01814587905470814
+step = 88, Training Accuracy: 0.7433928571428572
+Training loss = 0.017802166454494
+step = 89, Training Accuracy: 0.7369642857142857
+Training loss = 0.017899914777704647
+step = 90, Training Accuracy: 0.7405357142857143
+Validation Accuracy: 0.80625
+Training loss = 0.017729116726134506
+step = 91, Training Accuracy: 0.74875
+Training loss = 0.017963876096265655
+step = 92, Training Accuracy: 0.7519642857142858
+Training loss = 0.017965608654277664
+step = 93, Training Accuracy: 0.7528571428571429
+Training loss = 0.017919342634933336
+step = 94, Training Accuracy: 0.7469642857142857
+Training loss = 0.017605487909168004
+step = 95, Training Accuracy: 0.7460714285714286
+Validation Accuracy: 0.805
+Training loss = 0.017765704292271818
+step = 96, Training Accuracy: 0.7446428571428572
+Training loss = 0.01804450993027006
+step = 97, Training Accuracy: 0.7491071428571429
+Training loss = 0.017886042605553355
+step = 98, Training Accuracy: 0.7426785714285714
+Training loss = 0.017939131408929825
+step = 99, Training Accuracy: 0.7451785714285715
+Validation Accuracy: 0.8025
