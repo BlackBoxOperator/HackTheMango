@@ -20,6 +20,9 @@ import albumentations as A
 # Import pytorch utilities from albumentations
 from albumentations.pytorch import ToTensor
 
+from esPipeline import numOfPipeline, idxList2trainPipeline, idxList2validPipeline
+
+
 # ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
@@ -54,6 +57,7 @@ class train():
     def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
                     image_size= 128, validation_frequency = 5, weight_path = "weight", data_path="data"):
 
+        return
         self.seed = 42
 
         if not os.path.isdir(weight_path):
@@ -81,132 +85,9 @@ class train():
         torch.manual_seed(self.seed)
         torch.cuda.manual_seed_all(self.seed)
 
-        return
-        """
-        image transformation / augmentation
-        """
-        train_trans = lambda ind: [
-            A.Flip(p=0.5),
-            #A.Blur(p=0.5),
-            A.RandomBrightnessContrast(
-                brightness_limit=(-0.2, 0.2),
-                contrast_limit=(-0.2, 0.2),
-                brightness_by_max=False,
-                p=0.5
-            ),
-            A.RandomResizedCrop(
-                height=self.image_size,
-                width=self.image_size,
-                scale=(0.8, 1.0), # 0.08 to 0.8 become worse
-                ratio=(0.75, 1.3333333333333333),
-                interpolation=2, # non default
-                p=1,
-            ),
-            A.ShiftScaleRotate(
-                #shift_limit=0.0625,
-                #scale_limit=0.1,
-                shift_limit=0,
-                scale_limit=0,
-                rotate_limit=180,
-                interpolation=1,
-                p=0.5
-            ),
-            #A.Rotate(limit=(-180,180)), # better than SSR
-            #A.ElasticTransform(  # ET is slow, must later than crop
-            #    alpha=1,
-            #    sigma=50,
-            #    alpha_affine=50,
-            #    interpolation=1,
-            #    p=0.5
-            #),
-            A.Normalize(
-                mean=[ind[0], ind[1], ind[2]],
-                std=[ind[3], ind[4], ind[5]],
-            ),
-            ToTensor(), # convert the image to PyTorch tensor
-        ]
-
-        valid_trans = lambda ind: [
-            A.RandomBrightnessContrast(
-                brightness_limit = 0,
-                contrast_limit = 0,
-                brightness_by_max = False,
-                always_apply = True,
-                p = 1
-            ),
-            A.Resize(self.image_size, self.image_size),
-            A.Normalize(
-                mean = [ind[0], ind[1], ind[2]],
-                std = [ind[3], ind[4], ind[5]],
-            ),
-            ToTensor(),
-        ]
-
-        """
-        new_trans = [
-                A.HorizontalFlip(p = 0.5), # apply horizontal flip to 50% of images
-                A.OneOf(
-                    [
-                        # apply one of transforms to 50% of images
-                        A.RandomContrast(), # apply random contrast
-                        A.RandomGamma(), # apply random gamma
-                        A.RandomBrightness(), # apply random brightness
-                    ],
-                    p = 0.5
-                ),
-                A.RandomResizedCrop(self.image_size, interpolation=2),
-                A.RandomRotation(degrees=(-180,180)),
-                ToTensor(), # convert the image to PyTorch tensor
-                A.Normalize(
-                    mean=[0.485, 0.456, 0.406],
-                    #mean=[ind[0], ind[1], ind[2]],
-                    std=[0.229, 0.224, 0.225],
-                    #std=[ind[3], ind[4], ind[5]],
-                ),
-            ]
-        """
-
-        """
-        [
-                #A.HorizontalFlip(p = 0.5), # apply horizontal flip to 50% of images
-                #A.OneOf(
-                #    [
-                #        # apply one of transforms to 50% of images
-                #        A.RandomContrast(), # apply random contrast
-                #        A.RandomGamma(), # apply random gamma
-                #        A.RandomBrightness(), # apply random brightness
-                #    ],
-                #    p = 0.5
-                #),
-
-                A.RandomResizedCrop(self.image_size, interpolation=2),
-                A.RandomRotation(degrees=(-180,180)),
-
-                ToTensor(), # convert the image to PyTorch tensor
-
-                #A.Normalize(, )
-                A.Normalize(
-                    mean=[0.485, 0.456, 0.406],
-                    #mean=[ind[0], ind[1], ind[2]],
-                    std=[0.229, 0.224, 0.225],
-                    #std=[ind[3], ind[4], ind[5]],
-                ),
-
-            ]
-        """
-        self.augmentation_pipeline = lambda ind: A.Compose(train_trans(ind), p = 1)
-        self.validation_pipeline = lambda ind: A.Compose(valid_trans(ind), p = 1)
-
     def run(self, ind):
-        return 0,
-        global bench
-
-        # ind is a permuation list
-        print("parameter = {}".format(bench))
-
-        # Define the augmentation pipeline
-        # TODO here
-
+        return sum([sum([(ind[i + j] - ind[i]) * ((j - i) ** 3) for j in range(len(ind[i + 1:]))]) for i in range(len(ind))]),
+        #return 0,
 
         """
         Image data augmentation is typically only applied to the training dataset,
@@ -217,7 +98,7 @@ class train():
         https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
         """
 
-        dataTransformsTrain = self.augmentation_pipeline(bench)
+        dataTransformsTrain = idxList2trainPipeline(ind)
 
         trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
         dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
@@ -242,7 +123,7 @@ class train():
             print("Training loss = {}".format(totalLoss/count))
             print("step = {}, Training Accuracy: {}".format(step,accuracy / count))
             if step % self.validation_frequency == 0 or step == self.max_epoch-1:
-                result = self.validation(bench)
+                result = self.validation(ind)
                 self.store_weight(step)
 
         return result,
@@ -259,7 +140,7 @@ class train():
             ])
             """
 
-            dataTransformsValid = self.validation_pipeline(ind)
+            dataTransformsValid = idxList2validPipeline(ind)
 
             validDatasets = Mango_dataset(os.path.join(self.data_path,"dev.csv"), os.path.join(self.data_path,"C1-P1_Dev"), dataTransformsValid)
             dataloadersValid = torch.utils.data.DataLoader(validDatasets, batch_size=self.batch_size, shuffle=False)
@@ -296,23 +177,16 @@ class train():
             return self.classes[torch.argmax(outputs)]
 
 # ea
-NUM_PIPE = 123
+NUM_PIPE = numOfPipeline()
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMax)
 
-bench = [0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010]
-
-global_a = 0
 
 def main():
-    global global_a
-    global bench
     #_78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
     #        0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
     random.seed(64)
-
-    global_a = train()
 
     #Since there is only one queen per line,
     #individual are represented by a permutation
@@ -325,7 +199,7 @@ def main():
     toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.permutation)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
-    toolbox.register("evaluate", global_a.run)
+    toolbox.register("evaluate", train().run)
     toolbox.register("mate", tools.cxPartialyMatched)
     toolbox.register("mutate", tools.mutShuffleIndexes, indpb=2.0/NUM_PIPE)
     toolbox.register("select", tools.selTournament, tournsize=3)

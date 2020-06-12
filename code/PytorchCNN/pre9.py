@@ -111,7 +111,7 @@ class train():
             A.RandomResizedCrop(
                 height=self.image_size,
                 width=self.image_size,
-                scale=(0.8, 1.0), # 0.08 to 0.8 become worse
+                scale=(0.9, 1.0), # 0.08 to 0.8 become worse
                 ratio=(0.75, 1.3333333333333333),
                 interpolation=2, # non default
                 p=1,
