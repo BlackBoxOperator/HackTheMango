@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import math
 
 # Deap
 import random
@@ -20,7 +21,7 @@ import albumentations as A
 # Import pytorch utilities from albumentations
 from albumentations.pytorch import ToTensor
 
-from esPipeline import numOfPipeline, idxList2trainPipeline, idxList2validPipeline
+from esPipeline import numOfPipeline, idxList2trainPipeline, idxList2validPipeline, printPipeline
 
 
 # ======== Evolutionray Strategy ============
@@ -35,9 +36,10 @@ MAX_VALUE = 1
 MIN_STRATEGY = 0.3
 MAX_STRATEGY = 0.8
 
-creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
-creator.create("Strategy", array.array, typecode="d")
+#useless
+#creator.create("FitnessMax", base.Fitness, weights=(1.0,))
+#creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
+#creator.create("Strategy", array.array, typecode="d")
 
 def checkStrategy(minstrategy):
     def decorator(func):
@@ -54,10 +56,10 @@ def checkStrategy(minstrategy):
 # ==========================================
 
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 100, lr = 1e-4, batch_size = 32,
+    def __init__(self,classes = ["A","B","C"], max_epoch = 30, lr = 1e-4, batch_size = 32,
                     image_size= 128, validation_frequency = 5, weight_path = "weight", data_path="data"):
 
-        return
+        #return
         self.seed = 42
 
         if not os.path.isdir(weight_path):
@@ -86,8 +88,8 @@ class train():
         torch.cuda.manual_seed_all(self.seed)
 
     def run(self, ind):
-        return sum([sum([(ind[i + j] - ind[i]) * ((j - i) ** 3) for j in range(len(ind[i + 1:]))]) for i in range(len(ind))]),
-        #return 0,
+        #return sum([1 / (((ind[i] - i) ** 2) + 1) for i in range(len(ind))]),
+        printPipeline(ind, idxList2trainPipeline)
 
         """
         Image data augmentation is typically only applied to the training dataset,
@@ -100,8 +102,15 @@ class train():
 
         dataTransformsTrain = idxList2trainPipeline(ind)
 
-        trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
-        dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
+        trainDatasets = Mango_dataset(
+                os.path.join(self.data_path,"train.csv"),
+                os.path.join(self.data_path,"C1-P1_Train"),
+                dataTransformsTrain,
+                sample_count = 100,
+        )
+        dataloadersTrain = torch.utils.data.DataLoader(
+                trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
+        
         for step in range(self.max_epoch):
             self.classifier_net.train()
             totalLoss = 0
@@ -121,6 +130,7 @@ class train():
                 accuracy += (predicted == label).sum().item()
                 totalLoss += loss.item()
             print("Training loss = {}".format(totalLoss/count))
+            if(math.isnan(totalLoss/count)): return 0,
             print("step = {}, Training Accuracy: {}".format(step,accuracy / count))
             if step % self.validation_frequency == 0 or step == self.max_epoch-1:
                 result = self.validation(ind)
@@ -142,8 +152,13 @@ class train():
 
             dataTransformsValid = idxList2validPipeline(ind)
 
-            validDatasets = Mango_dataset(os.path.join(self.data_path,"dev.csv"), os.path.join(self.data_path,"C1-P1_Dev"), dataTransformsValid)
-            dataloadersValid = torch.utils.data.DataLoader(validDatasets, batch_size=self.batch_size, shuffle=False)
+            validDatasets = Mango_dataset(
+                    os.path.join(self.data_path,"dev.csv"),
+                    os.path.join(self.data_path,"C1-P1_Dev"),
+                    dataTransformsValid
+            )
+            dataloadersValid = torch.utils.data.DataLoader(
+                    validDatasets, batch_size=self.batch_size, shuffle=False)
             accuracy = 0
             count = 0
             self.classifier_net.eval()
@@ -204,7 +219,7 @@ def main():
     toolbox.register("mutate", tools.mutShuffleIndexes, indpb=2.0/NUM_PIPE)
     toolbox.register("select", tools.selTournament, tournsize=3)
 
-    pop = toolbox.population(n=NUM_PIPE)
+    pop = toolbox.population(n=6)
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("Avg", np.mean)
