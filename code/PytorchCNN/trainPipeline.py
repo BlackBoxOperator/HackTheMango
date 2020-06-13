@@ -56,7 +56,7 @@ def checkStrategy(minstrategy):
 # ==========================================
 
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 10, lr = 1e-4, batch_size = 32,
+    def __init__(self,classes = ["A","B","C"], max_epoch = 15, lr = 1e-4, batch_size = 32,
                     image_size= 128, validation_frequency = 5, weight_path = "weight", data_path="data"):
 
         #return
