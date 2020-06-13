@@ -4,7 +4,7 @@ import numpy as np
 # Deap
 import random
 import array
-from deap import algorithms, base, creator, tools, benchmarks
+from deap import algorithms, base, creator, tools, benchmarks, cma
 
 import torch
 import torch.nn as nn
@@ -18,40 +18,11 @@ from data import Mango_dataset
 # ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
-
-MU, LAMBDA = 4, 8
-NGEN = 30  # number of generations
-
 IND_SIZE = 6
-MIN_VALUE = 0
-MAX_VALUE = 1
-MIN_STRATEGY = 0.3
-MAX_STRATEGY = 0.8
-
-creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
-creator.create("Strategy", array.array, typecode="d")
-
-# Individual generator
-def generateES(icls, scls, size, imin, imax, smin, smax):
-    ind = icls([0.4914, 0.4822, 0.4465, 0.2023, 0.1994, 0.2010])
-    # ind = icls(random.uniform(imin, imax) for _ in range(size))
-    ind.strategy = scls(random.uniform(smin, smax) for _ in range(size))
-    return ind
-
-def checkStrategy(minstrategy):
-    def decorator(func):
-        def wrappper(*args, **kargs):
-            children = func(*args, **kargs)
-            for child in children:
-                for i, s in enumerate(child.strategy):
-                    if s < minstrategy:
-                        child.strategy[i] = minstrategy
-            return children
-        return wrappper
-    return decorator
-
-# ==========================================
+NGEN = 30
+CENTROID = [0.5]*IND_SIZE
+SIGMA = 0.3
+LAMBDA = 8
 
 global_a = 0
 
@@ -159,7 +130,28 @@ class train():
             outputs = self.classifier_net(x)
             return self.classes[torch.argmax(outputs)]
 
+creator.create("FitnessMin", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMin)
 
+toolbox = base.Toolbox()
+
+
+strategy = cma.Strategy(centroid=CENTROID, sigma=SIGMA, lambda_=LAMBDA)
+
+def adjust(x):
+    if x > 0.99:
+        return 0.95
+    if x < 0.01:
+        return 0.05
+    return x
+
+
+def gen_new_pop(y):
+    global strategy
+    pop = strategy.generate(y)
+    for group in pop:
+        group[:] = [adjust(x) for x in group]
+    return pop
 
 
 def main():
@@ -170,27 +162,20 @@ def main():
 
     global_a = train()
 
-    toolbox = base.Toolbox()
-    toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
-    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
-    toolbox.register("mate", tools.cxESBlend, alpha=0.1)
-    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.03)
-    toolbox.register("select", tools.selTournament, tournsize=3)
+    # new-design es start from this
+    global strategy
+    toolbox.register("generate", gen_new_pop, creator.Individual)
+    toolbox.register("update", strategy.update)
     toolbox.register("evaluate", global_a.run)
 
-    toolbox.decorate("mate", checkStrategy(MIN_STRATEGY))
-    toolbox.decorate("mutate", checkStrategy(MIN_STRATEGY))
-
-    pop = toolbox.population(n=MU)
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
-    stats.register("avg", np.mean)
-    stats.register("std", np.std)
-    stats.register("min", np.min)
-    stats.register("max", np.max)
+    stats.register("avg", numpy.mean)
+    stats.register("std", numpy.std)
+    stats.register("min", numpy.min)
+    stats.register("max", numpy.max)
 
-    pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
-        cxpb=0.6, mutpb=0.3, ngen=NGEN, stats=stats, halloffame=hof)
+    pop, logbook = algorithms.eaGenerateUpdate(toolbox, ngen=NGEN, stats=stats, halloffame=hof)    #random.s
 
     return pop, logbook, hof
 
