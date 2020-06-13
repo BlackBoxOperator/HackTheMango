@@ -216,7 +216,7 @@ def main():
 
     toolbox.register("evaluate", train().run)
     toolbox.register("mate", tools.cxPartialyMatched)
-    toolbox.register("mutate", tools.mutShuffleIndexes, indpb=0.8)
+    toolbox.register("mutate", tools.mutShuffleIndexes, indpb=0.65)
     toolbox.register("select", tools.selTournament, tournsize=3)
 
     pop = toolbox.population(n=6)
@@ -227,7 +227,7 @@ def main():
     stats.register("Min", np.min)
     stats.register("Max", np.max)
 
-    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.6, mutpb=0.4, ngen=30, stats=stats,
+    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.6, mutpb=0.4, ngen=100, stats=stats,
                         halloffame=hof, verbose=True)
 
     return pop, logbook, hof
