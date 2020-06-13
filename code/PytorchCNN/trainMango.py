@@ -140,10 +140,16 @@ strategy = cma.Strategy(centroid=CENTROID, sigma=SIGMA, lambda_=LAMBDA)
 
 def adjust(x):
     if x > 0.99:
-        return 0.95
+        return 0.99
     if x < 0.01:
-        return 0.05
+        return 0.01
     return x
+
+def update_new_pop(y):
+    global strategy
+    strategy.update(y)
+    for group in y:
+        group[:] = [adjust(x) for x in group]
 
 
 def gen_new_pop(y):
@@ -165,7 +171,7 @@ def main():
     # new-design es start from this
     global strategy
     toolbox.register("generate", gen_new_pop, creator.Individual)
-    toolbox.register("update", strategy.update)
+    toolbox.register("update", update_new_pop)
     toolbox.register("evaluate", global_a.run)
 
     hof = tools.HallOfFame(1)
