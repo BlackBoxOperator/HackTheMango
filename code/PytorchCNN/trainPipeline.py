@@ -56,7 +56,7 @@ def checkStrategy(minstrategy):
 # ==========================================
 
 class train():
-    def __init__(self,classes = ["A","B","C"], max_epoch = 30, lr = 1e-4, batch_size = 32,
+    def __init__(self,classes = ["A","B","C"], max_epoch = 10, lr = 1e-4, batch_size = 32,
                     image_size= 128, validation_frequency = 5, weight_path = "weight", data_path="data"):
 
         #return
@@ -227,7 +227,7 @@ def main():
     stats.register("Min", np.min)
     stats.register("Max", np.max)
 
-    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.7, mutpb=0.2, ngen=100, stats=stats,
+    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.7, mutpb=0.2, ngen=30, stats=stats,
                         halloffame=hof, verbose=True)
 
     return pop, logbook, hof

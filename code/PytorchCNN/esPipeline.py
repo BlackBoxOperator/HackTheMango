@@ -109,7 +109,7 @@ flattend_pipeset = flatten(pipeset)
 def numOfPipeline():
     return len(pipeset) + sum([len(p) for p in pipeset]) * 2
 
-pipeline_length = 24
+pipeline_length = 12
 # pipeline_length = numOfPipeline() # full pipeline
 nature_beg = 2
 normal_beg = 3
