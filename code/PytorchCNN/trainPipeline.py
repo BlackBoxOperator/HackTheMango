@@ -21,7 +21,7 @@ import albumentations as A
 # Import pytorch utilities from albumentations
 from albumentations.pytorch import ToTensor
 
-from esPipeline import numOfPipeline, idxList2trainPipeline, idxList2validPipeline, printPipeline
+from esPipelineRaw import numOfPipeline, idxList2trainPipeline, idxList2validPipeline, printPipeline
 
 
 # ======== Evolutionray Strategy ============
