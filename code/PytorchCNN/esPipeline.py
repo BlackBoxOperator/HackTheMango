@@ -130,7 +130,7 @@ pipes_attr =  {
     'albumentations.augmentations.transforms.ISONoise': {
       'p': [float, (0.0, 1.0), 0.5,  fixed],
       'color_shift': [(float, float), ((0.0, 1.0), (0.0, 1.0)), (0.01, 0.05), sorted_tuple],
-      'intensity': [(float, float), ((0.0, 1.0), 0.0, 1.0), (0.1, 0.5), fixed],
+      'intensity': [(float, float), ((0.0, 1.0), (0.0, 1.0)), (0.1, 0.5), fixed],
     },
     'albumentations.augmentations.transforms.InvertImg': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
@@ -444,7 +444,7 @@ def toFloatListByRange(typ, rang, df):
     if typ == int or typ == float:
         print(rang, typ, df)
         (mn, mx) = rang
-        return [(df - mn) / (mx - mn)]
+        return [(df - mn) / (mx - mn)] if mx != mn else [1]
     elif type(typ) == tuple:
         return flatten([toFloatListByRange(t, r, d) for t, r, d in zip(typ, rang, df)])
     else:
@@ -467,10 +467,10 @@ def defaultParametersByPipeline(pipeline):
 def deNorParams(typ, rang, df, params):
     if typ == int:
         (mn, mx) = rang
-        return int(params.pop(0) * (mx - mn) + mn)
+        return int(params.pop(0) * (mx - mn) + mn) if mx != mn else mn
     elif typ == float:
         (mn, mx) = rang
-        return params.pop(0) * (mx - mn) + mn
+        return params.pop(0) * (mx - mn) + mn if mx != mn else mn
     elif type(typ) == tuple:
         return tuple(deNorParams(t, r, d, params) for t, r, d in zip(typ, rang, df))
     else:
@@ -513,7 +513,7 @@ def printSelectPipes(pipeline):
 
 if __name__ == '__main__':
     #pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
-    pl = [i for i in range(single_pipes)]
+    #pl = [i for i in range(numOfPipeline())] # ok
     orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
     dftp = pakWithResizeTotensor([x for x in [idx2pipe(idx, construct = True) for idx in pl] if x])
     cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
