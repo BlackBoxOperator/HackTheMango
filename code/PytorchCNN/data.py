@@ -4,9 +4,29 @@ import pandas as pd
 import numpy as np
 from PIL import Image
 import os
+import imageio
+
 class Mango_dataset(Dataset):
-    def __init__(self, csvFile, data_path, data_transform):
+    def __init__(self, csvFile, data_path, data_transform,
+            sample_count = 0, sample_frac = 0, balance = False):
         self.df = pd.read_csv(csvFile)
+
+        # show count by label
+        # self.df['label'].value_counts()
+
+        if sample_count or sample_frac or balance:
+            if sample_frac:
+                self.df = self.df.groupby('label')\
+                            .apply(lambda x: x.sample(g.size().min())\
+                                              .sample(frac=sample_frac)\
+                                              .reset_index(drop=True))
+            elif sample_count:
+                self.df = self.df.groupby('label')\
+                            .apply(lambda x: x.sample(sample_count).reset_index(drop=True))
+            else:
+                self.df = self.df.groupby('label')\
+                            .apply(lambda x: x.sample(g.size().min()).reset_index(drop=True))
+
         self.data_path = data_path
         self.xTrain = self.df['image_id']
         self.yTrain, self.labels = pd.factorize(self.df['label'], sort=True)

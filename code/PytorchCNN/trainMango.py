@@ -4,7 +4,7 @@ import numpy as np
 # Deap
 import random
 import array
-from deap import algorithms, base, creator, tools, benchmarks
+from deap import algorithms, base, creator, tools, benchmarks, cma
 
 import torch
 import torch.nn as nn
@@ -14,18 +14,19 @@ import torchvision.transforms as transforms
 
 from mlp import VGG16_model, ResNet, ResidualBlock
 from data import Mango_dataset
-
-# ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
+'''
+# ======== Evolutionray Strategy ============
 
-MU, LAMBDA = 4, 8
+
+MU, LAMBDA = 4, 6
 NGEN = 30  # number of generations
 
 IND_SIZE = 6
 MIN_VALUE = 4
 MAX_VALUE = 2048
-MIN_STRATEGY = 32
+MIN_STRATEGY = 64
 MAX_STRATEGY = 512
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
@@ -34,7 +35,7 @@ creator.create("Strategy", array.array, typecode="d")
 
 # Individual generator
 def generateES(icls, scls, size, imin, imax, smin, smax):
-    ind = icls([64, 128, 256, 512, 1024, 1024])
+    ind = icls([114.0, 36.0, 195.0, 273.0, 1713.0, 1290.0])
     # ind = icls(random.uniform(imin, imax) for _ in range(size))
     ind.strategy = scls(random.randint(smin, smax) for _ in range(size))
     return ind
@@ -52,6 +53,20 @@ def checkStrategy(minstrategy):
     return decorator
 
 # ==========================================
+'''
+
+##############################
+####CMA########
+NGEN = 30
+IND_SIZE = 6
+CENTROID = [64,128,256,512,1024,1024]
+SIGMA = 64
+LAMBDA = 8
+creator.create("FitnessMin", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMin)
+
+################################
+
 
 
 class train():
@@ -89,7 +104,7 @@ class train():
             transforms.ToTensor(),
             transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010])
             ])
-        trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain)
+        trainDatasets = Mango_dataset(os.path.join(self.data_path,"train.csv"), os.path.join(self.data_path,"C1-P1_Train"), dataTransformsTrain,sample_count=300)
         dataloadersTrain = torch.utils.data.DataLoader(trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
         for step in range(self.max_epoch):
             self.classifier_net.train()
@@ -188,19 +203,41 @@ def es_hidden(ind):
 def main():
 
     random.seed(64)
-
+    '''
     toolbox = base.Toolbox()
     toolbox.register("individual", generateES, creator.Individual, creator.Strategy, IND_SIZE, MIN_VALUE, MAX_VALUE, MIN_STRATEGY, MAX_STRATEGY)
     toolbox.register("population", tools.initRepeat, list, toolbox.individual)
     toolbox.register("mate", tools.cxESBlend, alpha=0.1)
-    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=0.8)
+    toolbox.register("mutate", tools.mutESLogNormal, c=1.0, indpb=1)
     toolbox.register("select", tools.selTournament, tournsize=3)
     toolbox.register("evaluate", es_hidden)
 
     toolbox.decorate("mate", checkStrategy(MIN_STRATEGY))
     toolbox.decorate("mutate", checkStrategy(MIN_STRATEGY))
-
     pop = toolbox.population(n=MU)
+    hof = tools.HallOfFame(1)
+    '''
+    toolbox = base.Toolbox()
+
+    strategy = cma.Strategy(centroid=CENTROID, sigma=SIGMA, lambda_=LAMBDA)
+
+
+    def gen_new_pop(y):
+        pop = strategy.generate(y)
+        for i in range(len(pop)):
+            for j in range(len(pop[i])):
+                if j < 4:
+                    pop[i][j] = int(pop[i][j] % 513)
+                else:
+                    pop[i][j] = int(pop[i][j] % 2049)
+                if pop[i][j] < 16:
+                    pop[i][j] = 16
+        return pop
+    toolbox.register("evaluate", es_hidden)
+
+    toolbox.register("generate", gen_new_pop, creator.Individual)
+    toolbox.register("update", strategy.update)
+    
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
     stats.register("avg", np.mean)
@@ -208,8 +245,9 @@ def main():
     stats.register("min", np.min)
     stats.register("max", np.max)
 
-    pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
-        cxpb=0.2, mutpb=0.8, ngen=NGEN, stats=stats, halloffame=hof)
+    # pop, logbook = algorithms.eaMuCommaLambda(pop, toolbox, mu=MU, lambda_=LAMBDA,
+    #     cxpb=0.2, mutpb=0.8, ngen=NGEN, stats=stats, halloffame=hof)
+    pop, logbook = algorithms.eaGenerateUpdate(toolbox, ngen=NGEN, stats=stats, halloffame=hof)
 
     return pop, logbook, hof
 
