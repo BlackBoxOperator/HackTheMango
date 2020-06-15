@@ -7,6 +7,7 @@ fixed = lambda x: x
 paried = lambda x: (x, x)
 sorted_tuple = lambda x: tuple(sorted(x))
 flatten = lambda x: [y for l in x for y in flatten(l)] if type(x) is list else [x]
+OneOfP = 0.3
 
 # can we use IAA series here?
 
@@ -439,12 +440,12 @@ def idxList2trainPipeline(index_list):
                 pipeline.insert(0, A.OneOf(
                     #pipes_default[group_idx],
                     [p(**get_pipe_attr(p)) for p in pipes[group_idx]],
-                    p = 0.3))
+                    p = OneOfP))
             else:
                 pipeline.append(A.OneOf(
                     #pipes_default[group_idx],
                     [p(**get_pipe_attr(p)) for p in pipes[group_idx]],
-                    p = 0.3))
+                    p = OneOfP))
         elif idx % 2 == 0:
             single_idx = idx // 2
             if single_idx > normalize_index:
@@ -473,7 +474,7 @@ def idxList2trainPipeline(index_list):
         pipeline.append(A.OneOf(
             #pipes_default[idx]
             [p(**get_pipe_attr(p)) for p in pipes[idx]],
-            p = 0.3))
+            p = OneOfP))
 
     pipeline.insert(0, A.Resize(height=256, width=256, interpolation=1, always_apply=False, p=1))
     pipeline.append(A.Resize(height=128, width=128, interpolation=1, always_apply=False, p=1))
@@ -507,3 +508,65 @@ def idxList2validPipeline(index_list):
 def printPipeline(idxList, idx2pipe):
     print("pipeline: ", idxList[:pipeline_length])
     pprint(A.to_dict(idx2pipe(idxList)))
+
+def idx2pipe(idx):
+    if idx >= single_pipes:
+        return tuple(p for p in pipes[group_idx])
+    elif idx % 2 == 0:
+        return flattend_pipes[idx // 2]
+
+def toFloatListByRange(typ, rang, df):
+    if typ == int or typ == float:
+        (mn, mx) = rang
+        return [(df - mn) / (mx - mn)]
+    elif type(typ) == tuple:
+        return flatten([toFloatListByRange(t, r, d) for t, r, d in zip(typ, rang, df)])
+    else:
+        print("error"), exit()
+
+def defaultParametersByPipeline(pipeline):
+    params = []
+    for idx in pipeline:
+        p = idx2pipe(idx)
+        if type(p) == tuple:
+            params.append(OneOfP)
+            for subp in p:
+                for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
+                    params.extend(toFloatListByRange(typ, rang, df))
+        else:
+            for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
+                params.extend(toFloatListByRange(typ, rang, df))
+    return params
+
+
+def deNorParams(typ, rang, df, params):
+    if typ == int:
+        (mn, mx) = rang
+        return int(params.pop(0) * (mx - mn) + mn)
+    elif typ == float:
+        (mn, mx) = rang
+        return params.pop(0) * (mx - mn) + mn
+    elif type(typ) == tuple:
+        return tuple(deNorParams(t, r, d, params) for t, r, d in zip(typ, rang, df))
+    else:
+        print("error"), exit()
+
+def newPipelineWithParams(pipeline, params):
+    cons_pipes = []
+    for idx in pipeline:
+        p = idx2pipe(idx)
+        if type(p) == tuple:
+            ofp = params.pop(0)
+            ps = []
+            for subp in p:
+                kw = {}
+                for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
+                    kw[name] = ret(deNorParams(typ, rang, df, params))
+                ps.append(p(**kw))
+            cons_pipes.append(A.OneOf(ps, p = ofp))
+        else:
+            kw = {}
+            for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
+                kw[name] = ret(deNorParams(typ, rang, df, params))
+            cons_pipes.append(p(**kw))
+    return cons_pipes
