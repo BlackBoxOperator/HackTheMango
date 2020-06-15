@@ -116,7 +116,8 @@ normal_beg = 3
 nature_index = sum([len(x) for x in pipeset[:nature_beg]])
 normalize_index = sum([len(x) for x in pipeset[:normal_beg]])
 bc_start = sum([len(x) for x in pipeset[:normal_beg + 1]])
-
+single_pipes = sum([len(p) for p in pipeset]) * 2
+group_pipes = len(pipeset)
 def idxList2trainPipeline(index_list):
 
     index_list = index_list[:pipeline_length]
@@ -124,8 +125,6 @@ def idxList2trainPipeline(index_list):
     post_add = []
     g_post_add = []
     pipeline = []
-    single_pipes = sum([len(p) for p in pipeset]) * 2
-    group_pipes = len(pipeset)
 
     for idx in index_list:
         if idx >= single_pipes:

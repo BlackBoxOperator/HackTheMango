@@ -11,113 +11,14 @@ OneOfP = 0.3
 
 # can we use IAA series here?
 
-"""
-pipes_default = [
-    [ # uint8 only
-        # channe
-        A.InvertImg(always_apply=False, p=0.5),
-        A.Posterize(num_bits=4, always_apply=False, p=0.5),
-        # normalize, CLAHE = histogram equalize
-        A.CLAHE(clip_limit=4.0, tile_grid_size=(8, 8), always_apply=False, p=0.5),
-        A.Equalize(mode='cv', by_channels=True, mask=None,
-            mask_params=(), always_apply=False, p=0.5),
-        # noise
-        A.ISONoise(color_shift=(0.01, 0.05), intensity=(0.1, 0.5),
-            always_apply=False, p=0.5),
-    ],
-
-    [ # blur
-        A.Blur(blur_limit=7, always_apply=False, p=0.5),
-        A.MotionBlur(blur_limit=7, always_apply=False, p=0.5),
-        A.MedianBlur(blur_limit=5, always_apply=False, p=0.5),
-        A.GaussianBlur(blur_limit=7, always_apply=False, p=0.5),
-        A.RandomGamma(gamma_limit=(80, 120), eps=1e-07, always_apply=False, p=0.5),
-    ],
-
-    [ # nature
-        A.RandomSnow(snow_point_lower=0.1, snow_point_upper=0.3, brightness_coeff=2.5, always_apply=False, p=0.5),
-        A.RandomRain(slant_lower=-10, slant_upper=10, drop_length=20, drop_width=1, drop_color=(200, 200, 200), blur_value=7, brightness_coefficient=0.7, rain_type=None, always_apply=False, p=0.5),
-        A.RandomFog(fog_coef_lower=0.3, fog_coef_upper=1, alpha_coef=0.08, always_apply=False, p=0.5),
-        A.RandomSunFlare(flare_roi=(0, 0, 1, 0.5), angle_lower=0, angle_upper=1, num_flare_circles_lower=6, num_flare_circles_upper=10, src_radius=400, src_color=(255, 255, 255), always_apply=False, p=0.5),
-        A.RandomShadow(shadow_roi=(0, 0.5, 1, 1), num_shadows_lower=1, num_shadows_upper=2, shadow_dimension=5, always_apply=False, p=0.5),
-    ],
-
-    [ # normalize
-        A.Normalize(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), max_pixel_value=255.0, always_apply=False, p=1.0),
-    ],
-
-    [ # 飽和度/色彩相關
-        # will normalize by max or mean brightness
-        A.RandomBrightnessContrast(brightness_limit=0.2, contrast_limit=0.2, brightness_by_max=True, always_apply=False, p=0.5),
-        A.HueSaturationValue(hue_shift_limit=20, sat_shift_limit=30, val_shift_limit=20, always_apply=False, p=0.5),
-        A.RGBShift(r_shift_limit=20, g_shift_limit=20, b_shift_limit=20, always_apply=False, p=0.5),
-        A.RandomBrightness(limit=0.2, always_apply=False, p=0.5),
-        A.RandomContrast(limit=0.2, always_apply=False, p=0.5),
-        A.ChannelDropout(channel_drop_range=(1, 1), fill_value=0, always_apply=False, p=0.5),
-    ],
-
-    [ # affine
-        A.VerticalFlip(always_apply=False, p=0.5),
-        A.HorizontalFlip(always_apply=False, p=0.5),
-        A.Flip(always_apply=False, p=0.5),
-        A.RandomRotate90(always_apply=False, p=0.5),
-        A.Rotate(limit=180, interpolation=1, border_mode=4, value=None, mask_value=None, always_apply=False, p=0.5),
-        A.ShiftScaleRotate(shift_limit=0.0625, scale_limit=0, rotate_limit=45, interpolation=1, border_mode=4, value=None, mask_value=None, always_apply=False, p=0.5),
-        A.Transpose(always_apply=False, p=0.5),
-    ],
-
-    [ # 形變
-        A.OpticalDistortion(distort_limit=0.05, shift_limit=0.05, interpolation=1, border_mode=4, value=None, mask_value=None, always_apply=False, p=0.5),
-        A.GridDistortion(num_steps=5, distort_limit=0.3, interpolation=1, border_mode=4, value=None, mask_value=None, always_apply=False, p=0.5),
-        A.ElasticTransform(alpha=1, sigma=50, alpha_affine=50, interpolation=1, border_mode=4, value=None, mask_value=None, always_apply=False, approximate=False, p=0.5),
-    ],
-
-    [ # grid dropout or shuffle
-        A.CoarseDropout(max_holes=8, max_height=8, max_width=8, min_holes=None, min_height=None, min_width=None, fill_value=0, always_apply=False, p=0.5),
-        A.Cutout(num_holes=8, max_h_size=8, max_w_size=8, fill_value=0, always_apply=False, p=0.5),
-        A.RandomGridShuffle(grid=(3, 3), always_apply=False, p=1.0),
-    ],
-
-    [ # noise
-        A.GaussNoise(var_limit=(10.0, 50.0), mean=0, always_apply=False, p=0.5),
-    ], 
-
-    [ # channel
-        A.ChannelShuffle(always_apply=False, p=0.5),
-        A.ToGray(always_apply=False, p=0.5),
-        A.Solarize(threshold=128, always_apply=False, p=0.5),
-    ],
-
-    #[ # compression
-    #    A.JpegCompression(quality_lower=99, quality_upper=100, always_apply=False, p=0.5),
-    #    A.ImageCompression(quality_lower=99, quality_upper=100, always_apply=False, p=0.5),
-    #    # compression_type=A.ImageCompressionType.JPEG, 
-    #],
-
-    [ # scale and crop
-        A.Compose(
-            [A.CenterCrop(height=128, width=128, always_apply=False, p=1.0),
-            A.Resize(height=256, width=256, interpolation=1, always_apply=False, p=1)], p = 1),
-
-        # hand adjust here
-        A.RandomResizedCrop(height=256, width=256, scale=(0.9, 1.0), ratio=(0.75, 1.3333333333333333), interpolation=1, always_apply=False, p=1.0),
-    ],
-
-    #[ # bbox
-    #    A.RandomSizedBBoxSafeCrop(height=256, width=256, erosion_rate=0.0, interpolation=1, always_apply=False, p=1.0),
-    #],
- 
-]
-"""
-
 pipeline_length = 12
 # pipeline_length = numOfPipeline() # full pipeline
 nature_beg = 2
 normal_beg = 3
 
-def CenterCrop(height=128, width=128):
+def CenterCrop(height=128, width=128, p=1.0):
     return A.Compose(
-            [A.CenterCrop(height, width, always_apply=False, p=1.0),
+            [A.CenterCrop(height=height, width=width, always_apply=False, p=p),
             A.Resize(height=256, width=256, interpolation=1, always_apply=False, p=1)], p = 1)
 
 CenterCrop.get_class_fullname = lambda: 'albumentations.augmentations.transforms.CenterCrop'
@@ -375,11 +276,11 @@ pipes_attr =  {
     },
     'albumentations.augmentations.transforms.GaussNoise': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
+      'var_limit': [(float, float), ((5, 60), (5, 60)), (10.0, 50.0), fixed],
+      'mean': [float, (0.0, 1.0), 0.0, fixed],
     },
     'albumentations.augmentations.transforms.ChannelShuffle': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
-      'var_limit': [(float, float), ((5, 60), (5, 60)), (10.0, 50.0), fixed],
-      'mean': [float, (0.0, 1.0), 0.0, fixed],
     },
     'albumentations.augmentations.transforms.Solarize': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
@@ -423,9 +324,13 @@ group_pipes = len(pipes)
 def numOfPipeline():
     return len(pipes) + sum([len(p) for p in pipes]) * 2
 
-def idxList2trainPipeline(index_list, reorder = True, cut = True):
+def idxList2trainPipeline(index_list, reorder = True, cut = True, length = 0):
 
-    if cut: index_list = index_list[:pipeline_length]
+    if cut:
+        if length:
+            index_list = index_list[:length]
+        else:
+            index_list = index_list[:pipeline_length]
 
     post_add = []
     g_post_add = []
@@ -487,9 +392,13 @@ def idxList2trainPipeline(index_list, reorder = True, cut = True):
     pipeline.append(ToTensor())
     return A.Compose(pipeline, p = 1)
 
-def idxList2validPipeline(index_list):
-    
-    index_list = index_list[:pipeline_length]
+def idxList2validPipeline(index_list, cut = True, length = 0):
+   
+    if cut:
+        if length:
+            index_list = index_list[:length]
+        else:
+            index_list = index_list[:pipeline_length]
 
     pipeline = [A.Resize(height=128, width=128, interpolation=1, always_apply=False, p=1)]
 
@@ -511,22 +420,29 @@ def idxList2validPipeline(index_list):
     pipeline.append(ToTensor())
     return A.Compose(pipeline, p = 1)
 
-def printPipeline(idxList, index2pipe):
-    print("pipeline: ", idxList[:pipeline_length])
-    pprint(A.to_dict(index2pipe(idxList)))
+def printPipeline(idxList, index2pipe, length = 0):
+    if length:
+        print("pipeline: ", idxList[:length])
+        pprint(A.to_dict(index2pipe(idxList, length = length)))
+    else:
+        print("pipeline: ", idxList[:pipeline_length])
+        pprint(A.to_dict(index2pipe(idxList)))
 
 def idx2pipe(idx, construct = False):
     if idx >= single_pipes:
         group_idx = idx - single_pipes
         return tuple(p for p in pipes[group_idx]) \
-                if not construct else  A.OneOf([p() for p in pipes[group_idx]], p = OneOfP)
+                if not construct \
+                else A.OneOf([p(**get_pipe_attr(p)) for p in pipes[group_idx]], p = OneOfP)
     elif idx % 2 == 0:
-        return flattend_pipes[idx // 2] if not construct else flattend_pipes[idx // 2]()
+        p = flattend_pipes[idx // 2]
+        return p if not construct else p(**get_pipe_attr(p))
     else:
         return None
 
 def toFloatListByRange(typ, rang, df):
     if typ == int or typ == float:
+        print(rang, typ, df)
         (mn, mx) = rang
         return [(df - mn) / (mx - mn)]
     elif type(typ) == tuple:
@@ -566,7 +482,6 @@ def pakWithResizeTotensor(pipeline):
     pipeline.append(ToTensor())
     return A.Compose(pipeline, p = 1)
 
-
 def newPipelineWithParams(pipeline, params):
     cons_pipes = []
     for idx in pipeline:
@@ -588,8 +503,17 @@ def newPipelineWithParams(pipeline, params):
 
     return pakWithResizeTotensor(cons_pipes)
 
+def printSelectPipes(pipeline):
+    pipeline = [p // 2 for p in pipeline if p < single_pipes]
+    gpipe = [p - single_pipes for p in pipeline if p >= single_pipes]
+    pipeline = [flattend_pipes[p] for p in pipeline]
+    for g in gpipe:
+        pipeline.extend(pipes[g])
+    print('\n'.join([p.get_class_fullname() for p in set(pipeline)]))
+
 if __name__ == '__main__':
-    pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
+    #pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
+    pl = [i for i in range(single_pipes)]
     orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
     dftp = pakWithResizeTotensor([x for x in [idx2pipe(idx, construct = True) for idx in pl] if x])
     cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
