@@ -23,8 +23,9 @@ from albumentations.pytorch import ToTensor
 
 from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline
 
-selected_length = (3, 8)
-selected_pipes = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
+selected_length = (5, 18)
+#selected_pipes = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
+selected_pipes = [4, 8, 12, 16, 18, 28, 32, 34, 36, 40, 48, 50, 54, 56, 60, 62, 66, 68, 72, 80, 82, 83, 84, 86, 87, 88, 89, 90, 91] 
 
 # ======== Evolutionray Strategy ============
 # for reproducibility

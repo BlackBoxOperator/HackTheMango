@@ -27,9 +27,9 @@ avg = sorted([(p, sum(v) / len(v)) for p, v in pipes], key = lambda x: x[1])
 bst = sorted([(p, max(v)) for p, v in pipes], key = lambda x: x[1])
 lst = sorted([(p, v[-1]) for p, v in pipes], key = lambda x: x[1])
 
-bestAvgNum = 15
-bestBstNum = 25
-bestLstNum = 25
+bestAvgNum = 10
+bestBstNum = 10
+bestLstNum = 10
 
 good_pipes = set()
 out = open("good_pipes.txt", "w")
