@@ -513,20 +513,21 @@ def newPipelineWithParams(pipeline, params):
     return pakWithResizeTotensor(cons_pipes)
 
 def printSelectPipes(pipeline):
-    pipeline = [p // 2 for p in pipeline if p < single_pipes]
+    ps = [p // 2 for p in pipeline if p < single_pipes]
     gpipe = [p - single_pipes for p in pipeline if p >= single_pipes]
-    pipeline = [flattend_pipes[p] for p in pipeline]
+    ps = [flattend_pipes[p].get_class_fullname() for p in ps]
     for g in gpipe:
-        pipeline.extend(pipes[g])
-    print('\n'.join([p.get_class_fullname() for p in set(pipeline)]))
+        ps.append([p.get_class_fullname() for p in pipes[g]])
+    pprint(ps)
 
 if __name__ == '__main__':
     #pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
     #pl = [i for i in range(numOfPipeline())] # ok
-    orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
-    dftp = pakWithResizeTotensor([x for x in [idx2pipe(idx, construct = True) for idx in pl] if x])
-    cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
+    #orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
+    #dftp = pakWithResizeTotensor([x for x in [idx2pipe(idx, construct = True) for idx in pl] if x])
+    #cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
     #print(str(orgp), file=open("org", "w"))
     #print(str(dftp), file=open("dft", "w"))
     #print(str(cvtp), file=open("cvt", "w"))
-    print(str(orgp) == str(cvtp))
+    #print(str(orgp) == str(cvtp))
+    printSelectPipes([56, 38, 86, 62])
