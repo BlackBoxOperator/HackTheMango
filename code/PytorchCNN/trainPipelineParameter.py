@@ -21,7 +21,7 @@ import albumentations as A
 # Import pytorch utilities from albumentations
 from albumentations.pytorch import ToTensor
 
-from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline
+from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline, defaultParametersByPipeline, newPipelineWithParams
 
 target_pipe = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
 
