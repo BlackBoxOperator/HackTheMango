@@ -256,7 +256,7 @@ pipes_attr =  {
     },
     'albumentations.augmentations.transforms.RandomGamma': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
-      'gamma_limit': [(float, float), ((-130, 130), (-130, 130)), (80, 120), sorted_tuple],
+      'gamma_limit': [(float, float), ((-130, 130), (-130, 130)), (80.0, 120.0), sorted_tuple],
     },
     'albumentations.augmentations.transforms.RandomFog': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
@@ -274,7 +274,7 @@ pipes_attr =  {
       'p': [float, (0.0, 1.0), 0.5, fixed],
     },
     'albumentations.augmentations.transforms.Normalize': {
-      'p': [float, (0.0, 1.0), 1, fixed],
+      'p': [float, (0.0, 1.0), 1.0, fixed],
       'mean': [(float, float, float),
                ((0.0, 1.0),(0.0, 1.0),(0.0, 1.0)), 
                (0.485, 0.456, 0.406), fixed],
@@ -401,14 +401,14 @@ pipes_attr =  {
 }
 
 def get_init_val(attr, dic):
-    [typ, rang, init, ret] = dic[attr]
+    [typ, rang, init, ret] = dic
     return ret(init)
 
 def get_pipe_attr(p):
-    return p({
-        attr: get_init_val(attr, pipes_attr)
-        for attr in pipes_attr[p.get_class_fullname()]
-    })
+    return {
+        attrk: get_init_val(attrk, attrv)
+        for attrk, attrv in pipes_attr[p.get_class_fullname()].items()
+    }
 
 #flattend_pipes_default = flatten(pipes_default) 
 flattend_pipes = flatten(pipes) 
@@ -423,9 +423,9 @@ group_pipes = len(pipes)
 def numOfPipeline():
     return len(pipes) + sum([len(p) for p in pipes]) * 2
 
-def idxList2trainPipeline(index_list):
+def idxList2trainPipeline(index_list, reorder = True, cut = True):
 
-    index_list = index_list[:pipeline_length]
+    if cut: index_list = index_list[:pipeline_length]
 
     post_add = []
     g_post_add = []
@@ -434,9 +434,9 @@ def idxList2trainPipeline(index_list):
     for idx in index_list:
         if idx >= single_pipes:
             group_idx = idx - single_pipes
-            if group_idx == normal_beg:
+            if group_idx == normal_beg and reorder:
                 g_post_add.append(group_idx)
-            elif group_idx < normal_beg:
+            elif group_idx < normal_beg and reorder:
                 pipeline.insert(0, A.OneOf(
                     #pipes_default[group_idx],
                     [p(**get_pipe_attr(p)) for p in pipes[group_idx]],
@@ -448,7 +448,13 @@ def idxList2trainPipeline(index_list):
                     p = OneOfP))
         elif idx % 2 == 0:
             single_idx = idx // 2
-            if single_idx > normalize_index:
+            if not reorder:
+                p = flattend_pipes[idx // 2]
+                pipeline.append(
+                    #flattend_pipes_default[idx // 2]
+                    p(**get_pipe_attr(p))
+                )
+            elif single_idx > normalize_index:
                 p = flattend_pipes[idx // 2]
                 pipeline.append(
                     #flattend_pipes_default[idx // 2]
@@ -505,15 +511,19 @@ def idxList2validPipeline(index_list):
     pipeline.append(ToTensor())
     return A.Compose(pipeline, p = 1)
 
-def printPipeline(idxList, idx2pipe):
+def printPipeline(idxList, index2pipe):
     print("pipeline: ", idxList[:pipeline_length])
-    pprint(A.to_dict(idx2pipe(idxList)))
+    pprint(A.to_dict(index2pipe(idxList)))
 
-def idx2pipe(idx):
+def idx2pipe(idx, construct = False):
     if idx >= single_pipes:
-        return tuple(p for p in pipes[group_idx])
+        group_idx = idx - single_pipes
+        return tuple(p for p in pipes[group_idx]) \
+                if not construct else  A.OneOf([p() for p in pipes[group_idx]], p = OneOfP)
     elif idx % 2 == 0:
-        return flattend_pipes[idx // 2]
+        return flattend_pipes[idx // 2] if not construct else flattend_pipes[idx // 2]()
+    else:
+        return None
 
 def toFloatListByRange(typ, rang, df):
     if typ == int or typ == float:
@@ -531,13 +541,12 @@ def defaultParametersByPipeline(pipeline):
         if type(p) == tuple:
             params.append(OneOfP)
             for subp in p:
-                for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
+                for name, [typ, rang, df, ret] in pipes_attr[subp.get_class_fullname()].items():
                     params.extend(toFloatListByRange(typ, rang, df))
-        else:
+        elif p:
             for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
                 params.extend(toFloatListByRange(typ, rang, df))
     return params
-
 
 def deNorParams(typ, rang, df, params):
     if typ == int:
@@ -551,6 +560,13 @@ def deNorParams(typ, rang, df, params):
     else:
         print("error"), exit()
 
+def pakWithResizeTotensor(pipeline):
+    pipeline.insert(0, A.Resize(height=256, width=256, interpolation=1, always_apply=False, p=1))
+    pipeline.append(A.Resize(height=128, width=128, interpolation=1, always_apply=False, p=1))
+    pipeline.append(ToTensor())
+    return A.Compose(pipeline, p = 1)
+
+
 def newPipelineWithParams(pipeline, params):
     cons_pipes = []
     for idx in pipeline:
@@ -560,13 +576,24 @@ def newPipelineWithParams(pipeline, params):
             ps = []
             for subp in p:
                 kw = {}
-                for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
+                for name, [typ, rang, df, ret] in pipes_attr[subp.get_class_fullname()].items():
                     kw[name] = ret(deNorParams(typ, rang, df, params))
-                ps.append(p(**kw))
+                ps.append(subp(**kw))
             cons_pipes.append(A.OneOf(ps, p = ofp))
-        else:
+        elif p:
             kw = {}
             for name, [typ, rang, df, ret] in pipes_attr[p.get_class_fullname()].items():
                 kw[name] = ret(deNorParams(typ, rang, df, params))
             cons_pipes.append(p(**kw))
-    return cons_pipes
+
+    return pakWithResizeTotensor(cons_pipes)
+
+if __name__ == '__main__':
+    pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
+    orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
+    dftp = pakWithResizeTotensor([x for x in [idx2pipe(idx, construct = True) for idx in pl] if x])
+    cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
+    #print(str(orgp), file=open("org", "w"))
+    #print(str(dftp), file=open("dft", "w"))
+    #print(str(cvtp), file=open("cvt", "w"))
+    print(str(orgp) == str(cvtp))
