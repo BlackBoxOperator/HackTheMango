@@ -23,8 +23,7 @@ from albumentations.pytorch import ToTensor
 
 from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline
 
-selected_length = 5
-selected_pipes = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
+target_pipe = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
 
 # ======== Evolutionray Strategy ============
 # for reproducibility
@@ -92,10 +91,6 @@ class train():
     def run(self, ind):
         #return sum([1 / (((ind[i] - i) ** 2) + 1) for i in range(len(ind))]),
 
-        selected = [selected_pipes[i] for i in ind]
-
-        printPipeline(selected, idxList2trainPipeline, length = selected_length)
-
         """
         Image data augmentation is typically only applied to the training dataset,
         and not to the validation or test dataset.
@@ -105,7 +100,7 @@ class train():
         https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
         """
 
-        dataTransformsTrain = idxList2trainPipeline(selected, length = selected_length, reorder = False)
+        dataTransformsTrain = newPipelineWithParams(target_pipe, ind)
 
         trainDatasets = Mango_dataset(
                 os.path.join(self.data_path,"train.csv"),
@@ -154,9 +149,7 @@ class train():
                 transforms.Normalize([ind[0], ind[1], ind[2]], [ind[3], ind[4], ind[5]])
             ])
             """
-            selected = [selected_pipes[i] for i in ind]
-
-            dataTransformsValid = idxList2validPipeline(selected, length = selected_length)
+            dataTransformsValid = idxList2validPipeline(target_pipe)
 
             validDatasets = Mango_dataset(
                     os.path.join(self.data_path,"dev.csv"),
@@ -198,7 +191,8 @@ class train():
             return self.classes[torch.argmax(outputs)]
 
 # ea
-NUM_PIPE = len(selected_pipes)
+# should be NUM_PARAMETER
+NUM_PIPE = len(defaultParametersByPipeline(target_pipe))
 
 creator.create("FitnessMax", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMax)
@@ -239,8 +233,6 @@ def main():
     return pop, logbook, hof
 
 if __name__ == "__main__":
-
-    print("selected:", selected_pipes)
 
     pop, log, hof = main()
 
