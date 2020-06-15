@@ -227,11 +227,11 @@ def main():
 
 if __name__ == "__main__":
 
-    pop, log, hof = main(pl_params)
+    pop, log, hof = main()
 
     print("hof: ", hof[0])
 
-    new_pl_params = newPipelineWithParams(pl, hof[0])
+    new_pl_params = newPipelineWithParams(target_pipe, hof[0])
 
     print("new pl params", new_pl_params)
 
