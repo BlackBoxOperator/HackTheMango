@@ -5,7 +5,7 @@ import math
 # Deap
 import random
 import array
-from deap import algorithms, base, creator, tools, benchmarks
+from deap import algorithms, base, creator, tools, benchmarks, cma
 
 import torch
 import torch.nn as nn
@@ -25,35 +25,17 @@ from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeli
 
 target_pipe = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
 
+
 # ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
-MU, LAMBDA = 4, 8
-NGEN = 30  # number of generations
+NGEN = 30
+IND_SIZE = 0 # evalute in the bottom
+CENTROID = 0 # evalute in the bottom
+SIGMA = 0.3
+LAMBDA = 8
 
-IND_SIZE = 6
-MIN_VALUE = 0
-MAX_VALUE = 1
-MIN_STRATEGY = 0.3
-MAX_STRATEGY = 0.8
-
-#useless
-#creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-#creator.create("Individual", array.array, typecode="d", fitness=creator.FitnessMax, strategy=None)
-#creator.create("Strategy", array.array, typecode="d")
-
-def checkStrategy(minstrategy):
-    def decorator(func):
-        def wrappper(*args, **kargs):
-            children = func(*args, **kargs)
-            for child in children:
-                for i, s in enumerate(child.strategy):
-                    if s < minstrategy:
-                        child.strategy[i] = minstrategy
-            return children
-        return wrappper
-    return decorator
-
+global_a = 0
 # ==========================================
 
 class train():
@@ -89,6 +71,10 @@ class train():
         torch.cuda.manual_seed_all(self.seed)
 
     def run(self, ind):
+        global global_a
+
+        result = 0.0
+
         #return sum([1 / (((ind[i] - i) ** 2) + 1) for i in range(len(ind))]),
 
         """
@@ -110,7 +96,7 @@ class train():
         )
         dataloadersTrain = torch.utils.data.DataLoader(
                 trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
-        
+
         for step in range(self.max_epoch):
             self.classifier_net.train()
             totalLoss = 0
@@ -191,55 +177,90 @@ class train():
             return self.classes[torch.argmax(outputs)]
 
 # ea
+
+
 # should be NUM_PARAMETER
 NUM_PIPE = len(defaultParametersByPipeline(target_pipe))
 
-creator.create("FitnessMax", base.Fitness, weights=(1.0,))
-creator.create("Individual", list, fitness=creator.FitnessMax)
+creator.create("FitnessMin", base.Fitness, weights=(1.0,))
+creator.create("Individual", list, fitness=creator.FitnessMin)
+
+toolbox = base.Toolbox()
+strategy = 0
+
+
+
+def adjust(x):
+    if x > 0.99:
+        return 0.99
+    if x < 0.01:
+        return 0.01
+    return x
+
+def update_new_pop(y):
+    global strategy
+    strategy.update(y)
+    for group in y:
+        group[:] = [adjust(x) for x in group]
+
+def gen_new_pop(y):
+    global strategy
+    pop = strategy.generate(y)
+    for group in pop:
+        group[:] = [adjust(x) for x in group]
+    return pop
+
 
 
 def main():
-    #_78625 = [0.9937351930880042, 0.6999774952670302, 0.4506417252015659,
-    #        0.23635548700778367, 0.07663879046228922, 0.6776228457941125]
+    global global_a
+    global strategy
+    global IND_SIZE
+    global CENTROID
+
+    strategy = cma.Strategy(centroid=CENTROID, sigma=SIGMA, lambda_=LAMBDA)
+
     random.seed(64)
 
-    #Since there is only one queen per line,
-    #individual are represented by a permutation
-    toolbox = base.Toolbox()
-    toolbox.register("permutation", random.sample, range(NUM_PIPE), NUM_PIPE)
+    global_a = train()
 
-    #Structure initializers
-    #An individual is a list that represents the position of each queen.
-    #Only the line is stored, the column is the index of the number in the list.
-    toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.permutation)
-    toolbox.register("population", tools.initRepeat, list, toolbox.individual)
+    toolbox.register("generate", gen_new_pop, creator.Individual)
+    toolbox.register("update", update_new_pop)
+    toolbox.register("evaluate", global_a.run)
 
-    toolbox.register("evaluate", train().run)
-    toolbox.register("mate", tools.cxPartialyMatched)
-    toolbox.register("mutate", tools.mutShuffleIndexes, indpb=0.8)
-    toolbox.register("select", tools.selTournament, tournsize=3)
-
-    pop = toolbox.population(n=6)
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
-    stats.register("Avg", np.mean)
-    stats.register("Std", np.std)
-    stats.register("Min", np.min)
-    stats.register("Max", np.max)
+    stats.register("avg", numpy.mean)
+    stats.register("std", numpy.std)
+    stats.register("min", numpy.min)
+    stats.register("max", numpy.max)
 
-    pop, logbook = algorithms.eaSimple(pop, toolbox, cxpb=0.6, mutpb=0.4, ngen=100, stats=stats,
-                        halloffame=hof, verbose=True)
+    pop, logbook = algorithms.eaGenerateUpdate(toolbox, ngen=NGEN, stats=stats, halloffame=hof)
 
     return pop, logbook, hof
 
 if __name__ == "__main__":
+    global IND_SIZE
+    global CENTROID
+    pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
 
-    pop, log, hof = main()
+    pl_params = ep.defaultParametersByPipeline(pl)
+    IND_SIZE = len(pl_params)
+    CENTROID = [0.5] * IND_SIZE
+    pop, log, hof = main(pl_params)
+
+    print("hof: ", hof[0])
+
+    new_pl_params = ep.newPipelineWithParams(pl, hof[0])
+
+    print("new pl params", new_pl_params)
 
     logbook = open('logbook.txt', 'w')
+
+    for h in hof:
+        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
+        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values, file = logbook)
 
     print(log)
     print(log, file = logbook)
     logbook.close()
-
-    print(hof[0])
