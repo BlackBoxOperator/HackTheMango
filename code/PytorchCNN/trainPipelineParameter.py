@@ -23,19 +23,15 @@ from albumentations.pytorch import ToTensor
 
 from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline
 
-target_pipe = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
-
+target_pipe = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
 
 # ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
 NGEN = 30
-IND_SIZE = 0 # evalute in the bottom
-CENTROID = 0 # evalute in the bottom
 SIGMA = 0.3
 LAMBDA = 8
 
-global_a = 0
 # ==========================================
 
 class train():
@@ -71,7 +67,6 @@ class train():
         torch.cuda.manual_seed_all(self.seed)
 
     def run(self, ind):
-        global global_a
 
         result = 0.0
 
@@ -176,12 +171,6 @@ class train():
             outputs = self.classifier_net(x)
             return self.classes[torch.argmax(outputs)]
 
-# ea
-
-
-# should be NUM_PARAMETER
-NUM_PIPE = len(defaultParametersByPipeline(target_pipe))
-
 creator.create("FitnessMin", base.Fitness, weights=(1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMin)
 
@@ -213,20 +202,17 @@ def gen_new_pop(y):
 
 
 def main():
-    global global_a
     global strategy
-    global IND_SIZE
-    global CENTROID
+    CENTROID = defaultParametersByPipeline(target_pipe)
 
     strategy = cma.Strategy(centroid=CENTROID, sigma=SIGMA, lambda_=LAMBDA)
 
     random.seed(64)
 
-    global_a = train()
 
     toolbox.register("generate", gen_new_pop, creator.Individual)
     toolbox.register("update", update_new_pop)
-    toolbox.register("evaluate", global_a.run)
+    toolbox.register("evaluate", train().run)
 
     hof = tools.HallOfFame(1)
     stats = tools.Statistics(lambda ind: ind.fitness.values)
@@ -240,18 +226,12 @@ def main():
     return pop, logbook, hof
 
 if __name__ == "__main__":
-    global IND_SIZE
-    global CENTROID
-    pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
 
-    pl_params = ep.defaultParametersByPipeline(pl)
-    IND_SIZE = len(pl_params)
-    CENTROID = [0.5] * IND_SIZE
     pop, log, hof = main(pl_params)
 
     print("hof: ", hof[0])
 
-    new_pl_params = ep.newPipelineWithParams(pl, hof[0])
+    new_pl_params = newPipelineWithParams(pl, hof[0])
 
     print("new pl params", new_pl_params)
 

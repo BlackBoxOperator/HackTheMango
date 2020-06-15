@@ -328,6 +328,9 @@ def idxList2trainPipeline(index_list, reorder = True, cut = True, length = 0):
 
     if cut:
         if length:
+            if isinstance(length, tuple):
+                mn, mx = length
+                length = sum(index_list[-6:]) % (mx - mn + 1) + mn
             index_list = index_list[:length]
         else:
             index_list = index_list[:pipeline_length]
@@ -396,6 +399,9 @@ def idxList2validPipeline(index_list, cut = True, length = 0):
    
     if cut:
         if length:
+            if isinstance(length, tuple):
+                mn, mx = length
+                length = sum(index_list[-6:]) % (mx - mn + 1) + mn
             index_list = index_list[:length]
         else:
             index_list = index_list[:pipeline_length]
@@ -422,6 +428,9 @@ def idxList2validPipeline(index_list, cut = True, length = 0):
 
 def printPipeline(idxList, index2pipe, length = 0):
     if length:
+        if isinstance(length, tuple):
+            mn, mx = length
+            length = sum(idxList[-6:]) % (mx - mn + 1) + mn
         print("pipeline: ", idxList[:length])
         pprint(A.to_dict(index2pipe(idxList, length = length)))
     else:

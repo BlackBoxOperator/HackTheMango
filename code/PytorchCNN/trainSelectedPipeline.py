@@ -23,7 +23,7 @@ from albumentations.pytorch import ToTensor
 
 from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline
 
-selected_length = 5
+selected_length = (3, 8)
 selected_pipes = [0, 2, 4, 6, 8, 12, 14, 16, 18, 20, 22, 28, 32, 34, 36, 38, 40, 44, 46, 48, 50, 54, 56, 58, 60, 62, 66, 68, 72, 74, 80, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92]
 
 # ======== Evolutionray Strategy ============
@@ -105,7 +105,7 @@ class train():
         https://machinelearningmastery.com/how-to-configure-image-data-augmentation-when-training-deep-learning-neural-networks/
         """
 
-        dataTransformsTrain = idxList2trainPipeline(selected, length = selected_length, reorder = False)
+        dataTransformsTrain = idxList2trainPipeline(selected, length = selected_length)
 
         trainDatasets = Mango_dataset(
                 os.path.join(self.data_path,"train.csv"),
