@@ -7,6 +7,7 @@ C1-P1_Dev
 C1-P1_Train
 dev.csv
 train.csv
-
+C1-P1_Test/
+test.csv
 __pycache__
 *weight

@@ -23,11 +23,9 @@ from albumentations.pytorch import ToTensor
 
 from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline, defaultParametersByPipeline, newPipelineWithParams
 
-# good_pipes2.txt avg and last winner
-target_pipe = [82, 84, 48, 36, 16, 68, 28, 18, 32, 80, 88, 4, 86, 66, 87]
-# good_pipes2.txt best winner
-# target_pipe = [86, 62, 90, 88, 68, 66, 32, 60, 84]
 
+target_pipe = [56, 25, 86, 62]
+# target_pipe = [65, 12, 45, 69, 63, 71, 56, 73, 47, 48, 50, 82]
 # ======== Evolutionray Strategy ============
 # for reproducibility
 random.seed(64)
@@ -47,7 +45,7 @@ class train():
         if not os.path.isdir(weight_path):
             os.makedirs(weight_path)
         self.data_path = data_path
-        self.device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+        self.device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
         self.classes = classes
         self.image_size = image_size
         self.validation_frequency = validation_frequency
@@ -91,7 +89,7 @@ class train():
                 os.path.join(self.data_path,"train.csv"),
                 os.path.join(self.data_path,"C1-P1_Train"),
                 dataTransformsTrain,
-                sample_count = 100,
+                # sample_count = 100,
         )
         dataloadersTrain = torch.utils.data.DataLoader(
                 trainDatasets, batch_size=self.batch_size, shuffle=True, num_workers=2)
@@ -231,20 +229,23 @@ def main():
 
 if __name__ == "__main__":
 
-    pop, log, hof = main()
+    # pop, log, hof = main()
 
-    print("hof: ", hof[0])
+    # print("hof: ", hof[0])
 
-    new_pl_params = newPipelineWithParams(target_pipe, hof[0])
+    # new_pl_params = newPipelineWithParams(target_pipe, hof[0])
 
-    print("new pl params", new_pl_params)
+    # print("new pl params", new_pl_params)
 
-    logbook = open('logbook.txt', 'w')
+    # logbook = open('logbook.txt', 'w')
 
-    for h in hof:
-        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
-        print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values, file = logbook)
+    # for h in hof:
+    #     print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values)
+    #     print("individual: ", [x % 1 for x in h], " value: ", h.fitness.values, file = logbook)
 
-    print(log)
-    print(log, file = logbook)
-    logbook.close()
+    # print(log)
+    # print(log, file = logbook)
+    # logbook.close()
+    b = train(max_epoch=100)
+    b.run([0.4491086820559641, 0.5110112673570865, 0.8731044710710582, 0.18218755082068294, 0.3650997462797822, 0.21605293979567114, 0.99, 0.5389306222703668, 0.233419236545455, 0.17544182845835327, 0.5731093655427737, 0.5015190586068116, 0.99, 0.01, 0.49726851364050745, 0.694593240228059, 0.39460950335574463, 0.1463446569283618, 0.23974226312300628, 0.5161554718255529, 0.434586626846959, 0.99, 0.42466523379905513, 0.33664723473173774]
+    )

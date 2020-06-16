@@ -48,3 +48,21 @@ class Mango_dataset(Dataset):
     
     def __class__(self):
         return self.labels
+
+class Eval_dataset(Dataset):
+    def __init__(self, csvFile, data_path, data_transform):
+        self.df = pd.read_csv(csvFile)
+        self.data_path = data_path
+        self.xTrain = self.df['image_id']
+        self.data_transform = data_transform
+
+    def __getitem__(self, index):
+        
+        img = imageio.imread(os.path.join(self.data_path, self.xTrain[index]))
+        if self.data_transform is not None:
+            img = self.data_transform(**{'image': img})
+            img = img['image']
+        return img, index
+
+    def __len__(self):
+        return len(self.xTrain.index)
