@@ -23,10 +23,15 @@ from albumentations.pytorch import ToTensor
 
 from esPipeline import idxList2trainPipeline, idxList2validPipeline, printPipeline, defaultParametersByPipeline, newPipelineWithParams
 
-# good_pipes2.txt avg and last winner
-target_pipe = [82, 84, 48, 36, 16, 68, 28, 18, 32, 80, 88, 4, 86, 66, 87]
-# good_pipes2.txt best winner
-# target_pipe = [86, 62, 90, 88, 68, 66, 32, 60, 84]
+# good_pipes2.txt avg and last winner (too long)
+#target_pipe = [82, 84, 48, 36, 16, 68, 28, 18, 32, 80, 88, 4, 86, 66, 87]
+# good_pipes2.txt best winner (too long)
+#target_pipe = [86, 62, 90, 88, 68, 66, 32, 60, 84]
+
+# good_pipes1.txt last 2
+#target_pipe = [36, 89, 50, 48]
+# good_pipes1.txt last 1
+target_pipe = [4, 28, 56, 66, 34]
 
 # ======== Evolutionray Strategy ============
 # for reproducibility

@@ -526,6 +526,9 @@ def printSelectPipes(pipeline):
     pprint(ps)
 
 if __name__ == '__main__':
+    printSelectPipes([36, 89, 50, 48])
+    exit(0)
+
     print('singles:', single_pipes)
     #pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
     pl = [82, 84, 48, 36, 16, 68, 28, 18, 32, 80, 88, 4, 86, 66, 87]
