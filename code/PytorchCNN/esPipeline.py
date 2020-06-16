@@ -492,6 +492,7 @@ def pakWithResizeTotensor(pipeline):
     return A.Compose(pipeline, p = 1)
 
 def newPipelineWithParams(pipeline, params):
+    params = params.copy()
     cons_pipes = []
     for idx in pipeline:
         p = idx2pipe(idx)
