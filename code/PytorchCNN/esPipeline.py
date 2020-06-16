@@ -157,7 +157,7 @@ pipes_attr =  {
     },
     'albumentations.augmentations.transforms.RandomGamma': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
-      'gamma_limit': [(int, int), ((-130, 130), (-130, 130)), (80, 120), sorted_tuple],
+      'gamma_limit': [(float, float), ((-130, 130), (-130, 130)), (80.0, 120.0), sorted_tuple],
     },
     'albumentations.augmentations.transforms.RandomFog': {
       'p': [float, (0.0, 1.0), 0.5, fixed],
