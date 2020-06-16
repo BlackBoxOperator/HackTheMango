@@ -475,10 +475,12 @@ def defaultParametersByPipeline(pipeline):
 def deNorParams(typ, rang, df, params):
     if typ == int:
         (mn, mx) = rang
-        return int(params.pop(0) * (mx - mn) + mn) if mx != mn else mn
+        val = params.pop(0) # bug here if do propagate below
+        return int(val * (mx - mn) + mn) if mx != mn else mn
     elif typ == float:
         (mn, mx) = rang
-        return params.pop(0) * (mx - mn) + mn if mx != mn else mn
+        val = params.pop(0) # bug here if do propagate below
+        return val * (mx - mn) + mn if mx != mn else mn
     elif type(typ) == tuple:
         return tuple(deNorParams(t, r, d, params) for t, r, d in zip(typ, rang, df))
     else:
@@ -492,6 +494,7 @@ def pakWithResizeTotensor(pipeline):
 
 def newPipelineWithParams(pipeline, params):
     params = params.copy()
+    print(params)
     cons_pipes = []
     for idx in pipeline:
         p = idx2pipe(idx)
@@ -510,6 +513,8 @@ def newPipelineWithParams(pipeline, params):
                 kw[name] = ret(deNorParams(typ, rang, df, params))
             cons_pipes.append(p(**kw))
 
+    if(params):
+        print("params not over", params), exit(0)
     return pakWithResizeTotensor(cons_pipes)
 
 def printSelectPipes(pipeline):
@@ -521,13 +526,20 @@ def printSelectPipes(pipeline):
     pprint(ps)
 
 if __name__ == '__main__':
+    print('singles:', single_pipes)
     #pl = [83, 46, 51, 42, 44, 60, 23, 14, 63, 77, 61, 20, 36, 24, 58, 30]
+    pl = [82, 84, 48, 36, 16, 68, 28, 18, 32, 80, 88, 4, 86, 66, 87]
     #pl = [i for i in range(numOfPipeline())] # ok
-    #orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
+    """
+    sing = [i for i in range(single_pipes) if i % 2 == 0]
+    grup = [i for i in range(single_pipes, numOfPipeline())]
+    pl = sing + grup
+    """
+    orgp = idxList2trainPipeline(pl, reorder = False, cut = False)
     #dftp = pakWithResizeTotensor([x for x in [idx2pipe(idx, construct = True) for idx in pl] if x])
-    #cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
-    #print(str(orgp), file=open("org", "w"))
+    cvtp = newPipelineWithParams(pl, defaultParametersByPipeline(pl))
+    print(str(orgp), file=open("org", "w"))
     #print(str(dftp), file=open("dft", "w"))
-    #print(str(cvtp), file=open("cvt", "w"))
-    #print(str(orgp) == str(cvtp))
-    printSelectPipes([56, 38, 86, 62])
+    print(str(cvtp), file=open("cvt", "w"))
+    print(str(orgp) == str(cvtp))
+    #printSelectPipes([56, 38, 86, 62])
