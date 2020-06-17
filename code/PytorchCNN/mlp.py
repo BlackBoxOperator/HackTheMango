@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-
+import numpy as np
 class VGG16_model(nn.Module):
     def __init__(self, numClasses=3):
         super(VGG16_model, self).__init__()
@@ -79,28 +79,31 @@ class ResidualBlock(nn.Module):
         out = F.relu(out)
         return out
 
+#[120.0, 73.0, 349.0, 154.0, 1337.0, 1656.0]
+#[64,128,256,512,1024,1024]
+paralist = np.array([120.0, 73.0, 349.0, 154.0, 1337.0, 1656.0],dtype=int)
 class ResNet(nn.Module):
     def __init__(self, ResidualBlock, numClasses=3):
         super(ResNet, self).__init__()
-        self.inchannel = 64
+        self.inchannel = paralist[0]
         self.conv1 = nn.Sequential(
-            nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False),
-            nn.BatchNorm2d(64),
+            nn.Conv2d(3, paralist[0], kernel_size=3, stride=1, padding=1, bias=False),
+            nn.BatchNorm2d(paralist[0]),
             nn.ReLU(),
         )
-        self.layer1 = self.make_layer(ResidualBlock, 64,  2, stride=1)
-        self.layer2 = self.make_layer(ResidualBlock, 128, 2, stride=2)
-        self.layer3 = self.make_layer(ResidualBlock, 256, 2, stride=2)
-        self.layer4 = self.make_layer(ResidualBlock, 512, 2, stride=2)
+        self.layer1 = self.make_layer(ResidualBlock, paralist[0],  2, stride=1)
+        self.layer2 = self.make_layer(ResidualBlock, paralist[1], 2, stride=2)
+        self.layer3 = self.make_layer(ResidualBlock, paralist[2], 2, stride=2)
+        self.layer4 = self.make_layer(ResidualBlock, paralist[3], 2, stride=2)
         self.avgpool = nn.AdaptiveAvgPool2d((7, 7))
         self.classifier = nn.Sequential(
-            nn.Linear(512 * 7 * 7, 1024),
+            nn.Linear(paralist[3] * 7 * 7, paralist[4]),
             nn.ReLU(inplace=True),
             nn.Dropout(),
-            nn.Linear(1024, 1024),
+            nn.Linear(paralist[4], paralist[5]),
             nn.ReLU(inplace=True),
             nn.Dropout(),
-            nn.Linear(1024, numClasses)
+            nn.Linear(paralist[5], numClasses)
         )
 
     def make_layer(self, block, channels, num_blocks, stride):
