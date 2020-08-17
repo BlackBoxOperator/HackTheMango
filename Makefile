@@ -6,9 +6,12 @@ C1P2_ID = 1hPRbUqOBvIC9HHqcA42r1F3PlIxmPOF8
 C1P2_FN = c1p2/C1-P2_Train_Dev.rar
 
 c1p1: $(C1P1_FN)
+c1p2: $(C1P2_FN)
+
+$(C1P1_FN):
 	bash gdown.sh $(C1P1_ID) $(C1P1_FN)
 	rar x $(C1P1_FN) `dirname $(C1P1_FN)`
 
-c1p2: $(C1P2_FN)
+$(C1P2_FN):
 	bash gdown.sh $(C1P2_ID) $(C1P2_FN)
 	rar x $(C1P2_FN) `dirname $(C1P2_FN)`
