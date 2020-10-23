@@ -2,9 +2,10 @@ cnn-rnn-classifier/
 noisystudent/
 object_detection/
 supervised_pretraining_GN_WS/
-C1-P1_Train_Dev_fixed.rar
-C1-P1_Dev
-C1-P1_Train
+c1p1/*/
+c1p1/*.rar
+c1p2/*/
+c1p2/*.rar
 dev.csv
 train.csv
 __pycache__/
