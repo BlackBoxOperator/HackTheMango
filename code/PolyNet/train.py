@@ -33,8 +33,8 @@ parser.add_argument('--seed', type=int, default=1, metavar='S',
                     help='random seed (default: 1)')
 parser.add_argument('--log-interval', type=int, default=100, metavar='N',
                     help='how many batches to wait before logging training status')
-parser.add_argument('--model-name', type=str, default='resnet50', metavar='M',
-                    help='model name (default: resnet50)')
+parser.add_argument('--model-name', type=str, default='polynet', metavar='M',
+                    help='model name (default: polynet)')
 parser.add_argument('--dropout-p', type=float, default=0.2, metavar='D',
                     help='Dropout probability (default: 0.2)')
 
@@ -80,7 +80,7 @@ def test(model, test_loader, criterion=nn.CrossEntropyLoss()):
         100. * correct / len(test_loader.dataset)))
 
 
-def main():
+def main(data_path=os.path.join('..', '..', 'c1p1')):
     '''Main function to run code in this script'''
 
     model_name = args.model_name
@@ -123,8 +123,8 @@ def main():
     """
 
     train_set = Mango_dataset(
-            os.path.join(self.data_path,"train.csv"),
-            os.path.join(self.data_path,"C1-P1_Train"),
+            os.path.join(data_path,"train.csv"),
+            os.path.join(data_path,"C1-P1_Train"),
             transform)
 
     train_loader = torch.utils.data.DataLoader(
@@ -140,8 +140,8 @@ def main():
     """
 
     test_set = Mango_dataset(
-            os.path.join(self.data_path,"dev.csv"),
-            os.path.join(self.data_path,"C1-P1_Dev"),
+            os.path.join(data_path,"dev.csv"),
+            os.path.join(data_path,"C1-P1_Dev"),
             transform)
 
     test_loader = torch.utils.data.DataLoader(
