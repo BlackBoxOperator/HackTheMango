@@ -2,18 +2,20 @@
 #conda install -c pytorch pytorch torchvision cudatoolkit=11
 #conda install pyyaml
 
-# can try larger bs
+# we can try freeze, but I don't think it would help
+
+# can try larger bs, better augment, finetune
 #python train.py --model-name vit_small_patch16_224 --epochs 100 --lr 0.01 --augment 0 --finetune 0 | tee raw_vit_small_patch16_224.txt
 
 # ------------------------------------------------------------------------
 
-# can try larger bs
+# can try larger bs, better augment, finetune
 #python train.py --model-name vit_base_patch32_384 --epochs 100 --lr 0.0001 --augment 1 --finetune 0 | tee raw_vit_base_patch32_384.txt
 
 # ------------------------------------------------------------------------
 
-# can try larger bs
-#python train.py --model-name vit_base_patch32_384 --epochs 100 --lr 0.0001 --augment 1 --finetune 1 | tee vit_base_patch32_384.txt
+# can try larger bs, better augment, finetune
+#python train.py --model-name vit_base_patch32_384 --epochs 100 --lr 0.0001 --augment 1 --finetune 1 | tee pre_vit_base_patch32_384.txt
 
 # ------------------------------------------------------------------------
 
@@ -32,8 +34,12 @@
 
 # ------------------------------------------------------------------------
 
-python train.py --model-name vit_base_patch16_384 --epochs 100 --lr 0.0001 --batch-size 10 --augment 2 --finetune 1 | tee vit_base_patch16_384.txt
+#TODO: comment
+#python train.py --model-name vit_base_patch16_384 --epochs 100 --lr 0.0001 --batch-size 10 --augment 2 --finetune 1 | tee vit_base_patch16_384.txt
+
+python train.py --model-name vit_small_patch16_224 --epochs 100 --lr 0.0001 --batch-size 160 --augment 2 --finetune 1 | tee vit_small_patch16_224.txt
+python train.py --model-name vit_base_patch32_384 --epochs 100 --lr 0.0001 --batch-size 64 --augment 2 --finetune 1 | tee vit_base_patch32_384.txt
+python train.py --model-name vit_base_patch32_384 --epochs 100 --lr 0.0001 --batch-size 64 --augment 2 --finetune 1 | tee vit_base_patch32_384.txt
 
 # pretrain not tried yet
 # vit_base_patch16_224
-# vit_base_patch16_384
