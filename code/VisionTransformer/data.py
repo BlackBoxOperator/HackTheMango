@@ -21,7 +21,7 @@ class Mango_dataset(Dataset):
 
     def __len__(self):
         return len(self.xTrain.index)
-
+    
     def __class__(self):
         return self.labels
 

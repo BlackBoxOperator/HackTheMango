@@ -13,8 +13,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
 
-import os
-from cnn_finetune import make_model
+import timm, os
 from data import Mango_dataset
 
 parser = argparse.ArgumentParser(description='cnn_finetune cifar 10 example')
@@ -98,22 +97,37 @@ def main(data_path=os.path.join('..', '..', 'c1p1')):
 
     classes = ('A', 'B', 'C')
 
-    model = make_model(
-        model_name,
-        pretrained=True,
-        num_classes=len(classes),
-        dropout_p=args.dropout_p,
-        input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
-    )
+    """
+     'vit_base_patch16_224',
+     'vit_base_patch16_384',
+     'vit_base_patch32_384',
+     'vit_large_patch16_224',
+     'vit_large_patch16_384',
+     'vit_large_patch32_384',
+     'vit_small_patch16_224',
+    """
+
+    model = timm.create_model(
+            'vit_small_patch16_224',
+            pretrained=True,
+            num_classes=len(classes),
+            drop_rate=args.dropout_p,
+            # no input_size in this package
+            # input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
+            )
+
     model = model.to(device)
 
     transform = transforms.Compose([
-        #transforms.Scale(224),
-        #transforms.CenterCrop(224),
+        transforms.Scale(224),
+        transforms.CenterCrop(224),
         transforms.ToTensor(),
         transforms.Normalize(
-            mean=model.original_model_info.mean,
-            std=model.original_model_info.std),
+            mean = [0.485, 0.456, 0.406],
+             std = [0.229, 0.224, 0.225]
+            #mean=model.original_model_info.mean,
+            #std=model.original_model_info.std
+            ),
     ])
 
     """
