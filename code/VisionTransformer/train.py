@@ -13,7 +13,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
 
-import timm, os
+import timm, os, sys
 from data import Mango_dataset
 
 parser = argparse.ArgumentParser(description='cnn_finetune cifar 10 example')
@@ -67,10 +67,8 @@ else:
     exit(0)
 
 if args.freeze:
-    print("freeze the main network")
     FreezePretrained = True
 else:
-    print("tuning all network")
     FreezePretrained = False
 
 
@@ -182,6 +180,9 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
         print('augmentation type not supported yet')
         exit(0)
 
+    print(' '.join(sys.argv))
+    print(args)
+
     """
     train_set = torchvision.datasets.CIFAR10(
         root='./data', train=True, download=True, transform=transform
@@ -226,12 +227,16 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.975)
 
     # Train
+    w_dir = '{}w'.format(model_name)
+    if not os.path.exists(w_dir):
+        os.makedirs(w_dir)
+
     for epoch in range(1, args.epochs + 1):
         # Decay Learning Rate
         scheduler.step(epoch)
         train(model, epoch, optimizer, train_loader)
         test(model, test_loader)
-        with open("weight/weight_{}".format(epoch), "wb") as f:
+        with open(os.path.join(w_dir, "weight_{}".format(epoch)), "wb") as f:
             torch.save(model.state_dict(), f)
 
 
