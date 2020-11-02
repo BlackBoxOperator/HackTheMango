@@ -107,4 +107,4 @@ class train():
 if __name__ == "__main__":
     a = train()
     a.run()
-    
+

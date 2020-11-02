@@ -179,6 +179,8 @@ def main(data_path=os.path.join('..', '..', 'c1p1')):
         scheduler.step(epoch)
         train(model, epoch, optimizer, train_loader)
         test(model, test_loader)
+        with open("weight/weight_{}".format(epoch), "wb") as f:
+            torch.save(model.state_dict(), f)
 
 
 if __name__ == '__main__':
