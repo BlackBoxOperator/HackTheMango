@@ -9,7 +9,13 @@ class Mango_dataset(Dataset):
         self.df = pd.read_csv(csvFile)
         self.data_path = data_path
         self.xTrain = self.df['image_id']
-        self.yTrain, self.labels = pd.factorize(self.df['label'], sort=True)
+        if 'label' in self.df:
+            self.yTrain, self.labels = pd.factorize(self.df['label'], sort=True)
+        elif 'grade' in self.df:
+            self.yTrain, self.labels = pd.factorize(self.df['grade'], sort=True)
+        else:
+            print('no proper field for label'), exit(0)
+
         self.data_transform = data_transform
 
     def __getitem__(self, index):
@@ -21,7 +27,7 @@ class Mango_dataset(Dataset):
 
     def __len__(self):
         return len(self.xTrain.index)
-    
+
     def __class__(self):
         return self.labels
 

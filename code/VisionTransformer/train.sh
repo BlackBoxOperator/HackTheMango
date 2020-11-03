@@ -20,7 +20,7 @@
 # ------------------------------------------------------------------------
 
 # most proper
-#python train.py --model-name vit_large_patch32_384 --epochs 100 --lr 0.0001 --batch-size 16 --augment 2 --finetune 1 | tee vit_large_patch32_384.txt
+#python train.py --model-name vit_large_patch32_384 --epochs 100 --lr 0.0001 --batch-size 16 --augment 2 --finetune 0 | tee vit_large_patch32_384.txt
 
 # ------------------------------------------------------------------------
 
@@ -39,6 +39,8 @@
 #python train.py --model-name vit_small_patch16_224 --epochs 16 --lr 0.0001 --batch-size 96 --augment 2 --finetune 1 | tee vit_small_patch16_224.txt
 #python train.py --model-name vit_base_patch32_384 --epochs 16 --lr 0.0001 --batch-size 64 --augment 2 --finetune 1 | tee vit_base_patch32_384.txt
 #python train.py --model-name vit_base_patch16_224 --epochs 16 --lr 0.0001 --batch-size 42 --augment 2 --finetune 1 | tee vit_base_patch16_224.txt
+
+python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.0001 --batch-size 16 --augment 2 --finetune 1 --dataset c1p2 | tee vit_large_patch32_384.txt
 
 # pretrain not tried yet
 # vit_base_patch16_224
