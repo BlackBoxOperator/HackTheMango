@@ -47,6 +47,8 @@ parser.add_argument('--dataset', type=str, default='c1p1', metavar='M',
                     help='dataset (default: c1p1)')
 parser.add_argument('--freeze', action='store_true',
                     help='freeze the main network')
+parser.add_argument('--crop', action='store_true',
+                    help='crop image by position field in dataset')
 
 args = parser.parse_args()
 use_cuda = not args.no_cuda and torch.cuda.is_available()
@@ -195,7 +197,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     train_set = Mango_dataset(
             os.path.join(data_path,TRAIN_CSV),
             os.path.join(data_path,TRAIN_DIR),
-            transform)
+            transform, args.crop)
 
     train_loader = torch.utils.data.DataLoader(
             train_set, batch_size=args.batch_size, shuffle=True, num_workers=2)
@@ -212,7 +214,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     test_set = Mango_dataset(
             os.path.join(data_path,DEV_CSV),
             os.path.join(data_path,DEV_DIR),
-            transform)
+            transform, args.crop)
 
     test_loader = torch.utils.data.DataLoader(
             test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
