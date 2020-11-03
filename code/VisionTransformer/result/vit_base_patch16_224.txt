@@ -1,0 +1,82 @@
+train.py --model-name vit_base_patch16_224 --epochs 16 --lr 0.0001 --batch-size 42 --augment 2 --finetune 1
+Namespace(augment=2, batch_size=42, classes=3, dataset='c1p1', dropout_p=0.2, epochs=16, finetune=1, freeze=False, log_interval=100, lr=0.0001, model_name='vit_base_patch16_224', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64)
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.026463
+Train Epoch: 1 [4200/5600 (75%)]	Average loss: 0.015522
+
+Test set: Average loss: 0.0132, Accuracy: 634/800 (79%)
+
+Train Epoch: 2 [0/5600 (0%)]	Average loss: 0.011168
+Train Epoch: 2 [4200/5600 (75%)]	Average loss: 0.012759
+
+Test set: Average loss: 0.0126, Accuracy: 629/800 (79%)
+
+Train Epoch: 3 [0/5600 (0%)]	Average loss: 0.013312
+Train Epoch: 3 [4200/5600 (75%)]	Average loss: 0.011560
+
+Test set: Average loss: 0.0137, Accuracy: 613/800 (77%)
+
+Train Epoch: 4 [0/5600 (0%)]	Average loss: 0.009282
+Train Epoch: 4 [4200/5600 (75%)]	Average loss: 0.011309
+
+Test set: Average loss: 0.0144, Accuracy: 606/800 (76%)
+
+Train Epoch: 5 [0/5600 (0%)]	Average loss: 0.007802
+Train Epoch: 5 [4200/5600 (75%)]	Average loss: 0.010689
+
+Test set: Average loss: 0.0122, Accuracy: 646/800 (81%)
+
+Train Epoch: 6 [0/5600 (0%)]	Average loss: 0.008884
+Train Epoch: 6 [4200/5600 (75%)]	Average loss: 0.010184
+
+Test set: Average loss: 0.0122, Accuracy: 644/800 (80%)
+
+Train Epoch: 7 [0/5600 (0%)]	Average loss: 0.010813
+Train Epoch: 7 [4200/5600 (75%)]	Average loss: 0.009956
+
+Test set: Average loss: 0.0153, Accuracy: 597/800 (75%)
+
+Train Epoch: 8 [0/5600 (0%)]	Average loss: 0.011402
+Train Epoch: 8 [4200/5600 (75%)]	Average loss: 0.008999
+
+Test set: Average loss: 0.0120, Accuracy: 629/800 (79%)
+
+Train Epoch: 9 [0/5600 (0%)]	Average loss: 0.009510
+Train Epoch: 9 [4200/5600 (75%)]	Average loss: 0.008238
+
+Test set: Average loss: 0.0131, Accuracy: 612/800 (76%)
+
+Train Epoch: 10 [0/5600 (0%)]	Average loss: 0.007153
+Train Epoch: 10 [4200/5600 (75%)]	Average loss: 0.008132
+
+Test set: Average loss: 0.0130, Accuracy: 625/800 (78%)
+
+Train Epoch: 11 [0/5600 (0%)]	Average loss: 0.008791
+Train Epoch: 11 [4200/5600 (75%)]	Average loss: 0.007490
+
+Test set: Average loss: 0.0127, Accuracy: 647/800 (81%)
+
+Train Epoch: 12 [0/5600 (0%)]	Average loss: 0.005882
+Train Epoch: 12 [4200/5600 (75%)]	Average loss: 0.007261
+
+Test set: Average loss: 0.0160, Accuracy: 614/800 (77%)
+
+Train Epoch: 13 [0/5600 (0%)]	Average loss: 0.005444
+Train Epoch: 13 [4200/5600 (75%)]	Average loss: 0.006559
+
+Test set: Average loss: 0.0166, Accuracy: 616/800 (77%)
+
+Train Epoch: 14 [0/5600 (0%)]	Average loss: 0.005077
+Train Epoch: 14 [4200/5600 (75%)]	Average loss: 0.005573
+
+Test set: Average loss: 0.0163, Accuracy: 618/800 (77%)
+
+Train Epoch: 15 [0/5600 (0%)]	Average loss: 0.006840
+Train Epoch: 15 [4200/5600 (75%)]	Average loss: 0.005074
+
+Test set: Average loss: 0.0164, Accuracy: 617/800 (77%)
+
+Train Epoch: 16 [0/5600 (0%)]	Average loss: 0.003377
+Train Epoch: 16 [4200/5600 (75%)]	Average loss: 0.004748
+
+Test set: Average loss: 0.0201, Accuracy: 623/800 (78%)
+

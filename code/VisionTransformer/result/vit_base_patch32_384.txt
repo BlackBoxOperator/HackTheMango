@@ -1,0 +1,66 @@
+train.py --model-name vit_base_patch32_384 --epochs 16 --lr 0.0001 --batch-size 64 --augment 2 --finetune 1
+Namespace(augment=2, batch_size=64, classes=3, dataset='c1p1', dropout_p=0.2, epochs=16, finetune=1, freeze=False, log_interval=100, lr=0.0001, model_name='vit_base_patch32_384', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64)
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.017291
+
+Test set: Average loss: 0.0088, Accuracy: 598/800 (75%)
+
+Train Epoch: 2 [0/5600 (0%)]	Average loss: 0.008499
+
+Test set: Average loss: 0.0083, Accuracy: 630/800 (79%)
+
+Train Epoch: 3 [0/5600 (0%)]	Average loss: 0.007646
+
+Test set: Average loss: 0.0088, Accuracy: 616/800 (77%)
+
+Train Epoch: 4 [0/5600 (0%)]	Average loss: 0.007384
+
+Test set: Average loss: 0.0080, Accuracy: 619/800 (77%)
+
+Train Epoch: 5 [0/5600 (0%)]	Average loss: 0.007988
+
+Test set: Average loss: 0.0090, Accuracy: 619/800 (77%)
+
+Train Epoch: 6 [0/5600 (0%)]	Average loss: 0.006875
+
+Test set: Average loss: 0.0091, Accuracy: 603/800 (75%)
+
+Train Epoch: 7 [0/5600 (0%)]	Average loss: 0.008905
+
+Test set: Average loss: 0.0073, Accuracy: 629/800 (79%)
+
+Train Epoch: 8 [0/5600 (0%)]	Average loss: 0.007949
+
+Test set: Average loss: 0.0075, Accuracy: 642/800 (80%)
+
+Train Epoch: 9 [0/5600 (0%)]	Average loss: 0.005136
+
+Test set: Average loss: 0.0087, Accuracy: 624/800 (78%)
+
+Train Epoch: 10 [0/5600 (0%)]	Average loss: 0.004801
+
+Test set: Average loss: 0.0087, Accuracy: 615/800 (77%)
+
+Train Epoch: 11 [0/5600 (0%)]	Average loss: 0.004139
+
+Test set: Average loss: 0.0088, Accuracy: 618/800 (77%)
+
+Train Epoch: 12 [0/5600 (0%)]	Average loss: 0.003714
+
+Test set: Average loss: 0.0084, Accuracy: 635/800 (79%)
+
+Train Epoch: 13 [0/5600 (0%)]	Average loss: 0.004538
+
+Test set: Average loss: 0.0097, Accuracy: 608/800 (76%)
+
+Train Epoch: 14 [0/5600 (0%)]	Average loss: 0.004564
+
+Test set: Average loss: 0.0095, Accuracy: 625/800 (78%)
+
+Train Epoch: 15 [0/5600 (0%)]	Average loss: 0.003701
+
+Test set: Average loss: 0.0123, Accuracy: 584/800 (73%)
+
+Train Epoch: 16 [0/5600 (0%)]	Average loss: 0.005230
+
+Test set: Average loss: 0.0093, Accuracy: 641/800 (80%)
+
