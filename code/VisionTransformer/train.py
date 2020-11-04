@@ -129,7 +129,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             drop_rate=args.dropout_p,
             # no input_size in this package
             # input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
-            )
+    )
 
     if FreezePretrained:
         for param in model.parameters():
