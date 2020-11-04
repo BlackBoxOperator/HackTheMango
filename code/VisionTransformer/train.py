@@ -172,15 +172,29 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             transforms.RandomRotation(degrees=(-180,180)),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
-            #transforms.RandomResizedCrop(384, interpolation=2),
-            #transform.ColorJitter(),
             transforms.Resize((size_by_name(model_name), size_by_name(model_name))),
+            transforms.ToTensor(),
+            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
+        ])
+    elif args.augment == 3:
+        transform = transforms.Compose([
+            transforms.RandomResizedCrop(size_by_name(model_name), scale=(0.85, 1.0), interpolation=2),
+            #transforms.ColorJitter(brightness=0.15, contrast=0.15, saturation=0.15, hue=0.15),
+            transforms.RandomRotation(degrees=(-180,180)),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
             transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
         ])
     else:
         print('augmentation type not supported yet')
         exit(0)
+
+    test_transform = transforms.Compose([
+            transforms.Resize((size_by_name(model_name), size_by_name(model_name))),
+            transforms.ToTensor(),
+            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
+        ])
 
     print(' '.join(sys.argv))
     print(args)
@@ -214,7 +228,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     test_set = Mango_dataset(
             os.path.join(data_path,DEV_CSV),
             os.path.join(data_path,DEV_DIR),
-            transform, args.crop)
+            test_transform, args.crop)
 
     test_loader = torch.utils.data.DataLoader(
             test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
