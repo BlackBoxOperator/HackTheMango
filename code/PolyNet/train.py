@@ -67,6 +67,11 @@ elif args.dataset == 'c1p2':
     DEV_DIR = "Dev"
     TRAIN_CSV = "train.csv"
     TRAIN_DIR = "Train"
+elif args.dataset == 'final':
+    DEV_CSV = "new_valid0.csv"
+    DEV_DIR = "Train"
+    TRAIN_CSV = "new_train.csv"
+    TRAIN_DIR = "Train"
 else:
     print("dataset not supported yet")
     exit(0)
@@ -309,9 +314,9 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
 
     for epoch in range(1, args.epochs + 1):
         # Decay Learning Rate
-        scheduler.step(epoch)
         train(model, epoch, optimizer, train_loader)
         test(model, test_loader)
+        scheduler.step()
         with open(os.path.join(w_dir, "weight_{}".format(epoch)), "wb") as f:
             torch.save(model.state_dict(), f)
 

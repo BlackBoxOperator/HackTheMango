@@ -51,5 +51,12 @@
 # ================= lwlr =================
 
 # most proper
-python train.py --model-name vit_large_patch32_384 --epochs 12 --lr 0.00001 --batch-size 16 --augment 2 --finetune 1 --weight-name vit_large_patch32_384_0w | tee vit_large_patch32_384_0.txt
-python train.py --model-name vit_large_patch32_384 --epochs 12 --lr 0.00001 --batch-size 12 --augment 2 --finetune 2 --weight-name vit_large_patch32_384_1w | tee vit_large_patch32_384_1.txt
+#python train.py --model-name vit_large_patch32_384 --epochs 12 --lr 0.00001 --batch-size 16 --augment 2 --finetune 1 --weight-name vit_large_patch32_384_0w | tee vit_large_patch32_384_0.txt
+#python train.py --model-name vit_large_patch32_384 --epochs 12 --lr 0.00001 --batch-size 12 --augment 2 --finetune 2 --weight-name vit_large_patch32_384_1w | tee vit_large_patch32_384_1.txt
+
+
+# ==== final training ===
+python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.00002 --batch-size 16 --augment 2 --finetune 1 --dataset final --weight-name vitfinal1w | tee vitfinal1.txt
+python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.00002 --batch-size 16 --augment 2 --finetune 2 --dataset final --weight-name vitfinal2w | tee vitfinal2.txt
+python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.00002 --batch-size 16 --augment 2 --finetune 3 --dataset final --weight-name vitfinal3w | tee vitfinal3.txt
+python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.00002 --batch-size 16 --augment 2 --finetune 4 --dataset final --weight-name vitfinal4w | tee vitfinal4.txt
