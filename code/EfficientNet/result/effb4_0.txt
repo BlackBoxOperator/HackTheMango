@@ -1,0 +1,63 @@
+image size is: 224
+train.py --model-name tf_efficientnet_b4 --epochs 12 --lr 0.00001 --batch-size 32 --augment 2 --finetune 1 --weight-name effb4_0w
+Namespace(augment=2, batch_size=32, classes=3, crop=False, dataset='c1p1', dropout_p=0.2, epochs=12, finetune=1, freeze=False, log_interval=100, lr=1e-05, model_name='tf_efficientnet_b4', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64, weight_name='effb4_0w')
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.034439
+Train Epoch: 1 [3200/5600 (57%)]	Average loss: 0.033758
+
+Test set: Average loss: 0.0250, Accuracy: 550/800 (69%)
+
+Train Epoch: 2 [0/5600 (0%)]	Average loss: 0.025930
+Train Epoch: 2 [3200/5600 (57%)]	Average loss: 0.021629
+
+Test set: Average loss: 0.0182, Accuracy: 604/800 (76%)
+
+Train Epoch: 3 [0/5600 (0%)]	Average loss: 0.014282
+Train Epoch: 3 [3200/5600 (57%)]	Average loss: 0.017930
+
+Test set: Average loss: 0.0165, Accuracy: 621/800 (78%)
+
+Train Epoch: 4 [0/5600 (0%)]	Average loss: 0.016576
+Train Epoch: 4 [3200/5600 (57%)]	Average loss: 0.016941
+
+Test set: Average loss: 0.0158, Accuracy: 623/800 (78%)
+
+Train Epoch: 5 [0/5600 (0%)]	Average loss: 0.015124
+Train Epoch: 5 [3200/5600 (57%)]	Average loss: 0.016427
+
+Test set: Average loss: 0.0154, Accuracy: 634/800 (79%)
+
+Train Epoch: 6 [0/5600 (0%)]	Average loss: 0.021075
+Train Epoch: 6 [3200/5600 (57%)]	Average loss: 0.015710
+
+Test set: Average loss: 0.0149, Accuracy: 651/800 (81%)
+
+Train Epoch: 7 [0/5600 (0%)]	Average loss: 0.013420
+Train Epoch: 7 [3200/5600 (57%)]	Average loss: 0.015018
+
+Test set: Average loss: 0.0147, Accuracy: 641/800 (80%)
+
+Train Epoch: 8 [0/5600 (0%)]	Average loss: 0.014538
+Train Epoch: 8 [3200/5600 (57%)]	Average loss: 0.015088
+
+Test set: Average loss: 0.0145, Accuracy: 626/800 (78%)
+
+Train Epoch: 9 [0/5600 (0%)]	Average loss: 0.018195
+Train Epoch: 9 [3200/5600 (57%)]	Average loss: 0.014481
+
+Test set: Average loss: 0.0142, Accuracy: 639/800 (80%)
+
+Train Epoch: 10 [0/5600 (0%)]	Average loss: 0.017274
+Train Epoch: 10 [3200/5600 (57%)]	Average loss: 0.014125
+
+Test set: Average loss: 0.0140, Accuracy: 646/800 (81%)
+
+Train Epoch: 11 [0/5600 (0%)]	Average loss: 0.012860
+Train Epoch: 11 [3200/5600 (57%)]	Average loss: 0.014030
+
+Test set: Average loss: 0.0140, Accuracy: 636/800 (80%)
+
+Train Epoch: 12 [0/5600 (0%)]	Average loss: 0.015314
+Train Epoch: 12 [3200/5600 (57%)]	Average loss: 0.013760
+
+Test set: Average loss: 0.0138, Accuracy: 639/800 (80%)
+

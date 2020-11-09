@@ -1,0 +1,4 @@
+image size is: 224
+train.py --model-name tf_efficientnet_b5 --epochs 12 --lr 0.00001 --batch-size 24 --augment 2 --finetune 2 --weight-name effb5_1w
+Namespace(augment=2, batch_size=24, classes=3, crop=False, dataset='c1p1', dropout_p=0.2, epochs=12, finetune=2, freeze=False, log_interval=100, lr=1e-05, model_name='tf_efficientnet_b5', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64, weight_name='effb5_1w')
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.045721

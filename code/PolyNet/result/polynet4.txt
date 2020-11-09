@@ -1,0 +1,83 @@
+image size is: 224
+train.py --batch-size 28 --finetune 3 --augment 2 --lr 0.00001 --epochs 16 --weight-name polynet4w
+Namespace(augment=2, batch_size=28, classes=3, crop=False, dataset='c1p1', dropout_p=0.2, epochs=16, finetune=3, freeze=False, log_interval=100, lr=1e-05, model_name='polynet', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64, weight_name='polynet4w')
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.038000
+Train Epoch: 1 [2800/5600 (50%)]	Average loss: 0.025623
+
+Test set: Average loss: 0.0351, Accuracy: 619/800 (77%)
+
+Train Epoch: 2 [0/5600 (0%)]	Average loss: 0.019697
+Train Epoch: 2 [2800/5600 (50%)]	Average loss: 0.017963
+
+Test set: Average loss: 0.0162, Accuracy: 649/800 (81%)
+
+Train Epoch: 3 [0/5600 (0%)]	Average loss: 0.011775
+Train Epoch: 3 [2800/5600 (50%)]	Average loss: 0.015527
+
+Test set: Average loss: 0.0192, Accuracy: 641/800 (80%)
+
+Train Epoch: 4 [0/5600 (0%)]	Average loss: 0.010949
+Train Epoch: 4 [2800/5600 (50%)]	Average loss: 0.014911
+
+Test set: Average loss: 0.0162, Accuracy: 653/800 (82%)
+
+Train Epoch: 5 [0/5600 (0%)]	Average loss: 0.017151
+Train Epoch: 5 [2800/5600 (50%)]	Average loss: 0.013864
+
+Test set: Average loss: 0.0172, Accuracy: 640/800 (80%)
+
+Train Epoch: 6 [0/5600 (0%)]	Average loss: 0.021195
+Train Epoch: 6 [2800/5600 (50%)]	Average loss: 0.012508
+
+Test set: Average loss: 0.0171, Accuracy: 647/800 (81%)
+
+Train Epoch: 7 [0/5600 (0%)]	Average loss: 0.011563
+Train Epoch: 7 [2800/5600 (50%)]	Average loss: 0.011256
+
+Test set: Average loss: 0.0165, Accuracy: 661/800 (83%)
+
+Train Epoch: 8 [0/5600 (0%)]	Average loss: 0.015745
+Train Epoch: 8 [2800/5600 (50%)]	Average loss: 0.010139
+
+Test set: Average loss: 0.0183, Accuracy: 652/800 (82%)
+
+Train Epoch: 9 [0/5600 (0%)]	Average loss: 0.010012
+Train Epoch: 9 [2800/5600 (50%)]	Average loss: 0.008911
+
+Test set: Average loss: 0.0182, Accuracy: 660/800 (82%)
+
+Train Epoch: 10 [0/5600 (0%)]	Average loss: 0.009942
+Train Epoch: 10 [2800/5600 (50%)]	Average loss: 0.008058
+
+Test set: Average loss: 0.0188, Accuracy: 646/800 (81%)
+
+Train Epoch: 11 [0/5600 (0%)]	Average loss: 0.005275
+Train Epoch: 11 [2800/5600 (50%)]	Average loss: 0.006619
+
+Test set: Average loss: 0.0191, Accuracy: 647/800 (81%)
+
+Train Epoch: 12 [0/5600 (0%)]	Average loss: 0.005122
+Train Epoch: 12 [2800/5600 (50%)]	Average loss: 0.006765
+
+Test set: Average loss: 0.0221, Accuracy: 636/800 (80%)
+
+Train Epoch: 13 [0/5600 (0%)]	Average loss: 0.006832
+Train Epoch: 13 [2800/5600 (50%)]	Average loss: 0.006370
+
+Test set: Average loss: 0.0230, Accuracy: 641/800 (80%)
+
+Train Epoch: 14 [0/5600 (0%)]	Average loss: 0.004224
+Train Epoch: 14 [2800/5600 (50%)]	Average loss: 0.005462
+
+Test set: Average loss: 0.0262, Accuracy: 623/800 (78%)
+
+Train Epoch: 15 [0/5600 (0%)]	Average loss: 0.001932
+Train Epoch: 15 [2800/5600 (50%)]	Average loss: 0.004775
+
+Test set: Average loss: 0.0242, Accuracy: 647/800 (81%)
+
+Train Epoch: 16 [0/5600 (0%)]	Average loss: 0.003806
+Train Epoch: 16 [2800/5600 (50%)]	Average loss: 0.004079
+
+Test set: Average loss: 0.0257, Accuracy: 636/800 (80%)
+

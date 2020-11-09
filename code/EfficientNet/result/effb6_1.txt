@@ -1,0 +1,87 @@
+image size is: 224
+train.py --model-name tf_efficientnet_b6 --epochs 12 --lr 0.00001 --batch-size 16 --augment 2 --finetune 2 --weight-name effb6_1w
+Namespace(augment=2, batch_size=16, classes=3, crop=False, dataset='c1p1', dropout_p=0.2, epochs=12, finetune=2, freeze=False, log_interval=100, lr=1e-05, model_name='tf_efficientnet_b6', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64, weight_name='effb6_1w')
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.068497
+Train Epoch: 1 [1600/5600 (29%)]	Average loss: 0.067665
+Train Epoch: 1 [3200/5600 (57%)]	Average loss: 0.060483
+Train Epoch: 1 [4800/5600 (86%)]	Average loss: 0.054164
+
+Test set: Average loss: 0.0384, Accuracy: 579/800 (72%)
+
+Train Epoch: 2 [0/5600 (0%)]	Average loss: 0.040743
+Train Epoch: 2 [1600/5600 (29%)]	Average loss: 0.039119
+Train Epoch: 2 [3200/5600 (57%)]	Average loss: 0.038669
+Train Epoch: 2 [4800/5600 (86%)]	Average loss: 0.038449
+
+Test set: Average loss: 0.0340, Accuracy: 607/800 (76%)
+
+Train Epoch: 3 [0/5600 (0%)]	Average loss: 0.030690
+Train Epoch: 3 [1600/5600 (29%)]	Average loss: 0.035407
+Train Epoch: 3 [3200/5600 (57%)]	Average loss: 0.035502
+Train Epoch: 3 [4800/5600 (86%)]	Average loss: 0.035909
+
+Test set: Average loss: 0.0321, Accuracy: 629/800 (79%)
+
+Train Epoch: 4 [0/5600 (0%)]	Average loss: 0.052058
+Train Epoch: 4 [1600/5600 (29%)]	Average loss: 0.033486
+Train Epoch: 4 [3200/5600 (57%)]	Average loss: 0.034483
+Train Epoch: 4 [4800/5600 (86%)]	Average loss: 0.034102
+
+Test set: Average loss: 0.0312, Accuracy: 635/800 (79%)
+
+Train Epoch: 5 [0/5600 (0%)]	Average loss: 0.036913
+Train Epoch: 5 [1600/5600 (29%)]	Average loss: 0.034388
+Train Epoch: 5 [3200/5600 (57%)]	Average loss: 0.033705
+Train Epoch: 5 [4800/5600 (86%)]	Average loss: 0.033398
+
+Test set: Average loss: 0.0308, Accuracy: 636/800 (80%)
+
+Train Epoch: 6 [0/5600 (0%)]	Average loss: 0.036341
+Train Epoch: 6 [1600/5600 (29%)]	Average loss: 0.030505
+Train Epoch: 6 [3200/5600 (57%)]	Average loss: 0.031399
+Train Epoch: 6 [4800/5600 (86%)]	Average loss: 0.032008
+
+Test set: Average loss: 0.0307, Accuracy: 632/800 (79%)
+
+Train Epoch: 7 [0/5600 (0%)]	Average loss: 0.039809
+Train Epoch: 7 [1600/5600 (29%)]	Average loss: 0.029982
+Train Epoch: 7 [3200/5600 (57%)]	Average loss: 0.030636
+Train Epoch: 7 [4800/5600 (86%)]	Average loss: 0.030552
+
+Test set: Average loss: 0.0306, Accuracy: 634/800 (79%)
+
+Train Epoch: 8 [0/5600 (0%)]	Average loss: 0.018822
+Train Epoch: 8 [1600/5600 (29%)]	Average loss: 0.028969
+Train Epoch: 8 [3200/5600 (57%)]	Average loss: 0.029677
+Train Epoch: 8 [4800/5600 (86%)]	Average loss: 0.029526
+
+Test set: Average loss: 0.0295, Accuracy: 646/800 (81%)
+
+Train Epoch: 9 [0/5600 (0%)]	Average loss: 0.039831
+Train Epoch: 9 [1600/5600 (29%)]	Average loss: 0.028225
+Train Epoch: 9 [3200/5600 (57%)]	Average loss: 0.027843
+Train Epoch: 9 [4800/5600 (86%)]	Average loss: 0.028258
+
+Test set: Average loss: 0.0294, Accuracy: 648/800 (81%)
+
+Train Epoch: 10 [0/5600 (0%)]	Average loss: 0.034718
+Train Epoch: 10 [1600/5600 (29%)]	Average loss: 0.029815
+Train Epoch: 10 [3200/5600 (57%)]	Average loss: 0.028354
+Train Epoch: 10 [4800/5600 (86%)]	Average loss: 0.028082
+
+Test set: Average loss: 0.0285, Accuracy: 648/800 (81%)
+
+Train Epoch: 11 [0/5600 (0%)]	Average loss: 0.023204
+Train Epoch: 11 [1600/5600 (29%)]	Average loss: 0.026787
+Train Epoch: 11 [3200/5600 (57%)]	Average loss: 0.027732
+Train Epoch: 11 [4800/5600 (86%)]	Average loss: 0.027350
+
+Test set: Average loss: 0.0282, Accuracy: 643/800 (80%)
+
+Train Epoch: 12 [0/5600 (0%)]	Average loss: 0.022488
+Train Epoch: 12 [1600/5600 (29%)]	Average loss: 0.026119
+Train Epoch: 12 [3200/5600 (57%)]	Average loss: 0.025481
+Train Epoch: 12 [4800/5600 (86%)]	Average loss: 0.026017
+
+Test set: Average loss: 0.0282, Accuracy: 640/800 (80%)
+

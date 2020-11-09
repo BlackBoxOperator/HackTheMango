@@ -1,0 +1,11 @@
+image size is: 224
+train.py --model-name tf_efficientnet_b7 --epochs 12 --lr 0.00001 --batch-size 13 --augment 2 --finetune 1 --weight-name effb7_0w
+Namespace(augment=2, batch_size=13, classes=3, crop=False, dataset='c1p1', dropout_p=0.2, epochs=12, finetune=1, freeze=False, log_interval=100, lr=1e-05, model_name='tf_efficientnet_b7', momentum=0.9, no_cuda=False, seed=1, test_batch_size=64, weight_name='effb7_0w')
+Train Epoch: 1 [0/5600 (0%)]	Average loss: 0.083964
+Train Epoch: 1 [1300/5600 (23%)]	Average loss: 0.083283
+Train Epoch: 1 [2600/5600 (46%)]	Average loss: 0.081236
+Train Epoch: 1 [3900/5600 (70%)]	Average loss: 0.074728
+Train Epoch: 1 [5200/5600 (93%)]	Average loss: 0.069259
+
+Test set: Average loss: 0.0496, Accuracy: 573/800 (72%)
+

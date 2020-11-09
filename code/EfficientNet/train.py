@@ -13,8 +13,7 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
 
-import os, sys
-from cnn_finetune import make_model
+import timm, os, sys
 from data import Mango_dataset
 
 parser = argparse.ArgumentParser(description='cnn_finetune cifar 10 example')
@@ -40,10 +39,10 @@ parser.add_argument('--augment', type=int, default=2, metavar='S',
                     help='augment type (default: 2)')
 parser.add_argument('--log-interval', type=int, default=100, metavar='N',
                     help='how many batches to wait before logging training status')
-parser.add_argument('--model-name', type=str, default='polynet', metavar='M',
-                    help='model name (default: polynet)')
-parser.add_argument('--weight-name', type=str, default='polynetw', metavar='M',
-                    help='weight name (default: polynetw)')
+parser.add_argument('--model-name', type=str, default='tf_efficientnet_b8', metavar='M',
+                    help='model name (default: tf_efficientnet_b8)')
+parser.add_argument('--weight-name', type=str, default='tf_efficientnet_b8w', metavar='M',
+                    help='weight name (default: tf_efficientnet_b8w)')
 parser.add_argument('--dropout-p', type=float, default=0.2, metavar='D',
                     help='Dropout probability (default: 0.2)')
 parser.add_argument('--dataset', type=str, default='c1p1', metavar='M',
@@ -126,71 +125,41 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     if model_name == 'alexnet':
         raise ValueError('The input size of the CIFAR-10 data set (32x32) is too small for AlexNet')
 
-    make_classifier = None
-
-    if args.finetune:
-        if args.finetune == 1:
-            def _make_classifier(in_features, num_classes):
-                return  nn.Sequential(
-                    nn.Linear(in_features, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, num_classes)
-                )
-            make_classifier = _make_classifier
-        elif args.finetune == 2:
-            def _make_classifier(in_features, num_classes):
-                return  nn.Sequential(
-                    nn.Linear(in_features, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, num_classes)
-                )
-            make_classifier = _make_classifier
-        elif args.finetune == 3:
-            def _make_classifier(in_features, num_classes):
-                return  nn.Sequential(
-                    nn.Linear(in_features, 2048),
-                    nn.ReLU(),
-                    nn.Linear(2048, 2048),
-                    nn.ReLU(),
-                    nn.Linear(2048, num_classes)
-                )
-            make_classifier = _make_classifier
-        elif args.finetune == 4:
-            def _make_classifier(in_features, num_classes):
-                return  nn.Sequential(
-                    nn.Linear(in_features, 2048),
-                    nn.ReLU(),
-                    nn.Linear(2048, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, 4096),
-                    nn.ReLU(),
-                    nn.Linear(4096, num_classes)
-                )
-            make_classifier = _make_classifier
-        else:
-            print("finetune type not supported yet")
-            exit(0)
-
-    model = make_model(
-        model_name,
-        pretrained=True,
-        num_classes=args.classes,
-        dropout_p=args.dropout_p,
-        classifier_factory=make_classifier,
-        input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
+    model = timm.create_model(
+            model_name,
+            pretrained=True,
+            num_classes=args.classes,
+            drop_rate=args.dropout_p,
+            # no input_size in this package
+            # input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
     )
 
     if FreezePretrained:
         for param in model.parameters():
-            param.requires_grad = False 
+            param.requires_grad = False
+
+    if args.finetune:
+        if args.finetune == 1:
+            model.classifier = nn.Sequential(
+                    nn.Linear(model.classifier.in_features, 2048),
+                    nn.ReLU(),
+                    nn.Linear(2048, 2048),
+                    nn.ReLU(),
+                    nn.Linear(2048, model.classifier.out_features)
+                )
+        elif args.finetune == 2:
+            model.classifier = nn.Sequential(
+                    nn.Linear(model.classifier.in_features, 4096),
+                    nn.ReLU(),
+                    nn.Linear(4096, 4096),
+                    nn.ReLU(),
+                    nn.Linear(4096, 4096),
+                    nn.ReLU(),
+                    nn.Linear(4096, model.classifier.out_features)
+                )
+        else:
+            print("finetune type {} not supported yet".format(args.finetune))
+            exit(0)
 
 
     model = model.to(device)
@@ -209,49 +178,36 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                 transforms.RandomResizedCrop(384, interpolation=2),
                 transforms.RandomRotation(degrees=(-180,180)),
                 transforms.ToTensor(),
-                #transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
-                transforms.Normalize(
-                    mean=model.original_model_info.mean,
-                    std=model.original_model_info.std),
+                transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
             ])
     elif args.augment == 2:
         transform = transforms.Compose([
             transforms.RandomRotation(degrees=(-180,180)),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
-            transforms.Resize((size_by_name(model_name, 224), size_by_name(model_name, 224))),
+            transforms.Resize((size_by_name(model_name), size_by_name(model_name))),
             transforms.ToTensor(),
-            #transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
-            transforms.Normalize(
-                    mean=model.original_model_info.mean,
-                    std=model.original_model_info.std),
+            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
         ])
     elif args.augment == 3:
         transform = transforms.Compose([
-            transforms.RandomResizedCrop(size_by_name(model_name, 224), scale=(0.85, 1.0), interpolation=2),
+            transforms.RandomResizedCrop(size_by_name(model_name), scale=(0.85, 1.0), interpolation=2),
             #transforms.ColorJitter(brightness=0.15, contrast=0.15, saturation=0.15, hue=0.15),
             transforms.RandomRotation(degrees=(-180,180)),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            #transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
-            transforms.Normalize(
-                    mean=model.original_model_info.mean,
-                    std=model.original_model_info.std),
+            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
         ])
     else:
         print('augmentation type not supported yet')
         exit(0)
 
     print("image size is: {}".format(size_by_name(model_name, 224)))
-
     test_transform = transforms.Compose([
-            transforms.Resize((size_by_name(model_name, 224), size_by_name(model_name, 224))),
+            transforms.Resize((size_by_name(model_name), size_by_name(model_name))),
             transforms.ToTensor(),
-            #transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
-            transforms.Normalize(
-                    mean=model.original_model_info.mean,
-                    std=model.original_model_info.std),
+            transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
         ])
 
     print(' '.join(sys.argv))

@@ -41,6 +41,8 @@ parser.add_argument('--log-interval', type=int, default=100, metavar='N',
                     help='how many batches to wait before logging training status')
 parser.add_argument('--model-name', type=str, default='vit_large_patch32_384', metavar='M',
                     help='model name (default: vit_large_patch32_384)')
+parser.add_argument('--weight-name', type=str, default='vit_large_patch32_384w', metavar='M',
+                    help='weight name (default: vit_large_patch32_384w)')
 parser.add_argument('--dropout-p', type=float, default=0.2, metavar='D',
                     help='Dropout probability (default: 0.2)')
 parser.add_argument('--dataset', type=str, default='c1p1', metavar='M',
@@ -131,6 +133,8 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             # input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
     )
 
+    return model
+
     if FreezePretrained:
         for param in model.parameters():
             param.requires_grad = False
@@ -143,6 +147,16 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                     nn.Linear(2048, 2048),
                     nn.ReLU(),
                     nn.Linear(2048, model.head.out_features)
+                )
+        elif args.finetune == 2:
+            model.head = nn.Sequential(
+                    nn.Linear(model.head.in_features, 4096),
+                    nn.ReLU(),
+                    nn.Linear(4096, 4096),
+                    nn.ReLU(),
+                    nn.Linear(4096, 4096),
+                    nn.ReLU(),
+                    nn.Linear(4096, model.head.out_features)
                 )
         else:
             print("finetune type not supported yet")
@@ -243,7 +257,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.975)
 
     # Train
-    w_dir = '{}w'.format(model_name)
+    w_dir = '{}w'.format(model_name) if not args.weight_name else args.weight_name
     if not os.path.exists(w_dir):
         os.makedirs(w_dir)
 
@@ -257,4 +271,4 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
 
 
 if __name__ == '__main__':
-    main()
+    m = main()
