@@ -6,6 +6,7 @@ Based on:
 
 import argparse
 
+from tqdm import tqdm
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -135,14 +136,16 @@ def predict(model, pred_loader, criterion=nn.CrossEntropyLoss(), classes=['A', '
     test_loss = 0
     correct = 0
     df = pd.read_csv(os.path.join('..', '..', args.dataset, args.pred_csv))
+    df = df.astype({'label': str})
     with torch.no_grad():
-        for data, index in pred_loader:
+        for data, index in tqdm(pred_loader):
             data = data.to(device)
-            output = model(data)
-            pred = output.data.max(1, keepdim=True)[1]
+            outputs = model(data)
+            pred = outputs.data.max(1, keepdim=True)[1]
             pred = pred.cpu()
-            df['label'][index] = classes[pred[0]]
-
+            index = index.cpu().numpy()
+            for idx, p in zip(index, pred):
+                df.at[idx, 'label'] = classes[p]
     df.to_csv(args.out_csv, header=True, index=False)
 
 def size_by_name(name, default = 256):
@@ -317,7 +320,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                 os.path.join(data_path,args.pred_dir),
                 test_transform)
             pred_loader = torch.utils.data.DataLoader(
-                pred_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
+                pred_set, batch_size=64, shuffle=False, num_workers=2)
             predict(model, pred_loader)
         elif args.test_csv:
             if args.epochs != 100:
