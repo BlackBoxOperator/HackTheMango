@@ -49,6 +49,10 @@ parser.add_argument('--pred-csv', type=str, default=None, metavar='M',
                     help='path of csv to predict (default: None)')
 parser.add_argument('--pred-dir', type=str, default=None, metavar='M',
                     help='path of directory to predict (default: None)')
+parser.add_argument('--test-csv', type=str, default=None, metavar='M',
+                    help='path of csv to test (default: None)')
+parser.add_argument('--test-dir', type=str, default=None, metavar='M',
+                    help='path of directory to test (default: None)')
 parser.add_argument('--dropout-p', type=float, default=0.2, metavar='D',
                     help='Dropout probability (default: 0.2)')
 parser.add_argument('--dataset', type=str, default='c1p1', metavar='M',
@@ -301,14 +305,24 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.9)
 
     if args.load:
-        model.load_state_dict(torch.load(args.load))
-        pred_set = Eval_dataset(
-            os.path.join(data_path,args.pred_csv),
-            os.path.join(data_path,args.pred_dir),
-            test_transform)
-        pred_loader = torch.utils.data.DataLoader(
-            pred_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
-        predict(model, pred_loader)
+        if args.pred_csv:
+            model.load_state_dict(torch.load(args.load))
+            pred_set = Eval_dataset(
+                os.path.join(data_path,args.pred_csv),
+                os.path.join(data_path,args.pred_dir),
+                test_transform)
+            pred_loader = torch.utils.data.DataLoader(
+                pred_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
+            predict(model, pred_loader)
+        elif args.test_csv:
+            model.load_state_dict(torch.load(args.load))
+            test_set = Mango_dataset(
+                os.path.join(data_path,args.test_csv),
+                os.path.join(data_path,args.test_dir),
+                test_transform)
+            test_loader = torch.utils.data.DataLoader(
+                test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
+            test(model, test_loader)
         return
 
     # Train
