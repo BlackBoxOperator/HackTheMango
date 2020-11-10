@@ -2,7 +2,7 @@ image_id,label
 00008.jpg,C
 00017.jpg,C
 00018.jpg,C
-00023.jpg,C
+00023.jpg,A
 00024.jpg,A
 00031.jpg,A
 00046.jpg,A
@@ -44,11 +44,11 @@ image_id,label
 00277.jpg,A
 00283.jpg,C
 00292.jpg,A
-00297.jpg,A
+00297.jpg,C
 00298.jpg,A
 00308.jpg,C
 00316.jpg,A
-00337.jpg,A
+00337.jpg,B
 00343.jpg,A
 00345.jpg,A
 00346.jpg,A
@@ -105,7 +105,7 @@ image_id,label
 00749.jpg,B
 00750.jpg,C
 00776.jpg,A
-00783.jpg,C
+00783.jpg,A
 00789.jpg,A
 00790.jpg,A
 00804.jpg,A
@@ -227,7 +227,7 @@ image_id,label
 01830.jpg,A
 01844.jpg,A
 01852.jpg,A
-01859.jpg,B
+01859.jpg,A
 01862.jpg,A
 01868.jpg,A
 01870.jpg,A
@@ -257,7 +257,7 @@ image_id,label
 02047.jpg,A
 02048.jpg,A
 02054.jpg,B
-02056.jpg,C
+02056.jpg,A
 02057.jpg,A
 02063.jpg,A
 02069.jpg,A
@@ -280,7 +280,7 @@ image_id,label
 02214.jpg,A
 02230.jpg,B
 02262.jpg,A
-02285.jpg,C
+02285.jpg,B
 02318.jpg,A
 02346.jpg,A
 02363.jpg,A
@@ -305,7 +305,7 @@ image_id,label
 02510.jpg,A
 02515.jpg,A
 02517.jpg,A
-02519.jpg,C
+02519.jpg,A
 02521.jpg,C
 02525.jpg,A
 02559.jpg,A
@@ -357,7 +357,7 @@ image_id,label
 02905.jpg,A
 02909.jpg,A
 02919.jpg,A
-02920.jpg,B
+02920.jpg,C
 02924.jpg,A
 02930.jpg,C
 02931.jpg,A
@@ -379,7 +379,7 @@ image_id,label
 03098.jpg,C
 03103.jpg,C
 03106.jpg,A
-03110.jpg,C
+03110.jpg,A
 03116.jpg,A
 03120.jpg,A
 03122.jpg,A
@@ -394,7 +394,7 @@ image_id,label
 03198.jpg,A
 03199.jpg,A
 03203.jpg,C
-03211.jpg,C
+03211.jpg,A
 03212.jpg,C
 03216.jpg,A
 03221.jpg,A
@@ -416,7 +416,7 @@ image_id,label
 03328.jpg,A
 03329.jpg,C
 03338.jpg,A
-03351.jpg,B
+03351.jpg,C
 03352.jpg,A
 03353.jpg,A
 03354.jpg,A
@@ -443,7 +443,7 @@ image_id,label
 03491.jpg,A
 03497.jpg,A
 03504.jpg,A
-03518.jpg,C
+03518.jpg,B
 03519.jpg,A
 03521.jpg,A
 03522.jpg,A
@@ -457,7 +457,7 @@ image_id,label
 03571.jpg,A
 03576.jpg,B
 03599.jpg,C
-03605.jpg,A
+03605.jpg,B
 03610.jpg,A
 03612.jpg,A
 03615.jpg,B
@@ -513,14 +513,14 @@ image_id,label
 03980.jpg,A
 03995.jpg,C
 04002.jpg,A
-04017.jpg,C
-04024.jpg,A
+04017.jpg,B
+04024.jpg,B
 04028.jpg,B
 04035.jpg,A
 04038.jpg,A
 04039.jpg,A
 04066.jpg,A
-04073.jpg,A
+04073.jpg,B
 04115.jpg,B
 04117.jpg,B
 04128.jpg,A
@@ -597,7 +597,7 @@ image_id,label
 04676.jpg,A
 04680.jpg,C
 04681.jpg,A
-04686.jpg,A
+04686.jpg,B
 04687.jpg,A
 04690.jpg,A
 04694.jpg,A
@@ -714,7 +714,7 @@ image_id,label
 05527.jpg,A
 05530.jpg,A
 05534.jpg,A
-05548.jpg,C
+05548.jpg,A
 05555.jpg,A
 05557.jpg,A
 05559.jpg,C
@@ -732,9 +732,9 @@ image_id,label
 05677.jpg,A
 05683.jpg,A
 05692.jpg,A
-05710.jpg,A
+05710.jpg,C
 05711.jpg,C
-05712.jpg,B
+05712.jpg,C
 05716.jpg,C
 05721.jpg,A
 05724.jpg,A
@@ -764,12 +764,12 @@ image_id,label
 05877.jpg,A
 05882.jpg,C
 05885.jpg,A
-05896.jpg,C
+05896.jpg,B
 05898.jpg,C
 05905.jpg,A
 05915.jpg,A
 05918.jpg,A
-05936.jpg,C
+05936.jpg,B
 05939.jpg,A
 05940.jpg,A
 05957.jpg,A
@@ -784,7 +784,7 @@ image_id,label
 06026.jpg,A
 06028.jpg,A
 06029.jpg,A
-06041.jpg,B
+06041.jpg,A
 06051.jpg,C
 06061.jpg,A
 06064.jpg,A
@@ -820,7 +820,7 @@ image_id,label
 06250.jpg,A
 06262.jpg,A
 06272.jpg,A
-06273.jpg,B
+06273.jpg,C
 06278.jpg,A
 06280.jpg,A
 06287.jpg,A
@@ -830,7 +830,7 @@ image_id,label
 06308.jpg,A
 06309.jpg,A
 06316.jpg,A
-06331.jpg,C
+06331.jpg,A
 06342.jpg,A
 06346.jpg,A
 06358.jpg,C
@@ -847,7 +847,7 @@ image_id,label
 06482.jpg,A
 06487.jpg,A
 06500.jpg,A
-06511.jpg,C
+06511.jpg,A
 06521.jpg,A
 06522.jpg,A
 06548.jpg,A
@@ -862,13 +862,13 @@ image_id,label
 06580.jpg,A
 06589.jpg,A
 06604.jpg,A
-06621.jpg,C
+06621.jpg,A
 06622.jpg,A
 06637.jpg,A
 06641.jpg,C
 06644.jpg,A
 06659.jpg,A
-06664.jpg,B
+06664.jpg,A
 06667.jpg,C
 06669.jpg,A
 06670.jpg,A
@@ -911,7 +911,7 @@ image_id,label
 07013.jpg,C
 07024.jpg,A
 07028.jpg,A
-07029.jpg,A
+07029.jpg,C
 07032.jpg,A
 07057.jpg,A
 07063.jpg,B
@@ -931,7 +931,7 @@ image_id,label
 07156.jpg,A
 07167.jpg,A
 07181.jpg,A
-07192.jpg,C
+07192.jpg,A
 07215.jpg,A
 07226.jpg,A
 07230.jpg,A
@@ -972,7 +972,7 @@ image_id,label
 07518.jpg,A
 07519.jpg,A
 07534.jpg,A
-07536.jpg,A
+07536.jpg,B
 07546.jpg,A
 07548.jpg,A
 07555.jpg,A
@@ -1019,21 +1019,21 @@ image_id,label
 07781.jpg,A
 07783.jpg,A
 07784.jpg,A
-07818.jpg,A
+07818.jpg,C
 07822.jpg,A
 07824.jpg,A
 07825.jpg,A
 07838.jpg,A
 07845.jpg,A
 07862.jpg,B
-07868.jpg,C
+07868.jpg,A
 07869.jpg,A
 07874.jpg,B
-07876.jpg,B
-07900.jpg,A
+07876.jpg,A
+07900.jpg,B
 07912.jpg,A
 07917.jpg,A
-07934.jpg,C
+07934.jpg,A
 07948.jpg,C
 07953.jpg,A
 07955.jpg,A
@@ -1048,7 +1048,7 @@ image_id,label
 08032.jpg,C
 08036.jpg,A
 08049.jpg,C
-08059.jpg,C
+08059.jpg,A
 08061.jpg,C
 08064.jpg,C
 08071.jpg,C
@@ -1074,7 +1074,7 @@ image_id,label
 08229.jpg,A
 08230.jpg,A
 08231.jpg,A
-08236.jpg,C
+08236.jpg,A
 08244.jpg,A
 08265.jpg,A
 08270.jpg,A
@@ -1086,7 +1086,7 @@ image_id,label
 08316.jpg,C
 08338.jpg,A
 08354.jpg,A
-08355.jpg,B
+08355.jpg,C
 08364.jpg,A
 08365.jpg,A
 08368.jpg,C
@@ -1111,7 +1111,7 @@ image_id,label
 08561.jpg,A
 08564.jpg,A
 08572.jpg,A
-08582.jpg,A
+08582.jpg,B
 08590.jpg,A
 08591.jpg,A
 08594.jpg,A
@@ -1152,7 +1152,7 @@ image_id,label
 08970.jpg,C
 08975.jpg,A
 08980.jpg,A
-09001.jpg,B
+09001.jpg,C
 09003.jpg,A
 09008.jpg,A
 09009.jpg,A
@@ -1160,12 +1160,12 @@ image_id,label
 09022.jpg,A
 09037.jpg,C
 09044.jpg,A
-09048.jpg,A
+09048.jpg,C
 09058.jpg,A
 09061.jpg,A
 09064.jpg,A
 09065.jpg,A
-09080.jpg,C
+09080.jpg,A
 09085.jpg,C
 09087.jpg,A
 09093.jpg,A
@@ -1181,7 +1181,7 @@ image_id,label
 09173.jpg,C
 09178.jpg,A
 09180.jpg,C
-09183.jpg,C
+09183.jpg,B
 09189.jpg,A
 09193.jpg,A
 09198.jpg,A
@@ -1209,7 +1209,7 @@ image_id,label
 09363.jpg,A
 09372.jpg,A
 09387.jpg,A
-09390.jpg,B
+09390.jpg,C
 09391.jpg,A
 09395.jpg,A
 09396.jpg,C
@@ -1226,7 +1226,7 @@ image_id,label
 09471.jpg,A
 09473.jpg,A
 09476.jpg,A
-09480.jpg,C
+09480.jpg,A
 09481.jpg,A
 09485.jpg,A
 09494.jpg,B
@@ -1265,7 +1265,7 @@ image_id,label
 09689.jpg,B
 09694.jpg,A
 09696.jpg,A
-09700.jpg,C
+09700.jpg,A
 09704.jpg,A
 09717.jpg,A
 09723.jpg,A
@@ -1332,9 +1332,9 @@ image_id,label
 10145.jpg,A
 10147.jpg,A
 10150.jpg,A
-10154.jpg,A
+10154.jpg,C
 10157.jpg,A
-10164.jpg,B
+10164.jpg,A
 10177.jpg,A
 10181.jpg,A
 10190.jpg,A
@@ -1361,7 +1361,7 @@ image_id,label
 10417.jpg,A
 10422.jpg,A
 10428.jpg,A
-10437.jpg,A
+10437.jpg,C
 10439.jpg,A
 10450.jpg,C
 10457.jpg,A
@@ -1375,7 +1375,7 @@ image_id,label
 10545.jpg,B
 10563.jpg,A
 10567.jpg,A
-10585.jpg,C
+10585.jpg,A
 10595.jpg,C
 10604.jpg,A
 10605.jpg,A
@@ -1393,14 +1393,14 @@ image_id,label
 10676.jpg,C
 10679.jpg,C
 10686.jpg,A
-10695.jpg,C
+10695.jpg,B
 10705.jpg,C
 10715.jpg,A
 10718.jpg,B
 10719.jpg,A
 10726.jpg,A
 10736.jpg,A
-10740.jpg,A
+10740.jpg,B
 10742.jpg,A
 10743.jpg,A
 10746.jpg,A
@@ -1503,7 +1503,7 @@ image_id,label
 11559.jpg,C
 11575.jpg,A
 11580.jpg,C
-11611.jpg,C
+11611.jpg,A
 11614.jpg,A
 11623.jpg,A
 11626.jpg,A
@@ -1513,7 +1513,7 @@ image_id,label
 11656.jpg,B
 11663.jpg,A
 11670.jpg,A
-11675.jpg,C
+11675.jpg,B
 11682.jpg,A
 11696.jpg,C
 11701.jpg,B
@@ -1581,7 +1581,7 @@ image_id,label
 12146.jpg,A
 12169.jpg,A
 12170.jpg,A
-12195.jpg,C
+12195.jpg,A
 12200.jpg,A
 12205.jpg,A
 12207.jpg,A
@@ -1605,13 +1605,13 @@ image_id,label
 12337.jpg,A
 12346.jpg,B
 12351.jpg,C
-12360.jpg,B
+12360.jpg,A
 12363.jpg,A
 12380.jpg,A
 12382.jpg,A
 12391.jpg,A
 12409.jpg,A
-12431.jpg,C
+12431.jpg,A
 12433.jpg,A
 12438.jpg,A
 12439.jpg,A
@@ -1634,10 +1634,10 @@ image_id,label
 12593.jpg,A
 12595.jpg,A
 12599.jpg,A
-12603.jpg,A
+12603.jpg,B
 12621.jpg,B
 12628.jpg,A
-12630.jpg,B
+12630.jpg,A
 12656.jpg,B
 12660.jpg,B
 12675.jpg,C
@@ -1657,7 +1657,7 @@ image_id,label
 12752.jpg,B
 12754.jpg,A
 12756.jpg,A
-12757.jpg,C
+12757.jpg,A
 12758.jpg,C
 12761.jpg,C
 12764.jpg,A
@@ -1688,7 +1688,7 @@ image_id,label
 12914.jpg,A
 12925.jpg,A
 12941.jpg,A
-12959.jpg,B
+12959.jpg,C
 12971.jpg,A
 12972.jpg,C
 12974.jpg,B
@@ -1740,7 +1740,7 @@ image_id,label
 13321.jpg,C
 13326.jpg,A
 13336.jpg,A
-13343.jpg,B
+13343.jpg,A
 13372.jpg,A
 13376.jpg,A
 13379.jpg,A
@@ -1763,7 +1763,7 @@ image_id,label
 13482.jpg,A
 13483.jpg,B
 13489.jpg,A
-13491.jpg,C
+13491.jpg,A
 13492.jpg,A
 13493.jpg,A
 13496.jpg,A
@@ -1804,7 +1804,7 @@ image_id,label
 13745.jpg,A
 13748.jpg,A
 13750.jpg,A
-13765.jpg,B
+13765.jpg,C
 13774.jpg,A
 13775.jpg,A
 13781.jpg,A
@@ -1818,7 +1818,7 @@ image_id,label
 13882.jpg,A
 13895.jpg,B
 13898.jpg,A
-13910.jpg,A
+13910.jpg,B
 13916.jpg,A
 13917.jpg,C
 13924.jpg,B
@@ -2010,7 +2010,7 @@ image_id,label
 15245.jpg,A
 15263.jpg,A
 15289.jpg,A
-15290.jpg,A
+15290.jpg,C
 15295.jpg,A
 15299.jpg,C
 15320.jpg,A
@@ -2075,7 +2075,7 @@ image_id,label
 15915.jpg,A
 15916.jpg,B
 15931.jpg,A
-15943.jpg,C
+15943.jpg,B
 15951.jpg,A
 15955.jpg,A
 15964.jpg,A
@@ -2083,7 +2083,7 @@ image_id,label
 16003.jpg,C
 16026.jpg,C
 16036.jpg,C
-16044.jpg,C
+16044.jpg,B
 16055.jpg,A
 16064.jpg,C
 16076.jpg,B
@@ -2106,7 +2106,7 @@ image_id,label
 16215.jpg,C
 16224.jpg,A
 16229.jpg,C
-16250.jpg,B
+16250.jpg,C
 16266.jpg,C
 16278.jpg,C
 16279.jpg,A
@@ -2116,7 +2116,7 @@ image_id,label
 16306.jpg,A
 16318.jpg,A
 16323.jpg,A
-16333.jpg,A
+16333.jpg,B
 16343.jpg,B
 16356.jpg,C
 16361.jpg,A
@@ -2134,7 +2134,7 @@ image_id,label
 16500.jpg,A
 16503.jpg,A
 16506.jpg,A
-16509.jpg,A
+16509.jpg,C
 16512.jpg,A
 16514.jpg,A
 16516.jpg,A
@@ -2159,7 +2159,7 @@ image_id,label
 16637.jpg,A
 16641.jpg,A
 16642.jpg,A
-16647.jpg,A
+16647.jpg,C
 16650.jpg,C
 16682.jpg,A
 16683.jpg,A
@@ -2240,7 +2240,7 @@ image_id,label
 17105.jpg,A
 17109.jpg,A
 17113.jpg,B
-17114.jpg,C
+17114.jpg,A
 17118.jpg,B
 17120.jpg,A
 17122.jpg,A
@@ -2284,7 +2284,7 @@ image_id,label
 17412.jpg,A
 17413.jpg,A
 17420.jpg,A
-17430.jpg,C
+17430.jpg,A
 17433.jpg,A
 17455.jpg,A
 17457.jpg,C
@@ -2324,7 +2324,7 @@ image_id,label
 17714.jpg,A
 17720.jpg,A
 17729.jpg,A
-17738.jpg,C
+17738.jpg,A
 17743.jpg,A
 17748.jpg,A
 17758.jpg,B
@@ -2435,7 +2435,7 @@ image_id,label
 18568.jpg,A
 18598.jpg,A
 18604.jpg,A
-18612.jpg,A
+18612.jpg,B
 18614.jpg,A
 18624.jpg,C
 18634.jpg,C
@@ -2455,7 +2455,7 @@ image_id,label
 18772.jpg,C
 18777.jpg,B
 18786.jpg,A
-18792.jpg,A
+18792.jpg,C
 18799.jpg,A
 18802.jpg,A
 18805.jpg,A
@@ -2502,7 +2502,7 @@ image_id,label
 19065.jpg,A
 19069.jpg,C
 19074.jpg,A
-19080.jpg,B
+19080.jpg,A
 19092.jpg,A
 19098.jpg,A
 19103.jpg,A
@@ -2533,8 +2533,8 @@ image_id,label
 19276.jpg,C
 19277.jpg,B
 19278.jpg,B
-19280.jpg,C
-19289.jpg,C
+19280.jpg,A
+19289.jpg,A
 19295.jpg,A
 19298.jpg,A
 19306.jpg,C
@@ -2543,7 +2543,7 @@ image_id,label
 19327.jpg,A
 19328.jpg,C
 19332.jpg,C
-19340.jpg,A
+19340.jpg,C
 19341.jpg,B
 19342.jpg,B
 19343.jpg,A
@@ -2590,7 +2590,7 @@ image_id,label
 19628.jpg,B
 19634.jpg,A
 19637.jpg,C
-19654.jpg,C
+19654.jpg,B
 19657.jpg,A
 19671.jpg,A
 19676.jpg,A
@@ -2620,7 +2620,7 @@ image_id,label
 19846.jpg,A
 19851.jpg,A
 19863.jpg,A
-19868.jpg,A
+19868.jpg,C
 19873.jpg,A
 19875.jpg,A
 19879.jpg,A
@@ -2665,7 +2665,7 @@ image_id,label
 20200.jpg,A
 20201.jpg,A
 20206.jpg,A
-20222.jpg,B
+20222.jpg,A
 20232.jpg,A
 20236.jpg,A
 20237.jpg,A
@@ -2699,7 +2699,7 @@ image_id,label
 20503.jpg,B
 20504.jpg,C
 20506.jpg,A
-20519.jpg,C
+20519.jpg,A
 20525.jpg,B
 20533.jpg,A
 20541.jpg,A
@@ -2717,7 +2717,7 @@ image_id,label
 20643.jpg,A
 20645.jpg,A
 20658.jpg,A
-20676.jpg,A
+20676.jpg,B
 20683.jpg,C
 20698.jpg,A
 20702.jpg,A
@@ -2737,7 +2737,7 @@ image_id,label
 20776.jpg,A
 20778.jpg,A
 20793.jpg,A
-20812.jpg,A
+20812.jpg,C
 20823.jpg,A
 20833.jpg,A
 20836.jpg,A
@@ -2757,7 +2757,7 @@ image_id,label
 20932.jpg,A
 20947.jpg,A
 20956.jpg,A
-20957.jpg,C
+20957.jpg,A
 20975.jpg,A
 20981.jpg,A
 20982.jpg,A
@@ -2826,7 +2826,7 @@ image_id,label
 21469.jpg,C
 21473.jpg,A
 21481.jpg,A
-21492.jpg,A
+21492.jpg,C
 21495.jpg,A
 21503.jpg,A
 21505.jpg,A
@@ -2967,7 +2967,7 @@ image_id,label
 22489.jpg,A
 22495.jpg,C
 22501.jpg,A
-22512.jpg,C
+22512.jpg,A
 22516.jpg,C
 22526.jpg,A
 22528.jpg,A
@@ -2996,13 +2996,13 @@ image_id,label
 22700.jpg,A
 22702.jpg,A
 22707.jpg,A
-22711.jpg,A
+22711.jpg,B
 22712.jpg,C
 22738.jpg,C
 22743.jpg,A
 22744.jpg,A
 22758.jpg,A
-22763.jpg,A
+22763.jpg,B
 22775.jpg,C
 22778.jpg,C
 22784.jpg,A
@@ -3036,7 +3036,7 @@ image_id,label
 22954.jpg,A
 22956.jpg,C
 22959.jpg,A
-22960.jpg,C
+22960.jpg,A
 22962.jpg,A
 22978.jpg,A
 22993.jpg,A
@@ -3090,7 +3090,7 @@ image_id,label
 23411.jpg,A
 23414.jpg,B
 23424.jpg,A
-23438.jpg,A
+23438.jpg,C
 23444.jpg,A
 23458.jpg,A
 23460.jpg,A
@@ -3110,7 +3110,7 @@ image_id,label
 23568.jpg,A
 23569.jpg,A
 23588.jpg,A
-23599.jpg,C
+23599.jpg,A
 23600.jpg,A
 23606.jpg,B
 23607.jpg,A
@@ -3130,7 +3130,7 @@ image_id,label
 23736.jpg,A
 23737.jpg,C
 23768.jpg,C
-23790.jpg,C
+23790.jpg,A
 23801.jpg,A
 23807.jpg,A
 23817.jpg,A
@@ -3291,7 +3291,7 @@ image_id,label
 24943.jpg,A
 24947.jpg,A
 24948.jpg,C
-24950.jpg,C
+24950.jpg,A
 24951.jpg,A
 24954.jpg,A
 24964.jpg,C
@@ -3356,7 +3356,7 @@ image_id,label
 25349.jpg,A
 25360.jpg,A
 25371.jpg,A
-25386.jpg,C
+25386.jpg,A
 25422.jpg,C
 25423.jpg,A
 25425.jpg,A
@@ -3375,7 +3375,7 @@ image_id,label
 25538.jpg,A
 25550.jpg,B
 25551.jpg,A
-25566.jpg,C
+25566.jpg,A
 25567.jpg,A
 25573.jpg,A
 25574.jpg,C
@@ -3403,7 +3403,7 @@ image_id,label
 25694.jpg,C
 25695.jpg,A
 25708.jpg,A
-25709.jpg,B
+25709.jpg,A
 25721.jpg,A
 25724.jpg,A
 25737.jpg,A
@@ -3414,7 +3414,7 @@ image_id,label
 25757.jpg,A
 25760.jpg,A
 25771.jpg,A
-25774.jpg,A
+25774.jpg,B
 25788.jpg,B
 25793.jpg,A
 25801.jpg,C
@@ -3426,7 +3426,7 @@ image_id,label
 25857.jpg,A
 25858.jpg,B
 25868.jpg,A
-25887.jpg,A
+25887.jpg,B
 25899.jpg,A
 25901.jpg,C
 25911.jpg,A
@@ -3447,7 +3447,7 @@ image_id,label
 26034.jpg,A
 26035.jpg,B
 26037.jpg,A
-26040.jpg,B
+26040.jpg,A
 26048.jpg,A
 26059.jpg,C
 26076.jpg,B
@@ -3456,7 +3456,7 @@ image_id,label
 26089.jpg,A
 26091.jpg,C
 26150.jpg,C
-26160.jpg,C
+26160.jpg,A
 26162.jpg,A
 26166.jpg,A
 26177.jpg,A
@@ -3483,7 +3483,7 @@ image_id,label
 26346.jpg,A
 26347.jpg,A
 26348.jpg,A
-26349.jpg,C
+26349.jpg,A
 26353.jpg,B
 26355.jpg,B
 26380.jpg,A
@@ -3504,7 +3504,7 @@ image_id,label
 26464.jpg,A
 26465.jpg,A
 26469.jpg,A
-26471.jpg,C
+26471.jpg,B
 26488.jpg,A
 26522.jpg,A
 26523.jpg,A
@@ -3520,7 +3520,7 @@ image_id,label
 26640.jpg,A
 26643.jpg,A
 26646.jpg,A
-26653.jpg,C
+26653.jpg,A
 26659.jpg,C
 26668.jpg,B
 26677.jpg,A
@@ -3577,7 +3577,7 @@ image_id,label
 27045.jpg,A
 27047.jpg,A
 27058.jpg,A
-27062.jpg,C
+27062.jpg,A
 27063.jpg,A
 27066.jpg,C
 27070.jpg,A
@@ -3611,7 +3611,7 @@ image_id,label
 27253.jpg,A
 27263.jpg,C
 27267.jpg,A
-27276.jpg,C
+27276.jpg,A
 27278.jpg,A
 27280.jpg,A
 27284.jpg,A
@@ -3662,7 +3662,7 @@ image_id,label
 27634.jpg,A
 27653.jpg,A
 27664.jpg,A
-27676.jpg,C
+27676.jpg,A
 27677.jpg,A
 27683.jpg,A
 27696.jpg,A
@@ -3682,8 +3682,8 @@ image_id,label
 27821.jpg,C
 27823.jpg,A
 27835.jpg,A
-27843.jpg,B
-27858.jpg,A
+27843.jpg,C
+27858.jpg,B
 27867.jpg,A
 27870.jpg,A
 27888.jpg,A
@@ -3705,7 +3705,7 @@ image_id,label
 27974.jpg,B
 27995.jpg,A
 28000.jpg,A
-28009.jpg,C
+28009.jpg,A
 28010.jpg,B
 28012.jpg,A
 28023.jpg,A
@@ -3716,7 +3716,7 @@ image_id,label
 28037.jpg,C
 28043.jpg,B
 28058.jpg,A
-28061.jpg,A
+28061.jpg,C
 28063.jpg,A
 28069.jpg,A
 28076.jpg,A
@@ -3770,7 +3770,7 @@ image_id,label
 28540.jpg,A
 28541.jpg,A
 28543.jpg,A
-28546.jpg,C
+28546.jpg,A
 28558.jpg,A
 28562.jpg,A
 28563.jpg,B
@@ -3964,8 +3964,8 @@ image_id,label
 30016.jpg,B
 30034.jpg,C
 30038.jpg,A
-30040.jpg,B
-30051.jpg,B
+30040.jpg,C
+30051.jpg,C
 30052.jpg,A
 30065.jpg,B
 30071.jpg,C
@@ -4005,7 +4005,7 @@ image_id,label
 30354.jpg,A
 30355.jpg,A
 30376.jpg,A
-30395.jpg,B
+30395.jpg,C
 30397.jpg,A
 30405.jpg,A
 30407.jpg,A
@@ -4079,7 +4079,7 @@ image_id,label
 30902.jpg,A
 30909.jpg,B
 30910.jpg,B
-30918.jpg,B
+30918.jpg,A
 30932.jpg,A
 30939.jpg,A
 30953.jpg,C
@@ -4106,7 +4106,7 @@ image_id,label
 31076.jpg,B
 31079.jpg,A
 31084.jpg,A
-31110.jpg,B
+31110.jpg,C
 31115.jpg,A
 31132.jpg,A
 31138.jpg,B
@@ -4164,9 +4164,9 @@ image_id,label
 31598.jpg,A
 31600.jpg,A
 31639.jpg,A
-31670.jpg,C
+31670.jpg,A
 31674.jpg,A
-31681.jpg,C
+31681.jpg,A
 31684.jpg,C
 31693.jpg,C
 31702.jpg,A
@@ -4177,7 +4177,7 @@ image_id,label
 31724.jpg,A
 31748.jpg,C
 31803.jpg,C
-31809.jpg,A
+31809.jpg,B
 31816.jpg,A
 31818.jpg,A
 31821.jpg,A
@@ -4194,7 +4194,7 @@ image_id,label
 31900.jpg,B
 31910.jpg,A
 31911.jpg,A
-31913.jpg,A
+31913.jpg,B
 31918.jpg,C
 31921.jpg,C
 31923.jpg,A
@@ -4214,7 +4214,7 @@ image_id,label
 32034.jpg,C
 32040.jpg,C
 32041.jpg,C
-32045.jpg,C
+32045.jpg,A
 32051.jpg,A
 32053.jpg,A
 32076.jpg,A
@@ -4233,7 +4233,7 @@ image_id,label
 32210.jpg,C
 32215.jpg,A
 32218.jpg,A
-32231.jpg,B
+32231.jpg,C
 32239.jpg,A
 32277.jpg,A
 32283.jpg,A
@@ -4270,7 +4270,7 @@ image_id,label
 32496.jpg,C
 32500.jpg,A
 32506.jpg,A
-32511.jpg,B
+32511.jpg,C
 32514.jpg,B
 32515.jpg,A
 32521.jpg,A
@@ -4302,7 +4302,7 @@ image_id,label
 32705.jpg,A
 32715.jpg,A
 32722.jpg,A
-32728.jpg,C
+32728.jpg,A
 32730.jpg,C
 32735.jpg,A
 32770.jpg,C
@@ -4332,7 +4332,7 @@ image_id,label
 32995.jpg,A
 32996.jpg,C
 33005.jpg,A
-33013.jpg,C
+33013.jpg,A
 33023.jpg,B
 33031.jpg,C
 33032.jpg,A
@@ -4342,7 +4342,7 @@ image_id,label
 33073.jpg,A
 33077.jpg,A
 33078.jpg,C
-33085.jpg,B
+33085.jpg,A
 33114.jpg,A
 33131.jpg,C
 33134.jpg,C
@@ -4368,7 +4368,7 @@ image_id,label
 33286.jpg,A
 33297.jpg,A
 33308.jpg,A
-33321.jpg,C
+33321.jpg,A
 33323.jpg,A
 33339.jpg,A
 33345.jpg,A
@@ -4430,7 +4430,7 @@ image_id,label
 33794.jpg,A
 33795.jpg,A
 33818.jpg,A
-33827.jpg,A
+33827.jpg,B
 33830.jpg,A
 33837.jpg,A
 33847.jpg,A
@@ -4463,7 +4463,7 @@ image_id,label
 34045.jpg,C
 34051.jpg,A
 34062.jpg,A
-34066.jpg,A
+34066.jpg,C
 34093.jpg,A
 34109.jpg,A
 34110.jpg,A
@@ -4508,7 +4508,7 @@ image_id,label
 34418.jpg,A
 34421.jpg,A
 34423.jpg,A
-34426.jpg,C
+34426.jpg,A
 34430.jpg,A
 34449.jpg,A
 34450.jpg,A
@@ -4544,7 +4544,7 @@ image_id,label
 34666.jpg,B
 34670.jpg,A
 34676.jpg,A
-34680.jpg,C
+34680.jpg,A
 34696.jpg,A
 34700.jpg,A
 34708.jpg,B
@@ -4593,11 +4593,11 @@ image_id,label
 35061.jpg,B
 35063.jpg,A
 35064.jpg,A
-35070.jpg,C
+35070.jpg,A
 35085.jpg,A
 35092.jpg,A
 35094.jpg,A
-35098.jpg,B
+35098.jpg,C
 35141.jpg,A
 35143.jpg,C
 35163.jpg,B
@@ -4625,7 +4625,7 @@ image_id,label
 35311.jpg,B
 35322.jpg,A
 35325.jpg,A
-35339.jpg,C
+35339.jpg,A
 35342.jpg,C
 35357.jpg,A
 35361.jpg,B
@@ -4634,7 +4634,7 @@ image_id,label
 35374.jpg,A
 35379.jpg,A
 35391.jpg,A
-35396.jpg,A
+35396.jpg,C
 35408.jpg,A
 35428.jpg,A
 35437.jpg,A
@@ -4647,7 +4647,7 @@ image_id,label
 35484.jpg,C
 35489.jpg,C
 35505.jpg,A
-35508.jpg,C
+35508.jpg,A
 35513.jpg,A
 35528.jpg,A
 35532.jpg,B
@@ -4660,7 +4660,7 @@ image_id,label
 35601.jpg,A
 35614.jpg,A
 35617.jpg,A
-35621.jpg,C
+35621.jpg,A
 35622.jpg,A
 35632.jpg,A
 35647.jpg,A
@@ -4672,7 +4672,7 @@ image_id,label
 35667.jpg,A
 35674.jpg,A
 35681.jpg,A
-35686.jpg,C
+35686.jpg,A
 35695.jpg,A
 35705.jpg,A
 35724.jpg,A
@@ -4750,7 +4750,7 @@ image_id,label
 36225.jpg,A
 36236.jpg,A
 36245.jpg,B
-36266.jpg,C
+36266.jpg,A
 36295.jpg,A
 36296.jpg,C
 36301.jpg,B
@@ -4798,7 +4798,7 @@ image_id,label
 36648.jpg,A
 36656.jpg,A
 36657.jpg,A
-36661.jpg,C
+36661.jpg,B
 36662.jpg,A
 36666.jpg,C
 36673.jpg,A
@@ -4832,7 +4832,7 @@ image_id,label
 36836.jpg,A
 36838.jpg,A
 36856.jpg,A
-36859.jpg,A
+36859.jpg,B
 36862.jpg,C
 36869.jpg,A
 36876.jpg,B
@@ -4857,7 +4857,7 @@ image_id,label
 37116.jpg,A
 37118.jpg,A
 37120.jpg,A
-37154.jpg,C
+37154.jpg,A
 37168.jpg,B
 37173.jpg,A
 37199.jpg,B
@@ -4924,12 +4924,12 @@ image_id,label
 37695.jpg,A
 37698.jpg,A
 37704.jpg,C
-37713.jpg,C
+37713.jpg,A
 37728.jpg,A
 37729.jpg,A
-37735.jpg,B
+37735.jpg,C
 37737.jpg,C
-37738.jpg,C
+37738.jpg,A
 37747.jpg,A
 37748.jpg,A
 37758.jpg,B
@@ -5055,7 +5055,7 @@ image_id,label
 38742.jpg,B
 38747.jpg,A
 38748.jpg,A
-38753.jpg,A
+38753.jpg,C
 38761.jpg,B
 38798.jpg,C
 38799.jpg,A
@@ -5182,7 +5182,7 @@ image_id,label
 39855.jpg,C
 39859.jpg,A
 39860.jpg,B
-39866.jpg,C
+39866.jpg,A
 39871.jpg,A
 39872.jpg,A
 39873.jpg,A
@@ -5231,7 +5231,7 @@ image_id,label
 40153.jpg,A
 40160.jpg,C
 40170.jpg,C
-40176.jpg,B
+40176.jpg,C
 40178.jpg,A
 40180.jpg,B
 40185.jpg,A
@@ -5257,7 +5257,7 @@ image_id,label
 40348.jpg,A
 40349.jpg,C
 40356.jpg,A
-40373.jpg,C
+40373.jpg,A
 40379.jpg,A
 40380.jpg,A
 40395.jpg,A
@@ -5280,7 +5280,7 @@ image_id,label
 40521.jpg,A
 40525.jpg,A
 40534.jpg,A
-40556.jpg,C
+40556.jpg,B
 40564.jpg,A
 40568.jpg,A
 40579.jpg,A
@@ -5297,7 +5297,7 @@ image_id,label
 40668.jpg,A
 40673.jpg,A
 40676.jpg,C
-40684.jpg,C
+40684.jpg,A
 40698.jpg,A
 40701.jpg,C
 40705.jpg,A
@@ -5323,7 +5323,7 @@ image_id,label
 40812.jpg,A
 40818.jpg,A
 40829.jpg,C
-40835.jpg,C
+40835.jpg,A
 40839.jpg,A
 40860.jpg,C
 40864.jpg,A
@@ -5338,7 +5338,7 @@ image_id,label
 40926.jpg,A
 40927.jpg,C
 40933.jpg,A
-40943.jpg,A
+40943.jpg,C
 40948.jpg,A
 40951.jpg,A
 40962.jpg,A
@@ -5348,7 +5348,7 @@ image_id,label
 40985.jpg,A
 40992.jpg,C
 41000.jpg,C
-41009.jpg,A
+41009.jpg,B
 41013.jpg,A
 41017.jpg,B
 41020.jpg,A
@@ -5377,7 +5377,7 @@ image_id,label
 41206.jpg,A
 41208.jpg,B
 41213.jpg,A
-41218.jpg,A
+41218.jpg,C
 41228.jpg,A
 41244.jpg,A
 41258.jpg,A
@@ -5487,7 +5487,7 @@ image_id,label
 41994.jpg,A
 42005.jpg,A
 42023.jpg,C
-42025.jpg,A
+42025.jpg,B
 42032.jpg,A
 42038.jpg,A
 42039.jpg,A
@@ -5499,10 +5499,10 @@ image_id,label
 42108.jpg,A
 42116.jpg,B
 42130.jpg,A
-42131.jpg,C
+42131.jpg,A
 42152.jpg,A
 42155.jpg,A
-42157.jpg,C
+42157.jpg,B
 42161.jpg,C
 42163.jpg,A
 42167.jpg,A
@@ -5540,7 +5540,7 @@ image_id,label
 42449.jpg,A
 42468.jpg,A
 42484.jpg,A
-42485.jpg,C
+42485.jpg,A
 42491.jpg,A
 42497.jpg,A
 42504.jpg,A
@@ -5584,7 +5584,7 @@ image_id,label
 42794.jpg,A
 42812.jpg,A
 42824.jpg,A
-42825.jpg,C
+42825.jpg,A
 42842.jpg,A
 42843.jpg,C
 42873.jpg,A
@@ -5656,17 +5656,17 @@ image_id,label
 43299.jpg,A
 43305.jpg,A
 43306.jpg,C
-43309.jpg,C
+43309.jpg,A
 43317.jpg,C
 43322.jpg,A
 43351.jpg,B
 43353.jpg,A
 43357.jpg,A
-43366.jpg,A
+43366.jpg,B
 43373.jpg,A
 43377.jpg,A
 43390.jpg,A
-43396.jpg,B
+43396.jpg,A
 43404.jpg,A
 43412.jpg,A
 43413.jpg,A
@@ -5827,7 +5827,7 @@ image_id,label
 44544.jpg,A
 44552.jpg,B
 44561.jpg,B
-44562.jpg,A
+44562.jpg,B
 44577.jpg,A
 44594.jpg,A
 44608.jpg,A
@@ -5869,7 +5869,7 @@ image_id,label
 44851.jpg,A
 44853.jpg,A
 44855.jpg,A
-44861.jpg,C
+44861.jpg,A
 44872.jpg,A
 44874.jpg,A
 44883.jpg,B
@@ -5917,11 +5917,11 @@ image_id,label
 45178.jpg,A
 45180.jpg,A
 45190.jpg,A
-45199.jpg,C
+45199.jpg,A
 45203.jpg,A
 45204.jpg,A
 45220.jpg,A
-45225.jpg,C
+45225.jpg,A
 45233.jpg,C
 45236.jpg,A
 45241.jpg,A
@@ -5937,14 +5937,14 @@ image_id,label
 45341.jpg,C
 45356.jpg,A
 45366.jpg,A
-45372.jpg,C
+45372.jpg,B
 45373.jpg,A
 45375.jpg,A
 45382.jpg,A
 45384.jpg,A
 45391.jpg,A
 45401.jpg,A
-45403.jpg,A
+45403.jpg,C
 45417.jpg,B
 45422.jpg,A
 45431.jpg,A
@@ -5986,7 +5986,7 @@ image_id,label
 45744.jpg,C
 45785.jpg,A
 45795.jpg,A
-45796.jpg,A
+45796.jpg,C
 45818.jpg,A
 45851.jpg,A
 45858.jpg,A
@@ -6063,7 +6063,7 @@ image_id,label
 46359.jpg,A
 46375.jpg,A
 46378.jpg,C
-46379.jpg,C
+46379.jpg,A
 46386.jpg,A
 46390.jpg,A
 46392.jpg,A
@@ -6084,7 +6084,7 @@ image_id,label
 46531.jpg,A
 46532.jpg,C
 46554.jpg,A
-46567.jpg,C
+46567.jpg,A
 46594.jpg,A
 46621.jpg,A
 46627.jpg,B
@@ -6094,7 +6094,7 @@ image_id,label
 46699.jpg,A
 46704.jpg,A
 46716.jpg,C
-46718.jpg,C
+46718.jpg,B
 46732.jpg,B
 46748.jpg,A
 46755.jpg,B
@@ -6108,7 +6108,7 @@ image_id,label
 46814.jpg,C
 46815.jpg,C
 46821.jpg,C
-46832.jpg,C
+46832.jpg,A
 46835.jpg,A
 46838.jpg,A
 46841.jpg,A
@@ -6124,7 +6124,7 @@ image_id,label
 46944.jpg,A
 46949.jpg,A
 46955.jpg,B
-46961.jpg,C
+46961.jpg,A
 46966.jpg,C
 46970.jpg,A
 46971.jpg,A
@@ -6250,7 +6250,7 @@ image_id,label
 47749.jpg,A
 47764.jpg,A
 47765.jpg,B
-47776.jpg,C
+47776.jpg,A
 47782.jpg,A
 47786.jpg,A
 47798.jpg,A
@@ -6361,7 +6361,7 @@ image_id,label
 48656.jpg,A
 48657.jpg,C
 48660.jpg,A
-48667.jpg,A
+48667.jpg,C
 48669.jpg,A
 48678.jpg,A
 48681.jpg,C
@@ -6385,7 +6385,7 @@ image_id,label
 48812.jpg,A
 48821.jpg,A
 48823.jpg,A
-48829.jpg,A
+48829.jpg,B
 48833.jpg,A
 48862.jpg,A
 48865.jpg,A
@@ -6409,7 +6409,7 @@ image_id,label
 48990.jpg,A
 48991.jpg,A
 48992.jpg,A
-49002.jpg,B
+49002.jpg,A
 49010.jpg,A
 49014.jpg,A
 49015.jpg,A
@@ -6439,15 +6439,15 @@ image_id,label
 49167.jpg,A
 49168.jpg,A
 49169.jpg,B
-49177.jpg,C
-49185.jpg,C
+49177.jpg,A
+49185.jpg,A
 49187.jpg,A
 49193.jpg,A
-49197.jpg,C
+49197.jpg,A
 49201.jpg,A
 49204.jpg,A
 49206.jpg,A
-49209.jpg,C
+49209.jpg,A
 49212.jpg,C
 49216.jpg,A
 49223.jpg,A
@@ -6455,7 +6455,7 @@ image_id,label
 49234.jpg,C
 49242.jpg,A
 49264.jpg,A
-49277.jpg,B
+49277.jpg,C
 49280.jpg,A
 49282.jpg,B
 49290.jpg,A
@@ -6508,8 +6508,8 @@ image_id,label
 49636.jpg,A
 49654.jpg,B
 49659.jpg,A
-49660.jpg,C
-49674.jpg,A
+49660.jpg,A
+49674.jpg,C
 49678.jpg,A
 49687.jpg,A
 49688.jpg,C
@@ -6550,7 +6550,7 @@ image_id,label
 49897.jpg,A
 49905.jpg,A
 49907.jpg,A
-49931.jpg,C
+49931.jpg,B
 49939.jpg,C
 49940.jpg,A
 49950.jpg,A
@@ -6576,7 +6576,7 @@ image_id,label
 50090.jpg,A
 50099.jpg,C
 50110.jpg,A
-50120.jpg,C
+50120.jpg,A
 50125.jpg,A
 50129.jpg,A
 50134.jpg,C
@@ -6631,7 +6631,7 @@ image_id,label
 50513.jpg,A
 50515.jpg,A
 50516.jpg,A
-50523.jpg,C
+50523.jpg,B
 50526.jpg,A
 50537.jpg,A
 50561.jpg,A
@@ -6670,7 +6670,7 @@ image_id,label
 50763.jpg,A
 50777.jpg,A
 50785.jpg,A
-50801.jpg,A
+50801.jpg,B
 50807.jpg,A
 50818.jpg,A
 50830.jpg,A
@@ -6693,7 +6693,7 @@ image_id,label
 50988.jpg,A
 50996.jpg,A
 51003.jpg,A
-51004.jpg,C
+51004.jpg,A
 51006.jpg,A
 51014.jpg,A
 51024.jpg,A
@@ -6716,7 +6716,7 @@ image_id,label
 51177.jpg,A
 51191.jpg,A
 51193.jpg,A
-51204.jpg,C
+51204.jpg,B
 51205.jpg,C
 51212.jpg,A
 51214.jpg,A
@@ -6775,7 +6775,7 @@ image_id,label
 51696.jpg,A
 51698.jpg,A
 51705.jpg,A
-51709.jpg,C
+51709.jpg,A
 51720.jpg,A
 51722.jpg,A
 51725.jpg,A
@@ -6826,13 +6826,13 @@ image_id,label
 52105.jpg,A
 52107.jpg,A
 52115.jpg,B
-52118.jpg,A
+52118.jpg,B
 52136.jpg,A
 52142.jpg,B
 52152.jpg,A
 52154.jpg,B
 52167.jpg,C
-52171.jpg,B
+52171.jpg,A
 52174.jpg,A
 52184.jpg,A
 52187.jpg,A
@@ -6860,7 +6860,7 @@ image_id,label
 52380.jpg,A
 52384.jpg,A
 52391.jpg,C
-52393.jpg,C
+52393.jpg,B
 52398.jpg,A
 52401.jpg,A
 52417.jpg,A
@@ -6971,12 +6971,12 @@ image_id,label
 53181.jpg,A
 53185.jpg,A
 53191.jpg,C
-53196.jpg,C
+53196.jpg,B
 53197.jpg,C
 53206.jpg,A
 53217.jpg,C
 53222.jpg,B
-53247.jpg,C
+53247.jpg,B
 53249.jpg,A
 53269.jpg,C
 53287.jpg,A
@@ -7064,7 +7064,7 @@ image_id,label
 53909.jpg,B
 53915.jpg,A
 53923.jpg,C
-53925.jpg,B
+53925.jpg,C
 53939.jpg,A
 53946.jpg,C
 53949.jpg,A
@@ -7139,9 +7139,9 @@ image_id,label
 54383.jpg,C
 54388.jpg,A
 54405.jpg,A
-54407.jpg,B
+54407.jpg,A
 54427.jpg,A
-54428.jpg,C
+54428.jpg,A
 54439.jpg,A
 54444.jpg,A
 54447.jpg,B
@@ -7214,7 +7214,7 @@ image_id,label
 54931.jpg,C
 54937.jpg,A
 54940.jpg,C
-54944.jpg,C
+54944.jpg,B
 54947.jpg,A
 54970.jpg,A
 54984.jpg,A
@@ -7316,9 +7316,9 @@ image_id,label
 55779.jpg,C
 55783.jpg,A
 55803.jpg,A
-55816.jpg,C
+55816.jpg,A
 55817.jpg,A
-55822.jpg,C
+55822.jpg,A
 55829.jpg,B
 55848.jpg,A
 55854.jpg,A
@@ -7404,7 +7404,7 @@ image_id,label
 56536.jpg,A
 56542.jpg,A
 56549.jpg,B
-56557.jpg,A
+56557.jpg,B
 56563.jpg,C
 56568.jpg,A
 56584.jpg,A
@@ -7521,7 +7521,7 @@ image_id,label
 57499.jpg,C
 57504.jpg,B
 57510.jpg,A
-57513.jpg,C
+57513.jpg,A
 57514.jpg,A
 57515.jpg,B
 57522.jpg,A
@@ -7541,7 +7541,7 @@ image_id,label
 57620.jpg,A
 57632.jpg,A
 57648.jpg,A
-57651.jpg,C
+57651.jpg,B
 57652.jpg,A
 57653.jpg,A
 57660.jpg,B
@@ -7561,7 +7561,7 @@ image_id,label
 57767.jpg,B
 57780.jpg,A
 57791.jpg,A
-57794.jpg,C
+57794.jpg,A
 57803.jpg,A
 57805.jpg,C
 57807.jpg,B
@@ -7750,7 +7750,7 @@ image_id,label
 59099.jpg,A
 59100.jpg,A
 59102.jpg,A
-59103.jpg,B
+59103.jpg,A
 59105.jpg,B
 59119.jpg,B
 59124.jpg,A
@@ -7823,7 +7823,7 @@ image_id,label
 59683.jpg,A
 59690.jpg,A
 59693.jpg,A
-59702.jpg,A
+59702.jpg,C
 59711.jpg,A
 59718.jpg,C
 59722.jpg,A
@@ -7854,7 +7854,7 @@ image_id,label
 59902.jpg,A
 59904.jpg,C
 59916.jpg,A
-59928.jpg,C
+59928.jpg,A
 59944.jpg,B
 59954.jpg,A
 59956.jpg,A
@@ -7896,7 +7896,7 @@ image_id,label
 60244.jpg,A
 60256.jpg,A
 60263.jpg,C
-60271.jpg,C
+60271.jpg,A
 60288.jpg,C
 60289.jpg,A
 60290.jpg,A
@@ -7914,7 +7914,7 @@ image_id,label
 60419.jpg,B
 60424.jpg,A
 60427.jpg,A
-60442.jpg,C
+60442.jpg,A
 60445.jpg,C
 60455.jpg,A
 60469.jpg,A
@@ -7922,7 +7922,7 @@ image_id,label
 60479.jpg,A
 60483.jpg,C
 60485.jpg,C
-60486.jpg,C
+60486.jpg,A
 60499.jpg,A
 60503.jpg,A
 60504.jpg,C
@@ -7930,7 +7930,7 @@ image_id,label
 60521.jpg,A
 60535.jpg,A
 60536.jpg,B
-60537.jpg,A
+60537.jpg,C
 60548.jpg,A
 60555.jpg,A
 60572.jpg,A
@@ -7956,7 +7956,7 @@ image_id,label
 60704.jpg,C
 60709.jpg,A
 60725.jpg,A
-60743.jpg,C
+60743.jpg,B
 60747.jpg,A
 60752.jpg,B
 60753.jpg,A
@@ -7993,7 +7993,7 @@ image_id,label
 61001.jpg,A
 61013.jpg,A
 61015.jpg,A
-61026.jpg,C
+61026.jpg,A
 61029.jpg,A
 61030.jpg,A
 61037.jpg,A
@@ -8042,7 +8042,7 @@ image_id,label
 61322.jpg,A
 61330.jpg,A
 61333.jpg,A
-61336.jpg,C
+61336.jpg,A
 61347.jpg,A
 61360.jpg,A
 61361.jpg,A
@@ -8110,7 +8110,7 @@ image_id,label
 61787.jpg,A
 61797.jpg,A
 61800.jpg,A
-61808.jpg,A
+61808.jpg,C
 61824.jpg,A
 61831.jpg,A
 61839.jpg,A
@@ -8291,7 +8291,7 @@ image_id,label
 63169.jpg,A
 63182.jpg,B
 63185.jpg,A
-63186.jpg,C
+63186.jpg,B
 63187.jpg,A
 63193.jpg,B
 63202.jpg,A
@@ -8340,7 +8340,7 @@ image_id,label
 63576.jpg,A
 63583.jpg,A
 63589.jpg,C
-63591.jpg,C
+63591.jpg,A
 63603.jpg,A
 63611.jpg,A
 63621.jpg,B
@@ -8453,7 +8453,7 @@ image_id,label
 64405.jpg,C
 64406.jpg,C
 64411.jpg,A
-64424.jpg,C
+64424.jpg,A
 64433.jpg,B
 64439.jpg,A
 64442.jpg,A
@@ -8488,7 +8488,7 @@ image_id,label
 64585.jpg,A
 64587.jpg,C
 64593.jpg,A
-64602.jpg,A
+64602.jpg,C
 64611.jpg,C
 64615.jpg,A
 64619.jpg,A
@@ -8555,7 +8555,7 @@ image_id,label
 65152.jpg,A
 65155.jpg,A
 65163.jpg,A
-65176.jpg,C
+65176.jpg,A
 65180.jpg,B
 65184.jpg,A
 65199.jpg,A
@@ -8567,10 +8567,10 @@ image_id,label
 65314.jpg,C
 65326.jpg,A
 65349.jpg,A
-65356.jpg,A
+65356.jpg,C
 65360.jpg,A
 65366.jpg,A
-65398.jpg,A
+65398.jpg,C
 65401.jpg,C
 65404.jpg,A
 65420.jpg,A
@@ -8584,7 +8584,7 @@ image_id,label
 65555.jpg,A
 65562.jpg,A
 65583.jpg,A
-65599.jpg,A
+65599.jpg,C
 65601.jpg,A
 65613.jpg,A
 65616.jpg,C
@@ -8605,7 +8605,7 @@ image_id,label
 65741.jpg,A
 65752.jpg,A
 65758.jpg,A
-65769.jpg,A
+65769.jpg,B
 65777.jpg,A
 65779.jpg,B
 65785.jpg,B
@@ -8615,12 +8615,12 @@ image_id,label
 65833.jpg,A
 65835.jpg,A
 65842.jpg,A
-65858.jpg,C
+65858.jpg,A
 65860.jpg,B
 65868.jpg,A
 65891.jpg,A
 65923.jpg,A
-65927.jpg,C
+65927.jpg,A
 65931.jpg,A
 65960.jpg,A
 65973.jpg,A
@@ -8652,7 +8652,7 @@ image_id,label
 66183.jpg,A
 66197.jpg,A
 66209.jpg,A
-66222.jpg,C
+66222.jpg,B
 66226.jpg,A
 66238.jpg,A
 66240.jpg,A
@@ -8728,14 +8728,14 @@ image_id,label
 66763.jpg,A
 66773.jpg,A
 66774.jpg,A
-66779.jpg,C
+66779.jpg,A
 66792.jpg,C
 66808.jpg,A
 66809.jpg,A
 66821.jpg,A
 66838.jpg,A
 66844.jpg,A
-66852.jpg,A
+66852.jpg,C
 66854.jpg,A
 66856.jpg,B
 66859.jpg,A
@@ -8744,7 +8744,7 @@ image_id,label
 66877.jpg,A
 66888.jpg,C
 66893.jpg,A
-66899.jpg,B
+66899.jpg,C
 66913.jpg,A
 66915.jpg,A
 66920.jpg,A
@@ -8756,7 +8756,7 @@ image_id,label
 66954.jpg,B
 66955.jpg,A
 66966.jpg,A
-66972.jpg,A
+66972.jpg,B
 66973.jpg,A
 66975.jpg,A
 66976.jpg,A
@@ -8777,7 +8777,7 @@ image_id,label
 67117.jpg,A
 67118.jpg,A
 67120.jpg,C
-67121.jpg,A
+67121.jpg,C
 67128.jpg,A
 67147.jpg,A
 67153.jpg,B
@@ -8794,7 +8794,7 @@ image_id,label
 67248.jpg,A
 67254.jpg,A
 67269.jpg,A
-67280.jpg,B
+67280.jpg,A
 67294.jpg,A
 67296.jpg,C
 67297.jpg,A
@@ -8832,7 +8832,7 @@ image_id,label
 67524.jpg,A
 67526.jpg,A
 67530.jpg,B
-67535.jpg,C
+67535.jpg,A
 67541.jpg,A
 67542.jpg,A
 67546.jpg,C
@@ -8868,7 +8868,7 @@ image_id,label
 67775.jpg,C
 67776.jpg,A
 67788.jpg,A
-67802.jpg,C
+67802.jpg,A
 67803.jpg,B
 67811.jpg,A
 67849.jpg,A
@@ -8899,7 +8899,7 @@ image_id,label
 68107.jpg,A
 68111.jpg,B
 68114.jpg,C
-68117.jpg,B
+68117.jpg,A
 68132.jpg,C
 68146.jpg,A
 68173.jpg,A
@@ -8953,7 +8953,7 @@ image_id,label
 68606.jpg,A
 68610.jpg,A
 68619.jpg,C
-68639.jpg,A
+68639.jpg,B
 68643.jpg,A
 68647.jpg,A
 68658.jpg,A
@@ -9034,12 +9034,12 @@ image_id,label
 69214.jpg,A
 69233.jpg,A
 69241.jpg,A
-69245.jpg,C
+69245.jpg,A
 69250.jpg,A
 69252.jpg,A
 69260.jpg,A
-69275.jpg,C
-69278.jpg,C
+69275.jpg,A
+69278.jpg,A
 69282.jpg,B
 69294.jpg,C
 69304.jpg,A
@@ -9119,7 +9119,7 @@ image_id,label
 69763.jpg,C
 69774.jpg,C
 69777.jpg,A
-69782.jpg,B
+69782.jpg,A
 69795.jpg,C
 69797.jpg,A
 69801.jpg,A
@@ -9187,7 +9187,7 @@ image_id,label
 70248.jpg,A
 70262.jpg,A
 70269.jpg,A
-70273.jpg,B
+70273.jpg,C
 70288.jpg,A
 70289.jpg,A
 70297.jpg,C
@@ -9206,7 +9206,7 @@ image_id,label
 70440.jpg,A
 70451.jpg,C
 70455.jpg,A
-70471.jpg,C
+70471.jpg,B
 70480.jpg,A
 70488.jpg,A
 70493.jpg,A
@@ -9247,7 +9247,7 @@ image_id,label
 70794.jpg,B
 70798.jpg,C
 70812.jpg,A
-70820.jpg,C
+70820.jpg,B
 70822.jpg,A
 70848.jpg,A
 70852.jpg,A
@@ -9361,7 +9361,7 @@ image_id,label
 71771.jpg,B
 71811.jpg,B
 71813.jpg,C
-71832.jpg,C
+71832.jpg,A
 71841.jpg,A
 71843.jpg,A
 71844.jpg,A
@@ -9434,7 +9434,7 @@ image_id,label
 72343.jpg,A
 72363.jpg,A
 72365.jpg,C
-72370.jpg,A
+72370.jpg,B
 72373.jpg,C
 72375.jpg,A
 72396.jpg,A
@@ -9456,9 +9456,9 @@ image_id,label
 72537.jpg,A
 72538.jpg,A
 72550.jpg,B
-72557.jpg,A
+72557.jpg,B
 72558.jpg,B
-72566.jpg,C
+72566.jpg,A
 72571.jpg,A
 72572.jpg,A
 72582.jpg,B
@@ -9590,14 +9590,14 @@ image_id,label
 73556.jpg,A
 73557.jpg,A
 73561.jpg,A
-73569.jpg,C
+73569.jpg,A
 73571.jpg,A
 73577.jpg,A
 73588.jpg,C
 73598.jpg,A
 73601.jpg,A
 73627.jpg,A
-73640.jpg,C
+73640.jpg,A
 73657.jpg,A
 73664.jpg,B
 73672.jpg,A
@@ -9677,7 +9677,7 @@ image_id,label
 74387.jpg,A
 74394.jpg,A
 74399.jpg,A
-74400.jpg,C
+74400.jpg,B
 74413.jpg,A
 74418.jpg,A
 74419.jpg,A
@@ -9721,14 +9721,14 @@ image_id,label
 74665.jpg,A
 74667.jpg,A
 74672.jpg,A
-74673.jpg,A
-74680.jpg,C
+74673.jpg,C
+74680.jpg,B
 74694.jpg,C
 74702.jpg,A
 74705.jpg,C
 74712.jpg,B
 74722.jpg,A
-74728.jpg,B
+74728.jpg,C
 74737.jpg,A
 74742.jpg,A
 74754.jpg,A
@@ -9737,7 +9737,7 @@ image_id,label
 74799.jpg,A
 74804.jpg,A
 74819.jpg,A
-74824.jpg,A
+74824.jpg,C
 74828.jpg,A
 74836.jpg,A
 74837.jpg,C
@@ -9745,7 +9745,7 @@ image_id,label
 74848.jpg,B
 74857.jpg,A
 74862.jpg,A
-74863.jpg,C
+74863.jpg,A
 74866.jpg,A
 74870.jpg,A
 74876.jpg,A
@@ -9757,7 +9757,7 @@ image_id,label
 74919.jpg,A
 74923.jpg,A
 74929.jpg,A
-74944.jpg,C
+74944.jpg,A
 74971.jpg,A
 74983.jpg,A
 74987.jpg,A
@@ -9793,7 +9793,7 @@ image_id,label
 75199.jpg,A
 75200.jpg,A
 75201.jpg,A
-75208.jpg,A
+75208.jpg,C
 75229.jpg,A
 75230.jpg,A
 75231.jpg,C
@@ -9801,7 +9801,7 @@ image_id,label
 75255.jpg,B
 75264.jpg,C
 75277.jpg,C
-75282.jpg,C
+75282.jpg,A
 75284.jpg,A
 75306.jpg,A
 75314.jpg,B
@@ -9829,12 +9829,12 @@ image_id,label
 75468.jpg,A
 75477.jpg,A
 75482.jpg,A
-75484.jpg,C
+75484.jpg,A
 75489.jpg,C
 75505.jpg,A
 75511.jpg,A
 75520.jpg,A
-75527.jpg,C
+75527.jpg,A
 75536.jpg,B
 75538.jpg,A
 75544.jpg,A
@@ -9842,7 +9842,7 @@ image_id,label
 75560.jpg,A
 75561.jpg,A
 75572.jpg,A
-75577.jpg,A
+75577.jpg,C
 75580.jpg,B
 75581.jpg,A
 75585.jpg,A
@@ -9863,7 +9863,7 @@ image_id,label
 75717.jpg,A
 75719.jpg,A
 75724.jpg,A
-75743.jpg,C
+75743.jpg,A
 75748.jpg,A
 75756.jpg,C
 75764.jpg,C
@@ -9886,7 +9886,7 @@ image_id,label
 75919.jpg,A
 75923.jpg,C
 75931.jpg,A
-75937.jpg,B
+75937.jpg,A
 75941.jpg,C
 75951.jpg,B
 75962.jpg,A
@@ -9902,12 +9902,12 @@ image_id,label
 76066.jpg,A
 76070.jpg,A
 76071.jpg,B
-76081.jpg,A
+76081.jpg,C
 76093.jpg,A
 76105.jpg,A
 76108.jpg,A
 76109.jpg,A
-76117.jpg,C
+76117.jpg,A
 76127.jpg,C
 76135.jpg,A
 76147.jpg,C
@@ -9928,7 +9928,7 @@ image_id,label
 76270.jpg,B
 76277.jpg,B
 76281.jpg,A
-76287.jpg,B
+76287.jpg,A
 76335.jpg,A
 76336.jpg,A
 76354.jpg,A
@@ -9939,7 +9939,7 @@ image_id,label
 76378.jpg,A
 76380.jpg,A
 76386.jpg,A
-76399.jpg,A
+76399.jpg,C
 76400.jpg,B
 76415.jpg,A
 76420.jpg,A
@@ -9957,7 +9957,7 @@ image_id,label
 76544.jpg,A
 76584.jpg,A
 76617.jpg,B
-76620.jpg,C
+76620.jpg,A
 76623.jpg,A
 76624.jpg,A
 76626.jpg,A
@@ -9969,7 +9969,7 @@ image_id,label
 76678.jpg,C
 76682.jpg,A
 76708.jpg,A
-76714.jpg,C
+76714.jpg,A
 76730.jpg,A
 76738.jpg,A
 76746.jpg,B
@@ -9986,10 +9986,10 @@ image_id,label
 76842.jpg,A
 76848.jpg,C
 76866.jpg,A
-76872.jpg,B
+76872.jpg,A
 76873.jpg,A
 76875.jpg,A
-76881.jpg,A
+76881.jpg,C
 76907.jpg,A
 76932.jpg,A
 76938.jpg,A
@@ -10020,7 +10020,7 @@ image_id,label
 77143.jpg,B
 77148.jpg,A
 77150.jpg,A
-77154.jpg,C
+77154.jpg,A
 77162.jpg,A
 77165.jpg,B
 77169.jpg,A
@@ -10050,7 +10050,7 @@ image_id,label
 77351.jpg,A
 77367.jpg,C
 77399.jpg,C
-77414.jpg,C
+77414.jpg,A
 77415.jpg,A
 77416.jpg,A
 77417.jpg,C
@@ -10106,7 +10106,7 @@ image_id,label
 77903.jpg,A
 77907.jpg,A
 77910.jpg,A
-77927.jpg,B
+77927.jpg,C
 77928.jpg,A
 77931.jpg,C
 77935.jpg,A
@@ -10123,7 +10123,7 @@ image_id,label
 78025.jpg,A
 78028.jpg,C
 78033.jpg,B
-78035.jpg,C
+78035.jpg,A
 78036.jpg,A
 78068.jpg,A
 78079.jpg,A
@@ -10156,7 +10156,7 @@ image_id,label
 78240.jpg,A
 78243.jpg,A
 78251.jpg,A
-78271.jpg,A
+78271.jpg,C
 78277.jpg,A
 78285.jpg,A
 78286.jpg,A
@@ -10183,7 +10183,7 @@ image_id,label
 78465.jpg,A
 78470.jpg,C
 78483.jpg,A
-78494.jpg,C
+78494.jpg,A
 78509.jpg,A
 78510.jpg,A
 78512.jpg,A
@@ -10243,7 +10243,7 @@ image_id,label
 78899.jpg,A
 78901.jpg,A
 78911.jpg,A
-78912.jpg,B
+78912.jpg,A
 78913.jpg,C
 78918.jpg,A
 78921.jpg,A
@@ -10262,7 +10262,7 @@ image_id,label
 78996.jpg,A
 79002.jpg,A
 79009.jpg,A
-79010.jpg,A
+79010.jpg,C
 79013.jpg,A
 79026.jpg,A
 79034.jpg,A
@@ -10288,7 +10288,7 @@ image_id,label
 79212.jpg,C
 79231.jpg,A
 79249.jpg,A
-79258.jpg,A
+79258.jpg,C
 79262.jpg,A
 79280.jpg,A
 79282.jpg,C
@@ -10327,7 +10327,7 @@ image_id,label
 79514.jpg,A
 79516.jpg,B
 79520.jpg,A
-79529.jpg,C
+79529.jpg,B
 79547.jpg,C
 79549.jpg,C
 79555.jpg,A
@@ -10339,7 +10339,7 @@ image_id,label
 79612.jpg,A
 79620.jpg,A
 79622.jpg,A
-79631.jpg,C
+79631.jpg,A
 79641.jpg,A
 79651.jpg,C
 79671.jpg,A
@@ -10388,7 +10388,7 @@ image_id,label
 79963.jpg,A
 79965.jpg,A
 79982.jpg,A
-79986.jpg,B
+79986.jpg,C
 80023.jpg,A
 80037.jpg,A
 80040.jpg,C
@@ -10678,7 +10678,7 @@ image_id,label
 82088.jpg,A
 82102.jpg,A
 82106.jpg,A
-82110.jpg,C
+82110.jpg,A
 82124.jpg,A
 82126.jpg,A
 82132.jpg,B
@@ -10694,7 +10694,7 @@ image_id,label
 82213.jpg,A
 82214.jpg,A
 82217.jpg,A
-82219.jpg,C
+82219.jpg,B
 82226.jpg,A
 82229.jpg,A
 82235.jpg,B
@@ -10780,11 +10780,11 @@ image_id,label
 82826.jpg,A
 82827.jpg,A
 82831.jpg,A
-82850.jpg,C
+82850.jpg,A
 82851.jpg,A
 82856.jpg,C
 82859.jpg,A
-82861.jpg,C
+82861.jpg,A
 82869.jpg,A
 82870.jpg,B
 82905.jpg,A
@@ -10844,7 +10844,7 @@ image_id,label
 83262.jpg,B
 83268.jpg,A
 83277.jpg,C
-83284.jpg,B
+83284.jpg,A
 83293.jpg,A
 83296.jpg,A
 83297.jpg,C
@@ -10903,7 +10903,7 @@ image_id,label
 83747.jpg,A
 83768.jpg,A
 83771.jpg,A
-83781.jpg,C
+83781.jpg,A
 83787.jpg,C
 83803.jpg,A
 83806.jpg,A
@@ -10952,11 +10952,11 @@ image_id,label
 84087.jpg,A
 84092.jpg,B
 84098.jpg,A
-84111.jpg,C
+84111.jpg,A
 84120.jpg,A
 84129.jpg,A
 84139.jpg,A
-84140.jpg,C
+84140.jpg,A
 84157.jpg,A
 84164.jpg,A
 84186.jpg,B
@@ -10977,7 +10977,7 @@ image_id,label
 84314.jpg,A
 84327.jpg,A
 84331.jpg,A
-84336.jpg,A
+84336.jpg,C
 84342.jpg,B
 84348.jpg,C
 84370.jpg,A
@@ -10990,7 +10990,7 @@ image_id,label
 84428.jpg,C
 84444.jpg,C
 84453.jpg,A
-84455.jpg,B
+84455.jpg,C
 84458.jpg,A
 84459.jpg,A
 84460.jpg,B
@@ -11011,7 +11011,7 @@ image_id,label
 84563.jpg,A
 84564.jpg,A
 84566.jpg,A
-84579.jpg,B
+84579.jpg,C
 84607.jpg,C
 84608.jpg,A
 84612.jpg,A
@@ -11079,7 +11079,7 @@ image_id,label
 85147.jpg,A
 85172.jpg,A
 85177.jpg,A
-85182.jpg,C
+85182.jpg,B
 85199.jpg,A
 85209.jpg,A
 85213.jpg,A
@@ -11256,8 +11256,8 @@ image_id,label
 86635.jpg,A
 86644.jpg,A
 86658.jpg,C
-86661.jpg,A
-86662.jpg,B
+86661.jpg,C
+86662.jpg,A
 86693.jpg,A
 86694.jpg,A
 86699.jpg,B
@@ -11297,7 +11297,7 @@ image_id,label
 86952.jpg,A
 86953.jpg,A
 86959.jpg,A
-86960.jpg,A
+86960.jpg,B
 86963.jpg,A
 86965.jpg,C
 86979.jpg,A
@@ -11316,7 +11316,7 @@ image_id,label
 87057.jpg,A
 87058.jpg,A
 87065.jpg,B
-87072.jpg,C
+87072.jpg,A
 87098.jpg,A
 87101.jpg,A
 87111.jpg,A
@@ -11347,7 +11347,7 @@ image_id,label
 87287.jpg,A
 87303.jpg,A
 87307.jpg,A
-87312.jpg,C
+87312.jpg,A
 87315.jpg,C
 87321.jpg,A
 87324.jpg,A
@@ -11370,7 +11370,7 @@ image_id,label
 87524.jpg,A
 87530.jpg,C
 87531.jpg,A
-87537.jpg,C
+87537.jpg,B
 87550.jpg,A
 87551.jpg,A
 87559.jpg,B
@@ -11432,7 +11432,7 @@ image_id,label
 87938.jpg,A
 87947.jpg,A
 87949.jpg,A
-87950.jpg,A
+87950.jpg,C
 87954.jpg,A
 87959.jpg,B
 87964.jpg,A
@@ -11590,18 +11590,18 @@ image_id,label
 89129.jpg,A
 89138.jpg,A
 89141.jpg,A
-89151.jpg,B
+89151.jpg,A
 89157.jpg,A
 89158.jpg,A
 89166.jpg,A
 89169.jpg,A
 89170.jpg,A
-89172.jpg,B
+89172.jpg,C
 89180.jpg,A
 89202.jpg,A
 89203.jpg,A
 89204.jpg,A
-89208.jpg,A
+89208.jpg,C
 89209.jpg,A
 89210.jpg,A
 89211.jpg,A
@@ -11694,7 +11694,7 @@ image_id,label
 89942.jpg,A
 89955.jpg,A
 89968.jpg,A
-89983.jpg,A
+89983.jpg,C
 89984.jpg,C
 89992.jpg,A
 89999.jpg,A
@@ -11796,7 +11796,7 @@ image_id,label
 90618.jpg,A
 90624.jpg,A
 90637.jpg,A
-90644.jpg,A
+90644.jpg,C
 90663.jpg,A
 90666.jpg,A
 90667.jpg,A
@@ -11821,7 +11821,7 @@ image_id,label
 90851.jpg,A
 90857.jpg,B
 90872.jpg,A
-90875.jpg,A
+90875.jpg,B
 90883.jpg,A
 90903.jpg,A
 90909.jpg,A
@@ -11841,7 +11841,7 @@ image_id,label
 90986.jpg,B
 90991.jpg,A
 90992.jpg,A
-90998.jpg,C
+90998.jpg,A
 91026.jpg,A
 91029.jpg,A
 91045.jpg,A
@@ -11896,7 +11896,7 @@ image_id,label
 91484.jpg,A
 91489.jpg,C
 91493.jpg,A
-91501.jpg,C
+91501.jpg,A
 91505.jpg,A
 91524.jpg,A
 91529.jpg,A
@@ -11904,7 +11904,7 @@ image_id,label
 91552.jpg,A
 91556.jpg,C
 91576.jpg,A
-91580.jpg,A
+91580.jpg,B
 91604.jpg,A
 91606.jpg,B
 91609.jpg,A
@@ -11924,7 +11924,7 @@ image_id,label
 91702.jpg,A
 91705.jpg,A
 91713.jpg,A
-91728.jpg,B
+91728.jpg,C
 91732.jpg,A
 91741.jpg,A
 91749.jpg,A
@@ -12008,12 +12008,12 @@ image_id,label
 92435.jpg,A
 92446.jpg,A
 92447.jpg,A
-92458.jpg,A
+92458.jpg,C
 92461.jpg,A
 92462.jpg,A
 92471.jpg,B
 92479.jpg,A
-92488.jpg,C
+92488.jpg,B
 92499.jpg,C
 92505.jpg,A
 92507.jpg,A
@@ -12047,7 +12047,7 @@ image_id,label
 92731.jpg,A
 92739.jpg,C
 92744.jpg,A
-92750.jpg,B
+92750.jpg,C
 92751.jpg,C
 92752.jpg,C
 92753.jpg,B
@@ -12057,7 +12057,7 @@ image_id,label
 92812.jpg,A
 92821.jpg,A
 92824.jpg,A
-92827.jpg,C
+92827.jpg,A
 92829.jpg,A
 92832.jpg,A
 92839.jpg,B
@@ -12093,7 +12093,7 @@ image_id,label
 93042.jpg,A
 93054.jpg,A
 93065.jpg,A
-93077.jpg,C
+93077.jpg,B
 93078.jpg,A
 93082.jpg,A
 93083.jpg,A
@@ -12179,7 +12179,7 @@ image_id,label
 93745.jpg,A
 93751.jpg,C
 93755.jpg,A
-93762.jpg,C
+93762.jpg,A
 93772.jpg,C
 93780.jpg,C
 93785.jpg,A
@@ -12209,7 +12209,7 @@ image_id,label
 93988.jpg,C
 93990.jpg,A
 93994.jpg,A
-94002.jpg,A
+94002.jpg,C
 94006.jpg,B
 94007.jpg,A
 94008.jpg,B
@@ -12225,7 +12225,7 @@ image_id,label
 94094.jpg,A
 94100.jpg,A
 94113.jpg,A
-94116.jpg,A
+94116.jpg,C
 94135.jpg,A
 94149.jpg,A
 94159.jpg,A
@@ -12273,7 +12273,7 @@ image_id,label
 94521.jpg,A
 94522.jpg,A
 94524.jpg,A
-94544.jpg,A
+94544.jpg,C
 94546.jpg,A
 94554.jpg,C
 94561.jpg,A
@@ -12282,7 +12282,7 @@ image_id,label
 94572.jpg,A
 94573.jpg,A
 94574.jpg,A
-94584.jpg,C
+94584.jpg,A
 94588.jpg,C
 94595.jpg,C
 94609.jpg,A
@@ -12315,7 +12315,7 @@ image_id,label
 94810.jpg,C
 94832.jpg,A
 94847.jpg,A
-94848.jpg,C
+94848.jpg,A
 94852.jpg,A
 94868.jpg,A
 94873.jpg,A
@@ -12338,14 +12338,14 @@ image_id,label
 94953.jpg,A
 94955.jpg,C
 94956.jpg,A
-94957.jpg,B
+94957.jpg,A
 94960.jpg,C
 94962.jpg,C
 94966.jpg,A
 94972.jpg,A
 94981.jpg,A
 94982.jpg,C
-94993.jpg,A
+94993.jpg,B
 95003.jpg,C
 95009.jpg,A
 95031.jpg,A
@@ -12387,7 +12387,7 @@ image_id,label
 95281.jpg,A
 95285.jpg,A
 95299.jpg,B
-95307.jpg,C
+95307.jpg,A
 95324.jpg,A
 95336.jpg,C
 95345.jpg,A
@@ -12415,7 +12415,7 @@ image_id,label
 95554.jpg,C
 95555.jpg,A
 95560.jpg,A
-95567.jpg,C
+95567.jpg,A
 95587.jpg,A
 95630.jpg,A
 95634.jpg,A
@@ -12469,7 +12469,7 @@ image_id,label
 95974.jpg,A
 95985.jpg,C
 95991.jpg,A
-95993.jpg,C
+95993.jpg,A
 96014.jpg,A
 96017.jpg,C
 96018.jpg,B
@@ -12533,7 +12533,7 @@ image_id,label
 96451.jpg,A
 96457.jpg,A
 96461.jpg,B
-96466.jpg,B
+96466.jpg,A
 96473.jpg,A
 96478.jpg,A
 96498.jpg,B
@@ -12580,7 +12580,7 @@ image_id,label
 96900.jpg,A
 96938.jpg,A
 96951.jpg,A
-96954.jpg,C
+96954.jpg,A
 96962.jpg,A
 96972.jpg,A
 96974.jpg,C
@@ -12607,7 +12607,7 @@ image_id,label
 97121.jpg,C
 97129.jpg,A
 97132.jpg,A
-97137.jpg,C
+97137.jpg,A
 97149.jpg,A
 97156.jpg,A
 97159.jpg,A
@@ -12642,13 +12642,13 @@ image_id,label
 97419.jpg,A
 97420.jpg,A
 97427.jpg,B
-97428.jpg,C
+97428.jpg,A
 97443.jpg,A
 97444.jpg,A
 97449.jpg,B
 97451.jpg,A
 97461.jpg,A
-97471.jpg,A
+97471.jpg,B
 97477.jpg,A
 97482.jpg,A
 97484.jpg,A
@@ -12660,7 +12660,7 @@ image_id,label
 97547.jpg,A
 97575.jpg,A
 97590.jpg,A
-97605.jpg,C
+97605.jpg,B
 97611.jpg,B
 97618.jpg,A
 97626.jpg,C
@@ -12674,7 +12674,7 @@ image_id,label
 97674.jpg,A
 97678.jpg,A
 97684.jpg,A
-97690.jpg,A
+97690.jpg,C
 97693.jpg,A
 97697.jpg,A
 97703.jpg,A
@@ -12719,7 +12719,7 @@ image_id,label
 97971.jpg,A
 97972.jpg,A
 97991.jpg,A
-97994.jpg,C
+97994.jpg,A
 97995.jpg,A
 97996.jpg,A
 98009.jpg,A
