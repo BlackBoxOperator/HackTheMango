@@ -45,6 +45,8 @@ parser.add_argument('--weight-name', type=str, default='tf_efficientnet_b8w', me
                     help='directory name for save weight (default: tf_efficientnet_b8w)')
 parser.add_argument('--load', type=str, default=None, metavar='M',
                     help='path for load weight (default: None)')
+parser.add_argument('--out-csv', type=str, default='result.csv', metavar='M',
+                    help='path of csv to output (default: result.csv)')
 parser.add_argument('--pred-csv', type=str, default=None, metavar='M',
                     help='path of csv to predict (default: None)')
 parser.add_argument('--pred-dir', type=str, default=None, metavar='M',
@@ -140,7 +142,7 @@ def predict(model, pred_loader, criterion=nn.CrossEntropyLoss(), classes=['A', '
             pred = pred.cpu()
             df['label'][index] = classes[pred[0]]
 
-    df.to_csv('result.csv', header=True, index=False)
+    df.to_csv(args.out_csv, header=True, index=False)
 
 def size_by_name(name, default = 256):
     #beg = name.rfind('_') + 1
