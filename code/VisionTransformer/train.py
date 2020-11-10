@@ -134,7 +134,7 @@ def predict(model, pred_loader, criterion=nn.CrossEntropyLoss(), classes=['A', '
     model.eval()
     test_loss = 0
     correct = 0
-    df = pd.read_csv(args.pred_csv)
+    df = pd.read_csv(os.path.join('..', '..', args.dataset, args.pred_csv))
     with torch.no_grad():
         for data, index in pred_loader:
             data = data.to(device)
