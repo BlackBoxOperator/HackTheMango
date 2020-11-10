@@ -27,7 +27,7 @@ def kaggle_bag(glob_files, loc_outfile, method="average", weights="uniform"):
             print("Using weight: 1")
       # sort glob_file by first column, ignoring the first line
       lines = open(glob_file).readlines()
-      lines = [lines[0]] + sorted(lines[1:])
+      # lines = [lines[0]] + sorted(lines[1:])
       for e, line in enumerate( lines ):
         if i == 0 and e == 0:
           outfile.write(line)
