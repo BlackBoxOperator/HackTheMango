@@ -275,6 +275,18 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                     mean=model.original_model_info.mean,
                     std=model.original_model_info.std),
         ])
+    elif args.augment == 4:
+        transform = transforms.Compose([
+            transforms.RandomApply([transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p=0.8),
+            transforms.RandomRotation(degrees=(-180,180)),
+            transforms.RandomGrayscale(p=0.2),
+            transforms.RandomApply([GaussianBlur([0.1, 2.0])], p=0.5),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])
+        ])
     else:
         print('augmentation type not supported yet')
         exit(0)
