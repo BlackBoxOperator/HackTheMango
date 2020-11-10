@@ -11,6 +11,7 @@ FINAL_FN = final/C1-P2_Test.rar
 
 c1p1: $(C1P1_FN)
 c1p2: $(C1P2_FN)
+final: $(FINAL_FN)
 
 $(C1P1_FN):
 	bash gdown.sh $(C1P1_ID) $(C1P1_FN)
