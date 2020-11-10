@@ -317,14 +317,26 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                 pred_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
             predict(model, pred_loader)
         elif args.test_csv:
-            model.load_state_dict(torch.load(args.load))
-            test_set = Mango_dataset(
-                os.path.join(data_path,args.test_csv),
-                os.path.join(data_path,args.test_dir),
-                test_transform)
-            test_loader = torch.utils.data.DataLoader(
-                test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
-            test(model, test_loader)
+            if args.epochs != 100:
+                for i in range(1, args.epochs + 1):
+                    model.load_state_dict(
+                        torch.load(os.path.join(args.load, 'weight_{}'.format(i))))
+                    test_set = Mango_dataset(
+                        os.path.join(data_path,args.test_csv),
+                        os.path.join(data_path,args.test_dir),
+                        test_transform)
+                    test_loader = torch.utils.data.DataLoader(
+                        test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
+                    test(model, test_loader)
+            else:
+                model.load_state_dict(torch.load(args.load))
+                test_set = Mango_dataset(
+                    os.path.join(data_path,args.test_csv),
+                    os.path.join(data_path,args.test_dir),
+                    test_transform)
+                test_loader = torch.utils.data.DataLoader(
+                    test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
+                test(model, test_loader)
         return
 
     # Train
