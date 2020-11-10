@@ -306,7 +306,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
     # Use exponential decay for fine-tuning optimizer
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.975)
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.9)
 
     if args.load:
         if args.pred_csv:
