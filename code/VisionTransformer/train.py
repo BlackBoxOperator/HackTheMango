@@ -14,7 +14,7 @@ import torch.nn as nn
 import torch.optim as optim
 
 import timm, os, sys
-from data import Mango_dataset
+from data import Mango_dataset, Eval_dataset
 
 parser = argparse.ArgumentParser(description='cnn_finetune cifar 10 example')
 parser.add_argument('--batch-size', type=int, default=32, metavar='N',
@@ -42,7 +42,13 @@ parser.add_argument('--log-interval', type=int, default=100, metavar='N',
 parser.add_argument('--model-name', type=str, default='vit_large_patch32_384', metavar='M',
                     help='model name (default: vit_large_patch32_384)')
 parser.add_argument('--weight-name', type=str, default='vit_large_patch32_384w', metavar='M',
-                    help='weight name (default: vit_large_patch32_384w)')
+                    help='directory name for save weight (default: vit_large_patch32_384w)')
+parser.add_argument('--load', type=str, default=None, metavar='M',
+                    help='path for load weight (default: None)')
+parser.add_argument('--pred-csv', type=str, default=None, metavar='M',
+                    help='path of csv to predict (default: None)')
+parser.add_argument('--pred-dir', type=str, default=None, metavar='M',
+                    help='path of directory to predict (default: None)')
 parser.add_argument('--dropout-p', type=float, default=0.2, metavar='D',
                     help='Dropout probability (default: 0.2)')
 parser.add_argument('--dataset', type=str, default='c1p1', metavar='M',
@@ -117,6 +123,21 @@ def test(model, test_loader, criterion=nn.CrossEntropyLoss()):
         test_loss, correct, len(test_loader.dataset),
         100. * correct / len(test_loader.dataset)))
 
+def predict(model, pred_loader, criterion=nn.CrossEntropyLoss(), classes=['A', 'B', 'C']):
+    model.eval()
+    test_loss = 0
+    correct = 0
+    df = pd.read_csv(args.pred_csv)
+    with torch.no_grad():
+        for data, index in pred_loader:
+            data = data.to(device)
+            output = model(data)
+            pred = output.data.max(1, keepdim=True)[1]
+            pred = pred.cpu()
+            df['label'][index] = classes[pred[0]]
+
+    df.to_csv('result.csv', header=True, index=False)
+
 def size_by_name(name, default = 256):
     beg = name.rfind('_') + 1
     return int(name[beg:]) if beg else default
@@ -137,8 +158,6 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             # no input_size in this package
             # input_size=(32, 32) if model_name.startswith(('vgg', 'squeezenet')) else None,
     )
-
-    return model
 
     if FreezePretrained:
         for param in model.parameters():
@@ -279,7 +298,18 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     optimizer = optim.Adam(model.parameters(), lr=args.lr)
 
     # Use exponential decay for fine-tuning optimizer
-    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.975)
+    scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=1, gamma=0.9)
+
+    if args.load:
+        model.load_state_dict(torch.load(args.load))
+        pred_set = Eval_dataset(
+            os.path.join(data_path,args.pred_csv),
+            os.path.join(data_path,args.pred_dir),
+            test_transform)
+        pred_loader = torch.utils.data.DataLoader(
+            pred_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
+        predict(model, pred_loader)
+        return
 
     # Train
     w_dir = '{}w'.format(model_name) if not args.weight_name else args.weight_name
@@ -296,4 +326,4 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
 
 
 if __name__ == '__main__':
-    m = main()
+    main()
