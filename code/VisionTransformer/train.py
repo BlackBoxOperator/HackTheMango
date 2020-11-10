@@ -12,6 +12,7 @@ import torchvision.transforms as transforms
 from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
+import pandas as pd
 
 import timm, os, sys
 from data import Mango_dataset, Eval_dataset
