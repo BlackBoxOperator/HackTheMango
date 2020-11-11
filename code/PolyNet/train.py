@@ -247,7 +247,6 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                 transforms.RandomResizedCrop(384, interpolation=2),
                 transforms.RandomRotation(degrees=(-180,180)),
                 transforms.ToTensor(),
-                #transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
                 transforms.Normalize(
                     mean=model.original_model_info.mean,
                     std=model.original_model_info.std),
@@ -267,12 +266,10 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     elif args.augment == 3:
         transform = transforms.Compose([
             transforms.RandomResizedCrop(size_by_name(model_name, 224), scale=(0.85, 1.0), interpolation=2),
-            #transforms.ColorJitter(brightness=0.15, contrast=0.15, saturation=0.15, hue=0.15),
             transforms.RandomRotation(degrees=(-180,180)),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
-            #transforms.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
             transforms.Normalize(
                     mean=model.original_model_info.mean,
                     std=model.original_model_info.std),
@@ -285,6 +282,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             transforms.RandomApply([transforms.GaussianBlur([3, 3])], p=0.5),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
+            transforms.Resize((size_by_name(model_name, 224), size_by_name(model_name))),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225])
