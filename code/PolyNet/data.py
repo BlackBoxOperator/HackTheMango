@@ -45,7 +45,7 @@ class Mango_dataset(Dataset):
         return self.labels
 
 class Eval_dataset(Dataset):
-    def __init__(self, csvFile, data_path, data_transform):
+    def __init__(self, csvFile, data_path, data_transform, crop_by_pos = False):
         self.df = pd.read_csv(csvFile)
         self.data_path = data_path
         self.xTrain = self.df['image_id']
