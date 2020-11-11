@@ -263,6 +263,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             transforms.RandomApply([transforms.GaussianBlur([3, 3])], p=0.5),
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
+            transforms.Resize((size_by_name(model_name), size_by_name(model_name))),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225])
