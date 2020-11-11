@@ -35,9 +35,7 @@ class Mango_dataset(Dataset):
                 img = transforms.functional.crop(
                         img, self.pos_y[index], self.pos_x[index],
                         self.height[index], self.width[index])
-                img = self.data_transform(img)
-            else:
-                img = self.data_transform(img)
+            img = self.data_transform(img)
         return img, self.yTrain[index]
 
     def __len__(self):
@@ -64,8 +62,14 @@ class Eval_dataset(Dataset):
     def __getitem__(self, index):
         img = Image.open(os.path.join(self.data_path, self.xTrain[index]))
         img = img.convert('RGB')
-        if self.data_transform is not None:
+
+        if self.data_transform:
+            if self.pos_x is not None:
+                img = transforms.functional.crop(
+                        img, self.pos_y[index], self.pos_x[index],
+                        self.height[index], self.width[index])
             img = self.data_transform(img)
+
         return img, index
 
     def __len__(self):
