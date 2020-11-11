@@ -356,7 +356,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             pred_set = Eval_dataset(
                 os.path.join(data_path,args.pred_csv),
                 os.path.join(data_path,args.pred_dir),
-                test_transform)
+                test_transform, args.crop)
             pred_loader = torch.utils.data.DataLoader(
                 pred_set, batch_size=64, shuffle=False, num_workers=2)
             predict(model, pred_loader)
@@ -368,7 +368,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                     test_set = Mango_dataset(
                         os.path.join(data_path,args.test_csv),
                         os.path.join(data_path,args.test_dir),
-                        test_transform)
+                        test_transform, args.crop)
                     test_loader = torch.utils.data.DataLoader(
                         test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
                     test(model, test_loader)
@@ -377,7 +377,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
                 test_set = Mango_dataset(
                     os.path.join(data_path,args.test_csv),
                     os.path.join(data_path,args.test_dir),
-                    test_transform)
+                    test_transform, args.crop)
                 test_loader = torch.utils.data.DataLoader(
                     test_set, batch_size=args.batch_size, shuffle=False, num_workers=2)
                 test(model, test_loader)
