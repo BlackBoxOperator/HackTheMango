@@ -51,6 +51,14 @@ class Eval_dataset(Dataset):
         self.df = pd.read_csv(csvFile)
         self.data_path = data_path
         self.xTrain = self.df['image_id']
+
+        if crop_by_pos and 'pos_x' in self.df:
+            self.pos_x, self.pos_y, self.width, self.height = \
+                self.df['pos_x'], self.df['pos_y'], \
+                self.df['width'], self.df['height']
+        else:
+            self.pos_x, self.pos_y, self.width, self.height = None, None, None, None
+
         self.data_transform = data_transform
 
     def __getitem__(self, index):
