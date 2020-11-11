@@ -138,7 +138,7 @@ def predict(model, pred_loader, criterion=nn.CrossEntropyLoss(), classes=['A', '
     df = pd.read_csv(os.path.join('..', '..', args.dataset, args.pred_csv))
     outdf = pd.DataFrame()
     outdf['image_id'] = df['image_id']
-    outdf['label'] = ['' for _ in range(len(df('image_id')))]
+    outdf['label'] = ['' for _ in range(len(df['image_id']))]
     with torch.no_grad():
         for data, index in tqdm(pred_loader):
             data = data.to(device)

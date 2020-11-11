@@ -138,7 +138,7 @@ def predict(model, pred_loader, criterion=nn.CrossEntropyLoss(), classes=['A', '
     df = pd.read_csv(os.path.join('..', '..', args.dataset, args.pred_csv))
     outdf = pd.DataFrame()
     outdf['image_id'] = df['image_id']
-    outdf['label'] = ['' for _ in range(len(df('image_id')))]
+    outdf['label'] = ['' for _ in range(len(df['image_id']))]
     with torch.no_grad():
         for data, index in tqdm(pred_loader):
             data = data.to(device)
@@ -265,6 +265,19 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             transforms.RandomHorizontalFlip(),
             transforms.RandomVerticalFlip(),
             transforms.Resize((size_by_name(model_name), size_by_name(model_name))),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225])
+        ])
+    elif args.augment == 5:
+        transform = transforms.Compose([
+            transforms.RandomResizedCrop(size_by_name(model_name), scale=(0.85, 1.0), interpolation=2),
+            transforms.RandomApply([transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)], p=0.8),
+            transforms.RandomRotation(degrees=(-180,180)),
+            transforms.RandomGrayscale(p=0.2),
+            transforms.RandomApply([transforms.GaussianBlur([3, 3])], p=0.5),
+            transforms.RandomHorizontalFlip(),
+            transforms.RandomVerticalFlip(),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225])
