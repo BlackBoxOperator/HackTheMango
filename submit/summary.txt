@@ -1,0 +1,16 @@
+effb6c1p24cbest3.csv       0.7700769
+effb6f2a3best5.csv         0.746
+effb6f2a5best4.csv         0.7332307
+effb6finalf4a2cbest6.csv   0.7517692
+effb6finalf4a2cbest15.csv  0.751
+
+poly9best6.csv             0.7596923
+poly9best19.csv            0.7576153
+poly10best7.csv            0.7526923
+poly4bestis16.csv
+poly6bestis16.csv
+
+poly8bestis18.csv          0.7246153
+poly8bestis22.csv          0.713
+poly8bestis30.csv          0.7028461
+poly46888mix.csv           0.7223846
