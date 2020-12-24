@@ -56,9 +56,24 @@
 
 
 # ==== final training ===
-python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.0001 --batch-size 20 --augment 2 --finetune 2 --dataset final --weight-name vitfinal2w | tee vitfinal2.txt
-python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.0001 --batch-size 20 --augment 2 --finetune 4 --dataset final --weight-name vitfinal4w | tee vitfinal4.txt
 
+#python train.py --model-name vit_base_patch16_224 --epochs 32 --lr 0.0001 --batch-size 96 --augment 2 --finetune 4 --dataset final --weight-name vitbasefinal4w | tee  vitbasefinal4.txt
+
+#python train.py --model-name vit_large_patch32_384 --epochs 24 --lr 0.0001 --batch-size 32 --augment 4 --finetune 4 --dataset c1p2 --weight-name vitfinal4w | tee vitfinal4.txt
+
+# training on gpu 0
+#python train.py --model-name vit_large_patch32_384 --epochs 32 --lr 0.001 --batch-size 32 --augment 3 --finetune 4 --dataset c1p2c80 --weight-name vitc1p2c80_5w --crop | tee vitc1p2c80_5w.txt
+#python train.py --model-name vit_large_patch32_384 --epochs 32 --lr 0.0006 --batch-size 32 --augment 3 --finetune 2 --dataset c1p2c80 --weight-name vitc1p2c80_7w --crop | tee vitc1p2c80_7w.txt
+
+# training on gpu 1
+python train.py --model-name vit_large_patch32_384 --epochs 32 --lr 0.0008 --batch-size 32 --augment 3 --finetune 4 --dataset c1p2blur --weight-name vitblur0w --crop | tee vitblur0w.txt
+
+
+#python train.py --model-name vit_large_patch32_384 --epochs 24 --lr 0.00075 --batch-size 32 --augment 4 --finetune 4 --dataset final --weight-name vitfinal44w | tee vitfinal44.txt
+#updated
+#python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.00075 --batch-size 32 --augment 2 --finetune 2 --dataset final --weight-name vitfinal21w | tee vitfinal21.txt
+
+# ==== ignore ====
 # finetune 2,4 is better
 #python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.0001 --batch-size 16 --augment 2 --finetune 1 --dataset final --weight-name vitfinal1w | tee vitfinal1.txt
 #python train.py --model-name vit_large_patch32_384 --epochs 16 --lr 0.00002 --batch-size 16 --augment 2 --finetune 3 --dataset final --weight-name vitfinal3w | tee vitfinal3.txt

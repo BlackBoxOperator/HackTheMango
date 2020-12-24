@@ -14,6 +14,8 @@ from torch.autograd import Variable
 import torch.nn as nn
 import torch.optim as optim
 import pandas as pd
+import albumentations as A
+from albumentations.pytorch import ToTensor
 
 import os, sys
 from cnn_finetune import make_model
@@ -66,7 +68,10 @@ parser.add_argument('--freeze', action='store_true',
                     help='freeze the main network')
 parser.add_argument('--crop', action='store_true',
                     help='crop image by position field in dataset')
+parser.add_argument('--blur', action='store_true',
+                    help='blur image by gaussian')
 
+torch.cuda.set_device(1)
 args = parser.parse_args()
 use_cuda = not args.no_cuda and torch.cuda.is_available()
 device = torch.device('cuda' if use_cuda else 'cpu')
@@ -77,6 +82,11 @@ if args.dataset == 'c1p1':
     TRAIN_CSV = "train.csv"
     TRAIN_DIR = "C1-P1_Train"
 elif args.dataset == 'c1p2':
+    DEV_CSV = "dev.csv"
+    DEV_DIR = "Dev"
+    TRAIN_CSV = "train.csv"
+    TRAIN_DIR = "Train"
+elif args.dataset == 'c1p2blur':
     DEV_CSV = "dev.csv"
     DEV_DIR = "Dev"
     TRAIN_CSV = "train.csv"
@@ -300,6 +310,16 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
             transforms.Normalize(mean=[0.485, 0.456, 0.406],
                                  std=[0.229, 0.224, 0.225])
         ])
+    elif args.augment == 6:
+        transform = A.Compose([
+            A.Rotate((-180,180)),
+            A.HorizontalFlip(),
+            A.VerticalFlip(),
+            A.Normalize([0.4914, 0.4822, 0.4465], [0.2023, 0.1994, 0.2010]),
+            A.Resize(size_by_name(model_name), size_by_name(model_name)),
+            ToTensor(),
+        ])
+
     else:
         print('augmentation type not supported yet')
         exit(0)
@@ -330,7 +350,7 @@ def main(data_path=os.path.join('..', '..', args.dataset)):
     train_set = Mango_dataset(
             os.path.join(data_path,TRAIN_CSV),
             os.path.join(data_path,TRAIN_DIR),
-            transform, args.crop)
+            transform, args.crop, args.blur)
 
     train_loader = torch.utils.data.DataLoader(
             train_set, batch_size=args.batch_size, shuffle=True, num_workers=2)

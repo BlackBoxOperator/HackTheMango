@@ -66,6 +66,7 @@ parser.add_argument('--freeze', action='store_true',
 parser.add_argument('--crop', action='store_true',
                     help='crop image by position field in dataset')
 
+torch.cuda.set_device(0)
 args = parser.parse_args()
 use_cuda = not args.no_cuda and torch.cuda.is_available()
 device = torch.device('cuda' if use_cuda else 'cpu')
@@ -76,6 +77,11 @@ if args.dataset == 'c1p1':
     TRAIN_CSV = "train.csv"
     TRAIN_DIR = "C1-P1_Train"
 elif args.dataset == 'c1p2':
+    DEV_CSV = "dev.csv"
+    DEV_DIR = "Dev"
+    TRAIN_CSV = "train.csv"
+    TRAIN_DIR = "Train"
+elif args.dataset == 'c1p2c80':
     DEV_CSV = "dev.csv"
     DEV_DIR = "Dev"
     TRAIN_CSV = "train.csv"

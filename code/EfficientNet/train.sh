@@ -16,19 +16,18 @@
 
 #=========== final tuning ==========
 
-python train.py --model-name tf_efficientnet_b4 --epochs 16 --lr 0.0001 --batch-size 32 --augment 4 --finetune 2 --dataset final --weight-name effb4final24w | tee effb4final24.txt
-python train.py --model-name tf_efficientnet_b4 --epochs 16 --lr 0.0001 --batch-size 32 --augment 4 --finetune 4 --dataset final --weight-name effb4final44w | tee effb4final44.txt
-python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 4 --finetune 2 --dataset final --weight-name effb6final24w | tee effb6final24.txt
-python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 4 --finetune 4 --dataset final --weight-name effb6final44w | tee effb6final44.txt
+#python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 3 --finetune 2 --dataset final --weight-name effb6final2cw --crop | tee effb6final2c.txt
+#python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 3 --finetune 4 --dataset final --weight-name effb6final4cw --crop | tee effb6final4c.txt
 
-#python train.py --model-name tf_efficientnet_b4 --epochs 16 --lr 0.0001 --batch-size 32 --augment 2 --finetune 2 --dataset final --weight-name effb4final2w | tee effb4final2.txt
-#python train.py --model-name tf_efficientnet_b4 --epochs 16 --lr 0.0001 --batch-size 32 --augment 2 --finetune 4 --dataset final --weight-name effb4final4w | tee effb4final4.txt
-#python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 2 --finetune 2 --dataset final --weight-name effb6final2w | tee effb6final2.txt
-#python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 2 --finetune 4 --dataset final --weight-name effb6final4w | tee effb6final4.txt
+# later
+#python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 5 --finetune 2 --dataset final --weight-name effb6final25cw --crop | tee effb6final25c.txt
+#python train.py --model-name tf_efficientnet_b6 --epochs 16 --lr 0.0001 --batch-size 16 --augment 5 --finetune 4 --dataset final --weight-name effb6final45cw --crop | tee effb6final45c.txt
 
+# best
+#python train.py --model-name tf_efficientnet_b6 --epochs 32 --lr 0.001 --batch-size 28 --augment 3 --finetune 4 --dataset c1p2 --weight-name effb6c1p24cw --crop
 
-# finetune 2,4 is better
-#python train.py --model-name tf_efficientnet_b6 --epochs 12 --lr 0.0001 --batch-size 18 --augment 2 --finetune 1 --dataset final --weight-name effb6final1w | tee effb6final1.txt
-#python train.py --model-name tf_efficientnet_b6 --epochs 12 --lr 0.0001 --batch-size 16 --augment 2 --finetune 3 --dataset final --weight-name effb6final3w | tee effb6final3.txt
-#python train.py --model-name tf_efficientnet_b4 --epochs 16 --lr 0.0001 --batch-size 32 --augment 2 --finetune 1 --dataset final --weight-name effb4final1w | tee effb4final1.txt
-#python train.py --model-name tf_efficientnet_b4 --epochs 12 --lr 0.0001 --batch-size 32 --augment 2 --finetune 3 --dataset final --weight-name effb4final3w | tee effb4final3.txt
+# panel 0 is training
+# python train.py --model-name tf_efficientnet_b4 --epochs 32 --lr 0.001 --batch-size 28 --augment 3 --finetune 4 --dataset c1p2 --weight-name effb4c1p24cw --crop | tee effb4c1p24c.txt
+
+# panel 1 is training
+python train.py --model-name tf_efficientnet_b6 --epochs 32 --lr 0.001 --batch-size 28 --augment 6 --finetune 4 --dataset c1p2blur --weight-name effb6blurf4cw --crop --blur | tee effb6blurf4c.txt
